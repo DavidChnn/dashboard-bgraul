@@ -28,7 +28,7 @@
               </div>
         </nav>
         <h1 class="text-xl mx-10 my-10">
-          Home Dashboard
+          Asset Layout
         </h1>
         <div>
             <div class="bg-white mx-10">
@@ -47,33 +47,33 @@
                 </div>
               </div>
               <div class="flex justify-between p-6">
-                <div class="bg-[#FFEFEF] flex justify-center items-center py-2 px-6 border-4">
-                  <img src="/image/gear.png" alt="gear" class="w-20">
-                  <div class="ml-6">
-                    <p>Total Asset</p>
-                    <p>1032</p>
-                  </div>
-                </div>
-                <div class="bg-[#FFBEBE] flex justify-center items-center py-2 px-6 border-4">
-                  <img src="/image/personmarket.png" alt="personmarket" class="w-20">
-                  <div class="ml-6">
-                    <p>Outstanding CIP</p>
-                    <p>214</p>
-                  </div>
-                </div>
-                <div class="bg-[#FFEFEF] flex justify-center items-center py-2 px-6 border-4">
-                  <img src="/image/moneyhand.png" alt="moneyhand" class="w-20">
-                  <div class="ml-6">
-                    <p>Total Valuation</p>
-                    <p>Rp 27.5 Miliar</p>
-                  </div>
+                <div>
+                    <p>Assembly Line Production</p>
+                    <div>
+                        <button id="dropdownButton1" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
+                            <span id="selectedItemText1" class="h-6">-- Pilih Line Production --</span>
+                            <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                        </button>
+                        <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                            <div href="#" onclick="selectItem('Plant1', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
+                                <p>Confirm</p>
+                            </div>
+                            <div href="#" onclick="selectItem('Plant2', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
+                                <p>Reject Confirmation</p>
+                            </div>
+                            <div href="#" onclick="selectItem('Plant2', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
+                                <p>Not Confirm</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
               </div>
               <div class="flex justify-end py-10 px-6">
-                <div class="flex text-white justify-center items-center w-fit bg-[#C80813] px-2 py-1 rounded">
-                  <img src="/image/refresh.png" alt="refresh" class="w-5">
-                  <p class="font-bold">Refresh</p>
-                </div>
+                <button type="button" class="flex text-white justify-center items-center w-fit bg-[#1899F6] px-2 py-1 rounded">
+                  <a href="assetlayout/lineproductionmap">
+                    <p class="font-bold">+ Show</p>
+                  </a>
+                </button>
               </div>
             </div>
         </div>
