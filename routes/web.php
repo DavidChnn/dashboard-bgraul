@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//LOGIN
+Route::get('/login', function () {
+    return view('login');
+});
 
 // ADMIN
 Route::get('/', function () {
@@ -55,6 +59,9 @@ Route::get('/report/depreciation', function () {
 });
 Route::get('/report/depreciation/fiscal', function () {
     return view('report/depreciation/fiscal');
+});
+Route::get('/setting', function () {
+    return view('setting');
 });
 
 // USER

@@ -35,7 +35,7 @@
             </a>
           </li>
           <li class="my-4 p-2 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-            <a href="listasset" class="flex">
+            <a href="/listasset" class="flex">
               <img class="w-7" src="/image/assetdetail.png" alt="assetdetail">
                 <p class="pl-2">Assets Details</p>
             </a>
@@ -56,24 +56,24 @@
               </a>
             </li>
             <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="/cip/confimation">
+              <a href="/cip/confirmation">
                 <p>Confirmation CIP</p>
               </a>
             </li>
             <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="cip/outstanding">
+              <a href="/cip/outstanding">
                 <p>Outstanding CIP</p>
               </a>
             </li>
           </ul>
           <li class="my-4 p-2 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-            <a href="assetlayout" class="flex">
+            <a href="/assetlayout" class="flex">
               <img class="w-7" src="/image/assetlayout.png" alt="assetlayout">
                 <p class="pl-2">Assets Layout</p>
             </a>
           </li>
           <li class="my-4 p-2 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-            <a href="assetopname" class="flex">
+            <a href="/assetopname" class="flex">
               <img class="w-7" src="/image/assetopname.png" alt="assetopname">
                 <p class="pl-2">Assets Opname</p>
             </a>
@@ -89,7 +89,7 @@
           </li>
           <ul class="reportOptions" style="display: none;">
             <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="report/depreciation">
+              <a href="/report/depreciation">
                 <p>Depreciation</p>
               </a>
             </li>
