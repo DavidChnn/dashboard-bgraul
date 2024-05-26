@@ -42,25 +42,25 @@
               <div class="flex justify-between">
                   <p>Asset Code Accounting</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                      <input type="text" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" id="assetCodeAccounting">
+                      <input type="text" class="bg-[#ECE9E9]" placeholder="" id="assetCodeAccounting">
                   </div>
               </div>
               <div class="flex justify-between">
                   <p>Acqusition CIP</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                      <input type="date" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="acquisitionCIP" id="acquisitionCIP">
+                      <input type="date" class="bg-[#ECE9E9]" placeholder="" name="acquisitionCIP" id="acquisitionCIP">
                   </div>
               </div>
               <div class="flex justify-between">
                   <p>Asset Code Engineering</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="text" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="assetCodeEnginery" id="assetCodeEnginery">
+                    <input type="text" class="bg-[#ECE9E9]" placeholder="" name="assetCodeEnginery" id="assetCodeEnginery">
                   </div>
               </div>
               <div class="flex justify-between">
                   <p>Depreciation Start</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="date" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="depreciationStart" id="depreciationStart">
+                    <input type="date" class="bg-[#ECE9E9]" placeholder="" name="depreciationStart" id="depreciationStart">
                   </div>
               </div>
               <div class="flex justify-between">
@@ -87,7 +87,7 @@
               <div class="flex justify-between">
                 <p>Depreciation End</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="date" class="bg-[#ECE9E9] focus:outline-none w-56" placeholder="" name="depreciationEnd" id="depreciationEnd">
+                  <input type="date" class="bg-[#ECE9E9]" placeholder="" name="depreciationEnd" id="depreciationEnd">
                 </div>
               </div>
               <div class="flex justify-between">
@@ -114,7 +114,7 @@
               <div class="flex justify-between">
                 <p>Current Book Value</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="number" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="currentBookValue" id="currentBookValue">
+                  <input type="number" class="bg-[#ECE9E9]" placeholder="" name="currentBookValue" id="currentBookValue">
                 </div>
               </div>
               <div class="flex justify-between">
@@ -162,7 +162,7 @@
               <div class="flex justify-between">
                 <p>Asset Description</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="assetDescription" id="assetDescription">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="assetDescription" id="assetDescription">
                 </div>
               </div>
               <div class="flex justify-between">
@@ -186,37 +186,37 @@
               <div class="flex justify-between">
                 <p>Sub Asset</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="subAsset" id="subAsset">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="subAsset" id="subAsset">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Cost Center</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="costCenter" id="costCenter">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="costCenter" id="costCenter">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>PIC Asset</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="picAsset" id="picAsset">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="picAsset" id="picAsset">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Product</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="product" id="product">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="product" id="product">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>CIP Code</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="number" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="cipCode" id="cipCode">
+                  <input type="number" class="bg-[#ECE9E9]" placeholder="" name="cipCode" id="cipCode">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Inventory Number</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="inventoryNumber" id="inventoryNumber">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="inventoryNumber" id="inventoryNumber">
                 </div>
               </div>
               <div class="flex justify-between">
@@ -240,19 +240,19 @@
               <div class="flex justify-between">
                 <p>Budget Number</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="budgetNumber" id="budgetNumber">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="budgetNumber" id="budgetNumber">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Vendor</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="vendor" id="vendor">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="vendor" id="vendor">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>PO Number</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="poNumber" id="poNumber">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="poNumber" id="poNumber">
                 </div>
               </div>
               <div class="flex justify-between">
@@ -279,7 +279,7 @@
               <div class="flex justify-between">
                 <p>Line</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="line" id="line">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="line" id="line">
                 </div>
               </div>
               <div class="row-span-5">
@@ -293,13 +293,13 @@
               <div class="flex justify-between col-start-1">
                 <p>Process</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="proccess" id="proccess">
+                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="proccess" id="proccess">
                 </div>
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Quantity</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="number" class="focus:outline-none w-56 bg-[#ECE9E9]" placeholder="" name="quantity" id="quantity">
+                  <input type="number" class="bg-[#ECE9E9]" placeholder="" name="quantity" id="quantity">
                 </div>
               </div>
               <div class="flex justify-between col-start-1">

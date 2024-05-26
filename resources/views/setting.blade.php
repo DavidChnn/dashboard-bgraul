@@ -55,12 +55,12 @@
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
                             <div id="myDropdown1" class="absolute hidden rounded shadow-md bg-white z-10 mt-1 w-full">
-                                <button type="button" onclick="selectItem('Engineering Body', 'selectedItemText1', 'myDropdown1', 'dept')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
+                                <a onclick="selectItem('Engineering Body', 'selectedItemText1', 'myDropdown1', 'dept')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
                                     Engineering Body
-                                </button>
-                                <button type="button" onclick="selectItem('Engineering', 'selectedItemText1', 'myDropdown1', 'dept')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
+                                </a>
+                                <a onclick="selectItem('Engineering', 'selectedItemText1', 'myDropdown1', 'dept')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
                                     Engineering
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <input type="hidden" id="dept" name="dept">

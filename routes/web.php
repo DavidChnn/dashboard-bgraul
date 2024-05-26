@@ -36,6 +36,7 @@ Route::middleware(['isLogin'])->group(function(){
         
         Route::get('listasset',[AssetController::class, 'index']);
         Route::get('/listasset/assetdetail/{id}',[AssetController::class, 'show']);
+        Route::get('/listasset/editasset',[AssetController::class, 'create']);
         Route::get('/listasset/addasset',[AssetController::class, 'create']);
         Route::post('/listasset',[AssetController::class, 'store']);
         Route::get('/assetlayout',[AssetController::class, 'indexLayout']);

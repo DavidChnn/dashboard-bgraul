@@ -85,6 +85,9 @@ class SessionController extends Controller
     function sidebar(){
 
     }
+    function setting(){
+        return view('/setting');
+    }
 
     function register(Request $request){
         $data = [
