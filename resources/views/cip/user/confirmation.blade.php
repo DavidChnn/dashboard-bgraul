@@ -60,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
-                  @php 
+                  @php
                     $counter = ($data->currentPage() - 1) * $data->perPage() + 1;
                     @endphp
                       @foreach ($data as $item)
@@ -78,7 +78,9 @@
                               <td class="border-2">{{$item->statusConfirmation ? 'Confirmed by User' : 'Not Confirmed by User'}}</td>
                               <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
                               <td class="border-2">
-                                <img src="/image/checklist1.png" alt="checklist1" class="w-8 mx-auto">
+                                <button class="" id="popup">
+                                  <img src="/image/checklist1.png" alt="checklist1" class="w-8 mx-auto">
+                                </button>
                             </td>
                           </tr>
                           @php $counter++; @endphp
@@ -89,5 +91,17 @@
         </div>
     </main>
     {{-- MAIN --}}
+    <script>
+      document.getElementById("popup").addEventListener("click", function() {
+            var confirmation = confirm("Apakah Anda sudah yakin?");
+            if (confirmation) {
+                // Lakukan sesuatu jika pengguna menekan "OK"
+                console.log("Pengguna yakin.");
+            } else {
+                // Lakukan sesuatu jika pengguna menekan "Cancel"
+                console.log("Pengguna tidak yakin.");
+            }
+        });
+    </script>
   </body>
 </html>
