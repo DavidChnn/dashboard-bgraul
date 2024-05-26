@@ -60,39 +60,33 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
-                    <tr>
-                        <td class="border-2">1</td>
-                        <td class="border-2">5000</td>
-                        <td class="border-2">
-                            <p class="bg-[#F0EFEF] rounded">
-                                Insert Inv Number
-                            </p>
-                        </td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">21/03/2024</td>
-                        <td class="border-2">091/XXI/881/1</td>
-                        <td class="border-2">MSU001</td>
-                        <td class="border-2">70.000.000</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">
-                            <p class="bg-[#E5F620] rounded">
-                                Not Confirm
-                            </p>
-                        </td>
-                        <td class="border-2">
-                            <p class="bg-[#F0EFEF] rounded">
-                                Insert CIP Number
-                            </p>
-                        </td>
-                        <td class="border-2">
-                            <button type="button">
-                                <a href="cip/confirmrequest">
-                                  <img src="/image/checklist.png" alt="checklist" class="w-6 translate-y-1">
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
+                  @php 
+                      $counter = ($data->currentPage() - 1) * $data->perPage() + 1;
+                  @endphp
+                    @foreach ($data as $item)
+                        <tr>
+                            <td class="border-2">{{$counter}}</td>
+                            <td class="border-2">{{$item->assetClass}}</td>
+                            <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : 'Insert Inventory Number'}}</td>
+                            <td class="border-2">{{$item->assetDescription}}</td>
+                            <td class="border-2">{{$item->acquisitionCIP}}</td>
+                            <td class="border-2"> {{$item->budgetNumber}}</td>
+                            <td class="border-2">{{$item->department}}</td>
+                            <td class="border-2">{{$item->acquisitionValue}}</td>
+                            <td class="border-2">{{$item->quantity}}</td>
+                            <td class="border-2">{{$item->uom}}</td>
+                            <td class="border-2">{{ $item->statusRequest}}</td>
+                            <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
+                            <td class="border-2">
+                              <button type="button">
+                                  <a href="{{url('/cip/confirmrequest/'.$item->id)}}">
+                                    <img src="/image/checklist.png" alt="checklist" class="w-6 translate-y-1">
+                                  </a>
+                              </button>
+                          </td>
+                        </tr>
+                        @php $counter++; @endphp
+                    @endforeach
                 </tbody>
             </table>
           </div>

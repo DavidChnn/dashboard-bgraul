@@ -60,68 +60,31 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
-                    <tr>
-                        <td class="border-2">1</td>
-                        <td class="border-2">5000</td>
-                        <td class="border-2">
-                            <p class="bg-[#F0EFEF] rounded">
-                                Insert Inv Number
-                            </p>
-                        </td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">21/03/2024</td>
-                        <td class="border-2">091/XXI/881/1</td>
-                        <td class="border-2">MSU001</td>
-                        <td class="border-2">70.000.000</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">
-                            <p class="bg-[#6A45D3] rounded">
-                                Confirm by User
-                            </p>
-                        </td>
-                        <td class="border-2">
-                            <p class="rounded">
-                                AJ12001
-                            </p>
-                        </td>
-                        <td class="border-2">
-                            <button type="button">
-                                <img src="/image/notify.png" alt="checklist" class="w-6 translate-y-1">
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-2">1</td>
-                        <td class="border-2">5000</td>
-                        <td class="border-2">
-                            <p class="bg-[#F0EFEF] rounded">
-                                Insert Inv Number
-                            </p>
-                        </td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">21/03/2024</td>
-                        <td class="border-2">091/XXI/881/1</td>
-                        <td class="border-2">MSU001</td>
-                        <td class="border-2">70.000.000</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">
-                            <p class="bg-[#EF1A1A] rounded">
-                                Not Confirm by User
-                            </p>
-                        </td>
-                        <td class="border-2">
-                            <p class="rounded">
-                                AJ12001
-                            </p>
-                        </td>
-                        <td class="border-2">
-                            <button type="button">
-                                <img src="/image/notify.png" alt="checklist" class="w-6 translate-y-1">
-                            </button>
-                        </td>
-                    </tr>
+                    @php 
+                    $counter = ($data->currentPage() - 1) * $data->perPage() + 1;
+                    @endphp
+                      @foreach ($data as $item)
+                          <tr>
+                              <td class="border-2">{{$counter}}</td>
+                              <td class="border-2">{{$item->assetClass}}</td>
+                              <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : 'Insert Inventory Number'}}</td>
+                              <td class="border-2">{{$item->assetDescription}}</td>
+                              <td class="border-2">{{$item->acquisitionCIP}}</td>
+                              <td class="border-2">{{$item->budgetNumber}}</td>
+                              <td class="border-2">{{$item->department}}</td>
+                              <td class="border-2">{{$item->acquisitionValue}}</td>
+                              <td class="border-2">{{$item->quantity}}</td>
+                              <td class="border-2">{{$item->uom}}</td>
+                              <td class="border-2">{{ $item->statusConfirmation ? 'Confirmed by User' : 'Not Confirmed by User'}}</td>
+                              <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
+                              <td class="border-2">
+                                <button type="button">
+                                    <img src="/image/notify.png" alt="checklist" class="w-6 translate-y-1">
+                                </button>
+                            </td>
+                          </tr>
+                          @php $counter++; @endphp
+                      @endforeach
                 </tbody>
             </table>
           </div>

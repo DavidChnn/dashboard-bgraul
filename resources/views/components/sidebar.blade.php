@@ -14,7 +14,7 @@
       <div class="flex pt-12">
           <img src="/image/profile.png" alt="profile" class="w-12 bg-white rounded-full">
             <div class="pl-2">
-              <p>User</p>
+              <p> {{Auth::check() ? Auth::user()->name : 'name'}} </p>
               <div class="flex items-center">
                 <svg width="10" height="10" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="1" cy="1" r="1" fill="#10FD52"/>
@@ -51,17 +51,17 @@
           </li>
           <ul class="reportOptions" style="display: none;">
             <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="/cip/request">
+              <a href="{{Auth::user()->role == 'admin' ? '/cip/request': '/cip/user/request'}}">
                 <p>Request CIP Number</p>
               </a>
             </li>
             <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="/cip/confirmation">
+              <a href="{{Auth::user()->role == 'admin' ? '/cip/confirmation': '/cip/user/confirmation'}}">
                 <p>Confirmation CIP</p>
               </a>
             </li>
             <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="/cip/outstanding">
+              <a href="{{Auth::user()->role == 'admin' ? '/cip/outstanding': '/cip/user/outstanding'}}">
                 <p>Outstanding CIP</p>
               </a>
             </li>

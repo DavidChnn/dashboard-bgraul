@@ -32,19 +32,20 @@
                         <img src="/image/arrow2.png" alt="arrow2" class="rotate-90 w-6">
                     </div>
                 </div>
-                <form class="p-6 flex flex-col w-fit gap-y-5">
+                <form class="p-6 flex flex-col w-fit gap-y-5" method="post" action="/register">
+                    @csrf
                     <p class="text-xl">Add Account</p>
                     <div>
                         <p>Name</p>
-                        <input type="text" class="border-2 rounded w-full">
+                        <input type="text" class="border-2 rounded w-full" name="name" id="name">
                     </div>
                     <div>
                         <p>Password</p>
-                        <input type="text" class="border-2 rounded w-full">
+                        <input type="text" class="border-2 rounded w-full" name="password" id="password">
                     </div>
                     <div>
                         <p>Email</p>
-                        <input type="text" class="border-2 rounded w-full">
+                        <input type="text" class="border-2 rounded w-full" name="email" id="email">
                     </div>
                     <div>
                         <p>Department</p>
@@ -54,22 +55,23 @@
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
                             <div id="myDropdown1" class="absolute hidden rounded shadow-md bg-white z-10 mt-1 w-full">
-                                <button type="button" onclick="selectItem('Engineering Body', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
+                                <button type="button" onclick="selectItem('Engineering Body', 'selectedItemText1', 'myDropdown1', 'dept')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
                                     Engineering Body
                                 </button>
-                                <button type="button" onclick="selectItem('Engineering', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
+                                <button type="button" onclick="selectItem('Engineering', 'selectedItemText1', 'myDropdown1', 'dept')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
                                     Engineering
                                 </button>
                             </div>
                         </div>
+                        <input type="hidden" id="dept" name="dept">
+                    </div>
+                    <div class="flex justify-end py-10 px-6">
+                        <button type="submit" class="flex text-white justify-center items-center w-fit bg-[#C80813] px-2 py-1 rounded">
+                            <img src="/image/refresh.png" alt="refresh" class="w-5">
+                            <p class="font-bold">Submit</p>
+                        </button>
                     </div>
                 </form>
-                <div class="flex justify-end py-10 px-6">
-                    <button type="submit" class="flex text-white justify-center items-center w-fit bg-[#C80813] px-2 py-1 rounded">
-                        <img src="/image/refresh.png" alt="refresh" class="w-5">
-                        <p class="font-bold">Submit</p>
-                    </button>
-                </div>
             </div>
         </div>
     </main>
@@ -98,10 +100,12 @@
             dropdown.classList.toggle("hidden");
         }
 
-        function selectItem(item, selectedItemTextId, dropdownId) {
-            document.getElementById(selectedItemTextId).innerText = item;
-            toggleDropdown(null, dropdownId);
-        }
+        function selectItem(item, selectedItemTextId, dropdownId, inputId) {
+        event.preventDefault();
+        document.getElementById(selectedItemTextId).innerText = item;
+        document.getElementById(inputId).value = item; 
+        toggleDropdown(null, dropdownId);
+      }
     </script>
     </body>
 </html>

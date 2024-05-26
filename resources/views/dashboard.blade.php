@@ -38,21 +38,21 @@
                   <img src="/image/gear.png" alt="gear" class="w-20">
                   <div class="ml-6">
                     <p>Total Asset</p>
-                    <p>1032</p>
+                    <p>{{$asset}}</p>
                   </div>
                 </div>
                 <div class="bg-[#FFBEBE] flex justify-center items-center py-2 px-6 border-4">
                   <img src="/image/personmarket.png" alt="personmarket" class="w-20">
                   <div class="ml-6">
                     <p>Outstanding CIP</p>
-                    <p>214</p>
+                    <p>{{$cip}}</p>
                   </div>
                 </div>
                 <div class="bg-[#FFEFEF] flex justify-center items-center py-2 px-6 border-4">
                   <img src="/image/moneyhand.png" alt="moneyhand" class="w-20">
                   <div class="ml-6">
                     <p>Total Valuation</p>
-                    <p>Rp 27.5 Miliar</p>
+                    <p>{{$count}}</p>
                   </div>
                 </div>
               </div>

@@ -59,138 +59,34 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
-                    <tr>
-                        <td class="border-2">1</td>
-                        <td class="border-2">JMM15073</td>
-                        <td class="border-2">3001472-0</td>
-                        <td class="border-2">0</td>
-                        <td class="border-2">Machine1</td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">Engineering Body</td>
-                        <td class="border-2">ENG331</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">Hybrid Damper</td>
-                        <td class="border-2">Active</td>
-                        <td class="border-2">170.000.000</td>
-                        <td class="border-2">
-                            <button>
-                                <a href="listasset/assetdetail">
-                                    <img src="/image/search1.png" alt="search" class="w-6 translate-x-2">
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-2">2</td>
-                        <td class="border-2">JMM15073</td>
-                        <td class="border-2">3001472-0</td>
-                        <td class="border-2">0</td>
-                        <td class="border-2">Machine1</td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">Engineering Body</td>
-                        <td class="border-2">ENG331</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">Hybrid Damper</td>
-                        <td class="border-2">Active</td>
-                        <td class="border-2">170.000.000</td>
-                        <td class="border-2">
-                            <button>
-                                <a href="listasset/assetdetail">
-                                    <img src="/image/search1.png" alt="search" class="w-6 translate-x-2">
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-2">3</td>
-                        <td class="border-2">JMM15073</td>
-                        <td class="border-2">3001472-0</td>
-                        <td class="border-2">0</td>
-                        <td class="border-2">Machine1</td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">Engineering Body</td>
-                        <td class="border-2">ENG331</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">Hybrid Damper</td>
-                        <td class="border-2">Active</td>
-                        <td class="border-2">170.000.000</td>
-                        <td class="border-2">
-                            <button>
-                                <a href="listasset/assetdetail">
-                                    <img src="/image/search1.png" alt="search" class="w-6 translate-x-2">
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-2">4</td>
-                        <td class="border-2">JMM15073</td>
-                        <td class="border-2">3001472-0</td>
-                        <td class="border-2">0</td>
-                        <td class="border-2">Machine1</td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">Engineering Body</td>
-                        <td class="border-2">ENG331</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">Hybrid Damper</td>
-                        <td class="border-2">Active</td>
-                        <td class="border-2">170.000.000</td>
-                        <td class="border-2">
-                            <button>
-                                <a href="listasset/assetdetail">
-                                    <img src="/image/search1.png" alt="search" class="w-6 translate-x-2">
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-2">5</td>
-                        <td class="border-2">JMM15073</td>
-                        <td class="border-2">3001472-0</td>
-                        <td class="border-2">0</td>
-                        <td class="border-2">Machine1</td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">Engineering Body</td>
-                        <td class="border-2">ENG331</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">Hybrid Damper</td>
-                        <td class="border-2">Active</td>
-                        <td class="border-2">170.000.000</td>
-                        <td class="border-2">
-                            <button>
-                                <a href="listasset/assetdetail">
-                                    <img src="/image/search1.png" alt="search" class="w-6 translate-x-2">
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-2">6</td>
-                        <td class="border-2">JMM15073</td>
-                        <td class="border-2">3001472-0</td>
-                        <td class="border-2">0</td>
-                        <td class="border-2">Machine1</td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">Engineering Body</td>
-                        <td class="border-2">ENG331</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">Hybrid Damper</td>
-                        <td class="border-2">Active</td>
-                        <td class="border-2">170.000.000</td>
-                        <td class="border-2">
-                            <button>
-                                <a href="listasset/assetdetail">
-                                    <img src="/image/search1.png" alt="search" class="w-6 translate-x-2">
-                                </a>
-                            </button>
-                        </td>
-                    </tr>
+                  @php 
+                      $counter = ($data->currentPage() - 1) * $data->perPage() + 1;
+                  @endphp
+                    @foreach ($data as $item)
+                        <tr>
+                            <td class="border-2">{{$counter}}</td>
+                            <td class="border-2">{{$item->assetCodeAccounting}}</td>
+                            <td class="border-2">{{$item->assetCodeEnginery}}</td>
+                            <td class="border-2">{{$item->subAsset}}</td>
+                            <td class="border-2">{{$item->assetGroup}}</td>
+                            <td class="border-2">{{$item->assetDescription}}</td>
+                            <td class="border-2">{{$item->department}}</td>
+                            <td class="border-2">{{$item->costCenter}}</td>
+                            <td class="border-2">{{$item->quantity}}</td>
+                            <td class="border-2">{{$item->uom}}</td>
+                            <td class="border-2">{{$item->product}}</td>
+                            <td class="border-2">{{$item->assetStatus}}</td>
+                            <td class="border-2">{{$item->currentBookValue}}</td>
+                            <td class="border-2">
+                                <button>
+                                    <a href='{{url('/listasset/assetdetail/'.$item->id)}}'>
+                                        <img src="/image/search1.png" alt="search" class="w-6 translate-x-2">
+                                    </a>
+                                </button>
+                            </td>
+                        </tr>
+                        @php $counter++; @endphp
+                    @endforeach
                 </tbody>
             </table>
           </div>
@@ -198,13 +94,8 @@
             <div class="flex text-white justify-center items-center w-fit bg-[#79C4FB] px-2 py-1 rounded">
               <a href="/listasset/addasset" class="font-bold">+ Add Asset</a>
             </div>
-            <div class="flex text-white justify-center items-center w-fit bg-[#79C4FB] px-2 py-1 rounded">
-              <button class="pr-2">1</button>
-              <button class="pr-2">2</button>
-              <button class="pr-2">3</button>
-              <button class="pr-2">4</button>
-              <button class="pr-2">5</button>
-              <button class="pr-2">dst..</button>
+            <div >
+              {{$data->links()}}
             </div>
           </div>
         </div>

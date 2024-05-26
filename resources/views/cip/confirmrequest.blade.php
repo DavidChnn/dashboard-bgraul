@@ -17,7 +17,9 @@
         <h1 class="text-xl mx-10 my-10">
           CIP/Request/Confirm CIP
         </h1>
-        <form class="bg-white mx-10 mb-10 pb-10">
+        <form class="bg-white mx-10 mb-10 pb-10" action="{{ url('/cip/confirmrequest/'.$data->id) }}" method="POST">
+          @csrf
+          @method('PUT')
           <div class="flex justify-between items-center border-b-2 p-4">
             <div class="flex">
               <svg width="40" height="35" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,85 +38,87 @@
             <p class="font-semibold">Confirm CIP >></p>
           </div>
 
+          
           <div class="grid grid-cols-2 overflow-y-auto gap-x-10 gap-y-5 px-6">
             <div class="flex justify-between">
               <p>Class</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="5000">
+                <p> {{$data->assetClass}}</p>
               </div>
             </div>
             <div class="flex justify-between">
               <p>UoM</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="pcs">
+                <p> {{$data->uom}}</p>
               </div>
             </div>
             <div class="flex justify-between">
               <p>Inventory Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="ACCJE001">
+                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert Inventory Number" name="inventoryNumber" id="inventoryNumber">
               </div>
             </div>
             <div class="flex justify-between">
               <p>CIP Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert CIP Number">
+                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert CIP Number" name="cipNumber" id="cipNumber">
               </div>
             </div>
             <div class="flex justify-between">
               <p>Description</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="M/C Damper Assembly Machine HvD 22MY">
+                <p> {{$data->assetDescription}}</p>
               </div>
             </div>
             <div class="flex justify-between">
               <p>Confirmation</p>
               <div>
-                  <button id="dropdownButton1" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                  <button id="dropdownButton1" type="button" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
                       <span id="selectedItemText1" class="h-6">-- select --</span>
                       <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                   </button>
                   <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                      <div href="#" onclick="selectItem('Plant1', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
+                      <div href="#" onclick="selectItem('Confirm', 'selectedItemText1', 'myDropdown1', 'statusRequestInput')" class="flex justify-between items-center w-64 px-4">
                           <p>Confirm</p>
                       </div>
-                      <div href="#" onclick="selectItem('Plant2', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
+                      <div href="#" onclick="selectItem('Reject', 'selectedItemText1', 'myDropdown1', 'statusRequestInput')" class="flex justify-between items-center w-64 px-4">
                           <p>Reject Confirmation</p>
                       </div>
-                      <div href="#" onclick="selectItem('Plant2', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
+                      <div href="#" onclick="selectItem('Not Confirm', 'selectedItemText1', 'myDropdown1', 'statusRequestInput')" class="flex justify-between items-center w-64 px-4">
                           <p>Not Confirm</p>
                       </div>
                   </div>
+                  <input type="hidden" id="statusRequestInput" name="statusRequestInput">
               </div>
             </div>
             <div class="flex justify-between">
               <p>Cap Date</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="21/03/2024">
+                <p> {{$data->acquisitionCIP}}</p>
               </div>
             </div>
             <div class="flex justify-between col-start-1">
               <p>Capex Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="091/XXI/881/1">
+                <p> {{$data->budgetNumber}}</p>
               </div>
             </div>
             <div class="flex justify-between col-start-1">
               <p>Dept</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="MSU001">
+                <p> {{$data->department}}</p>
               </div>
             </div>
             <div class="flex justify-between col-start-1">
               <p>Amount</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="97.000.000">
+                <p> {{$data->acquisitionValue}}</p>
               </div>
             </div>
             <div class="flex justify-between col-start-1">
               <p>Qty</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="1">
+                <p> {{$data->quantity}}</p>
               </div>
             </div>
           </div>
@@ -123,6 +127,12 @@
                 + Confirm CIP
             </button>
           </div>
+        
+          {{-- <div class="flex justify-center mt-10">
+            <button type="submit" class="bg-[#4B06A4] px-2 py-1 rounded text-white">
+                + Confirm CIP
+            </button>
+          </div> --}}
         </form>
       </div>
     </main>
@@ -133,9 +143,11 @@
         dropdown.classList.toggle("hidden");
       }
 
-      function selectItem(item, selectedItemTextId, dropdownId) {
-          document.getElementById(selectedItemTextId).innerText = item;
-          toggleDropdown(null, dropdownId);
+      function selectItem(item, selectedItemTextId, dropdownId, inputId) {
+        event.preventDefault();
+        document.getElementById(selectedItemTextId).innerText = item;
+        document.getElementById(inputId).value = item; 
+        toggleDropdown(null, dropdownId);
       }
     </script>
   </body>

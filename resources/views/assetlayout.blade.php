@@ -42,29 +42,44 @@
                             <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                         </button>
                         <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                            <div href="#" onclick="selectItem('Plant1', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
-                                <p>Confirm</p>
-                            </div>
-                            <div href="#" onclick="selectItem('Plant2', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
-                                <p>Reject Confirmation</p>
-                            </div>
-                            <div href="#" onclick="selectItem('Plant2', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
-                                <p>Not Confirm</p>
-                            </div>
+                            @php
+                                $uniqueLines = $data->unique('line');
+                            @endphp
+                            @foreach ($uniqueLines as $item)
+                                <div onclick="selectItem('{{ $item->line }}', 'selectedItemText1', 'myDropdown1', 'selectedLine')" class="flex justify-between items-center w-64 px-4 cursor-pointer">
+                                    <p>{{ $item->line }}</p>
+                                </div>
+                            @endforeach
                         </div>
+                        <input type="hidden" id="selectedLine" name="selectedLine">
                     </div>
                 </div>
-              </div>
-              <div class="flex justify-end py-10 px-6">
-                <button type="button" class="flex text-white justify-center items-center w-fit bg-[#1899F6] px-2 py-1 rounded">
-                  <a href="assetlayout/lineproductionmap">
+            </div>
+            <div class="flex justify-end py-10 px-6">
+                <a href="#" id="showButtonLink" class="flex text-white justify-center items-center w-fit bg-[#1899F6] px-2 py-1 rounded">
                     <p class="font-bold">+ Show</p>
-                  </a>
-                </button>
-              </div>
+                </a>
+            </div>
             </div>
         </div>
     </main>
+    <script>
+      function toggleDropdown(buttonId, dropdownId) {
+        var dropdown = document.getElementById(dropdownId);
+        dropdown.classList.toggle("hidden");
+      }
+
+      function selectItem(item, selectedItemTextId, dropdownId, inputId) {
+        event.preventDefault();
+        document.getElementById(selectedItemTextId).innerText = item;
+        document.getElementById(inputId).value = item;
+        toggleDropdown(null, dropdownId);
+
+        // Update the show button link
+        var showButtonLink = document.getElementById("showButtonLink");
+        showButtonLink.href = "/assetlayout/lineproductionmap/" + item;
+      }
+    </script>
     {{-- MAIN --}}
   </body>
 </html>
