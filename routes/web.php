@@ -28,7 +28,7 @@ Route::middleware(['isLogin'])->group(function(){
     
     Route::get('/logout',[SessionController::class, 'logout']);
 
-    Route::middleware(['UserAkses:admin'])->group(function(){
+    // Route::middleware(['UserAkses:admin'])->group(function(){
 
         Route::get('/',[SessionController::class, 'dashboard']);
         Route::get('/setting',[SessionController::class, 'setting']);
@@ -58,9 +58,9 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/report/depreciation/fiscal', function () {
             return view('report/depreciation/fiscal');
         });
-    });
+    // });
 
-    Route::middleware(['UserAkses:user'])->group(function(){
+    // Route::middleware(['UserAkses:user'])->group(function(){
          
         Route::get('/dashboarduser', function () {
             return view('dashboarduser');
@@ -75,7 +75,7 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/cip/user/confirmation',[cipController::class, 'indexConUser']);
         Route::get('/cip/user/outstanding',[cipController::class, 'IndexOutUser']);
 
-    });
+    // });
 
 });
 

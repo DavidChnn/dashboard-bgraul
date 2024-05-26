@@ -47,23 +47,23 @@
                         <p>Email</p>
                         <input type="text" class="border-2 rounded w-full" name="email" id="email">
                     </div>
-                    <div>
+                    <div class=" justify-between col-start-1">
                         <p>Department</p>
-                        <div class="relative">
-                            <button id="dropdownButton1" type="button" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-full rounded">
-                                <span id="selectedItemText1" class="h-6">Select Department</span>
+                        <div>
+                            <button type="button" id="dropdownButton" onclick="toggleDropdown('dropdownButton', 'myDropdown')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                                <span id="dept" class="h-6"></span>
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
-                            <div id="myDropdown1" class="absolute hidden rounded shadow-md bg-white z-10 mt-1 w-full">
-                                <button type="button" onclick="selectItem('Engineering Body', 'selectedItemText1', 'myDropdown1', 'dept')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
-                                    Engineering Body
-                                </button>
-                                <button type="button" onclick="selectItem('Engineering', 'selectedItemText1', 'myDropdown1', 'dept')" class="flex justify-between items-center w-full px-4 py-2 text-left hover:bg-gray-100">
-                                    Engineering
-                                </button>
+                            <div id="myDropdown" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                                <a href="#" onclick="selectItem('Eng', 'dept', 'myDropdown', 'deptInput')" class="flex justify-between items-center w-64 px-4">
+                                    <p>Eng</p>
+                                </a>
+                                <a href="#" onclick="selectItem('Engineering', 'dept', 'myDropdown', 'deptInput')" class="flex justify-between items-center w-64 px-4">
+                                    <p>Engineering</p>
+                                </a>
                             </div>
                         </div>
-                        <input type="hidden" id="dept" name="dept">
+                        <input type="hidden" id="deptInput" name="deptInput">
                     </div>
                     <div class="flex justify-end py-10 px-6">
                         <button type="submit" class="flex text-white justify-center items-center w-fit bg-[#C80813] px-2 py-1 rounded">
@@ -77,35 +77,17 @@
     </main>
     {{-- MAIN --}}
     <script>
-        function toggleNavDropdown() {
-            const dropdown = document.getElementById('dropdown');
-            dropdown.classList.toggle('hidden');
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('button') && !event.target.closest('.dropdown-content') && !event.target.closest('.relative')) {
-                const dropdowns = document.getElementsByClassName("dropdown-content");
-                for (let i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (!openDropdown.classList.contains('hidden')) {
-                        openDropdown.classList.add('hidden');
-                    }
-                }
-            }
-        }
-
         function toggleDropdown(buttonId, dropdownId) {
             var dropdown = document.getElementById(dropdownId);
             dropdown.classList.toggle("hidden");
         }
 
         function selectItem(item, selectedItemTextId, dropdownId, inputId) {
-        event.preventDefault();
-        document.getElementById(selectedItemTextId).innerText = item;
-        document.getElementById(inputId).value = item; 
-        toggleDropdown(null, dropdownId);
-      }
+            event.preventDefault();
+            document.getElementById(selectedItemTextId).innerText = item;
+            document.getElementById(inputId).value = item; 
+            toggleDropdown(null, dropdownId);
+        }
     </script>
     </body>
 </html>

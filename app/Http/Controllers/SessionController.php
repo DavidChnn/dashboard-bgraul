@@ -82,17 +82,18 @@ class SessionController extends Controller
         return redirect('/login');
     }
 
-    function sidebar(){
+    function setting(){
+        return view('setting');
 
     }
 
     function register(Request $request){
         $data = [
-            'name' => $request->name,
+            'name' => $request->input('name'),
             'password' =>Hash::make( $request->password),
-            'email' => $request->email,
-            'dept' => $request->dept,
-            'role' => $request->role ?? 'user',
+            'email' => $request->input('email'),
+            'dept' => $request->input('deptInput'),
+            'role' => $request->input('role') ?? 'user',
         ];
 
         User::create($data);
