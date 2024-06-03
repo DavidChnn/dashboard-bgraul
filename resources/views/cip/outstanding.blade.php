@@ -41,7 +41,10 @@
             </button>
           </div>
           <div class="px-2 w-full">
-            <table class="table border-collapse text-sm w-full">
+            <form action="/cip/outstanding" method="post">
+              @csrf
+              @method('PUT')
+              <table class="table border-collapse text-sm w-full">
                 <thead class="text-center">
                     <tr class="border-2">
                         <th class="border-2">No</th>
@@ -61,78 +64,35 @@
                 <tbody class="text-center">
                   @php 
                   $counter = ($data->currentPage() - 1) * $data->perPage() + 1;
-              @endphp
-                @foreach ($data as $item)
-                    <tr>
-                        <td class="border-2">{{$counter}}</td>
-                        <td class="border-2">{{$item->assetClass}}</td>
-                        <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : 'Insert Inventory Number'}}</td>
-                        <td class="border-2">{{$item->assetDescription}}</td>
-                        <td class="border-2">{{$item->acquisitionCIP}}</td>
-                        <td class="border-2"> {{$item->budgetNumber}}</td>
-                        <td class="border-2">{{$item->department}}</td>
-                        <td class="border-2">{{$item->acquisitionValue}}</td>
-                        <td class="border-2">{{$item->quantity}}</td>
-                        <td class="border-2">{{$item->uom}}</td>
-                        <td class="border-2">{{ $item->statusConfirmation ? 'confirm' : 'no confirm'}}</td>
-                        <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
-                    </tr>
-                    @php $counter++; @endphp
-                @endforeach
-                    <tr>
-                        <td class="border-2">1</td>
-                        <td class="border-2">5000</td>
-                        <td class="border-2">
-                            <p class="bg-[#F0EFEF] rounded">
-                                Insert Inv Number
-                            </p>
-                        </td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">21/03/2024</td>
-                        <td class="border-2">091/XXI/881/1</td>
-                        <td class="border-2">MSU001</td>
-                        <td class="border-2">70.000.000</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">
-                            <p class="bg-[#6A45D3] rounded">
-                                Confirm by User
-                            </p>
-                        </td>
-                        <td class="border-2">
-                            <p class="rounded">
-                                AJ12001
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border-2">1</td>
-                        <td class="border-2">5000</td>
-                        <td class="border-2">
-                            <p class="bg-[#F0EFEF] rounded">
-                                Insert Inv Number
-                            </p>
-                        </td>
-                        <td class="border-2">M/C Damper Assembly Machine HvD 22MY</td>
-                        <td class="border-2">21/03/2024</td>
-                        <td class="border-2">091/XXI/881/1</td>
-                        <td class="border-2">MSU001</td>
-                        <td class="border-2">70.000.000</td>
-                        <td class="border-2">1</td>
-                        <td class="border-2">pcs</td>
-                        <td class="border-2">
-                            <p class="bg-[#EF1A1A] rounded">
-                                Not Confirm by User
-                            </p>
-                        </td>
-                        <td class="border-2">
-                            <p class="rounded">
-                                AJ12001
-                            </p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                  @endphp
+                    @foreach ($data as $item)
+                      <tr>
+                          <td class="border-2">{{$counter}}</td>
+                          <td class="border-2">{{$item->assetClass}}</td>
+                          <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : 'Insert Inventory Number'}}</td>
+                          <td class="border-2">{{$item->assetDescription}}</td>
+                          <td class="border-2">{{$item->acquisitionCIP}}</td>
+                          <td class="border-2">{{$item->budgetNumber}}</td>
+                          <td class="border-2">{{$item->department}}</td>
+                          <td class="border-2">{{$item->acquisitionValue}}</td>
+                          <td class="border-2">{{$item->quantity}}</td>
+                          <td class="border-2">{{$item->uom}}</td>
+                          <td class="border-2">{{$item->statusConfirmation ? 'confirm' : 'no confirm'}}</td>
+                          <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
+                          <td class="border-2">
+                            <input type="checkbox" name="ids[]" value="{{$item->id}}">
+                            </td>
+                      </tr>
+                      @php $counter++; @endphp
+                    @endforeach
+                  </tbody>
+                </table>
+                <div class="flex justify-center mt-10">
+                  <button type="submit" class="bg-[#4B06A4] px-2 py-1 rounded text-white">
+                    Confirm
+                  </button>
+                </div>
+              </form>
           </div>
         </div>
     </main>

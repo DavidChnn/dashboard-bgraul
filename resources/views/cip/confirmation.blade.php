@@ -75,7 +75,7 @@
                               <td class="border-2">{{$item->acquisitionValue}}</td>
                               <td class="border-2">{{$item->quantity}}</td>
                               <td class="border-2">{{$item->uom}}</td>
-                              <td class="border-2">{{ $item->statusConfirmation ? 'Confirmed by User' : 'Not Confirmed by User'}}</td>
+                              <td class="border-2">{{$item->statusConfirmation ? 'Confirmed by User' : 'Not Confirmed by User'}}</td>
                               <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
                               <td class="border-2">
                                 <button type="button">
