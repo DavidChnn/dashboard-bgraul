@@ -60,6 +60,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
+                  
                   @php 
                     $counter = ($data->currentPage() - 1) * $data->perPage() + 1;
                   @endphp
@@ -78,12 +79,28 @@
                               <td class="border-2">{{$item->statusConfirmation ? 'Confirmed by User' : 'Not Confirmed by User'}}</td>
                               <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
                               <td class="border-2">
-                                <form method="POST" action="{{ url('/cip/user/confirmation/'.$item->id)}}">
+                                <form type method="POST" action="{{ url('/cip/user/confirmation/'.$item->id)}}" enctype="multipart/form-data">
                                   @csrf
                                   @method('PUT')
-                                  <input type="hidden" name="statusConfirmation" id="statusConfirmation" value="1">
+                                  <input type="hidden" name="statusConfirmation" id="statusConfirmation">
+                                  <button type="submit" onclick="return confirm('Are you sure you want to click this button?');">
+                                    {{-- <img src="/image/checklist1.png" alt="checklist1" class="w-8 mx-auto"> --}}
+                                  </button>
+                                </form>
+                                <form method="POST" action="{{ url('/cip/user/confirmation/'.$item->id)}}" enctype="multipart/form-data">
+                                  @csrf
+                                  @method('PUT')
+                                  <input type="hidden" name="statusConfirmation" id="statusConfirmation">
                                   <button type="submit" onclick="return confirm('Are you sure you want to click this button?');">
                                     <img src="/image/checklist1.png" alt="checklist1" class="w-8 mx-auto">
+                                  </button>
+                                </form>
+                                <form method="POST" action="{{ url('/cip/user/confirmation/'.$item->id)}}" enctype="multipart/form-data">
+                                  @csrf
+                                  @method('PUT')
+                                  <input type="hidden" name="statusConfirmation" id="statusConfirmation">
+                                  <button type="submit" onclick="return confirm('Are you sure you want to click this button?');">
+                                    {{-- <img src="/image/checklist1.png" alt="checklist1" class="w-8 mx-auto"> --}}
                                   </button>
                                 </form>
                               </td>

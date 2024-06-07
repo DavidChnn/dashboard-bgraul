@@ -33,7 +33,7 @@ class CIP extends Model
         'vendor' ,
         'site' ,
         'line' ,
-        'proccess' ,
+        'proccess' ,    
         'quantity',
         'uom' ,
         'acquisitionValue' ,
@@ -41,6 +41,12 @@ class CIP extends Model
         'budgetNumber' ,
         'poNumber' ,
         'assetPicture',
+        'departmentDetail',
+        'statusRequest',
+        'statusConfirmation',
+        'outstandingStatus',
+        'user'
+        
 
     ];
 }

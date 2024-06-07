@@ -180,12 +180,12 @@
             <div class="flex justify-between">
               <p>Line</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p>{{$data->line}}</p>
+                <p>{{$data->departmentDetail}}</p>
               </div>
             </div>
             <div class="row-span-5">
               <button class="flex items-center text-center">
-              <img src="/image/addpicture.png" alt="add" class="w-48">
+              <img src="{{url('foto').'/'.$data->assetPicture}}" alt="add" class="w-48">
                 {{-- <a href="" class="bg-[#CACACA] h-fit px-2 py-1 ml-5 rounded">
                   Add picture
                 </a> --}}
@@ -194,7 +194,7 @@
             <div class="flex justify-between col-start-1">
               <p>Process</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p>{{$data->process}}</p>
+                <p>{{$data->proccess}}</p>
               </div>
             </div>
             <div class="flex justify-between col-start-1">

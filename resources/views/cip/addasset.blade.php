@@ -36,7 +36,7 @@
             <p class="font-semibold">Add Asset Details >></p>
           </div>
 
-          <form method="post" action="/cip/addasset">
+          <form method="post" action="/cip/addasset" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="grid grid-cols-2 overflow-y-auto gap-x-10 gap-y-5 px-6">
@@ -219,11 +219,11 @@
               </div>
               <div class="row-span-5">
                 <button class="flex items-center text-center">
-                <img src="/image/addpicture.png" alt="add" class="w-48">
-                  <a href="" class="bg-[#CACACA] h-fit px-2 py-1 ml-5 rounded">
-                    Add picture
-                  </a>
-                </button>
+                  <img src="/image/addpicture.png" alt="add" class="w-48">
+                    <a href="" class="bg-[#CACACA] h-fit px-2 py-1 ml-5 rounded">
+                      <input type="file" class="form-control" id="assetPicture" name="assetPicture" >
+                    </a>
+                  </button>
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Process</p>
@@ -234,7 +234,8 @@
               <div class="flex justify-between col-start-1">
                 <p>Quantity</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="number" class="bg-[#ECE9E9]" placeholder="" name="quantity" id="quantity">
+                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$count}}" name="quantity" id="quantity">
+                  <label for="">{{$count}}</label>
                 </div>
               </div>
               <div class="flex justify-between col-start-1">
@@ -245,12 +246,11 @@
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown8" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                        <a href="#" onclick="selectItem('Pcs', 'uom', 'myDropdown8', 'uomInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Pcs</p>
-                        </a>
-                        <a href="#" onclick="selectItem('Num', 'uom', 'myDropdown8', 'uomInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Num</p>
-                        </a>
+                      @foreach ($uom as $item)
+                      <a href="#" onclick="selectItem('{{$item->name}}', 'uom', 'myDropdown8', 'uomInput')" class="flex justify-between items-center w-64 px-4">
+                          <p>{{$item->name}}</p>
+                      </a>
+                      @endforeach
                     </div>
                 </div>
                 <input type="hidden" id="uomInput" name="uomInput">
@@ -291,10 +291,10 @@
         const startDate = new Date(this.value);
         if (!isNaN(startDate.getTime())) {
             const endDate = new Date(startDate);
-            endDate.setMonth(startDate.getMonth() + 3);
+            endDate.setMonth(startDate.getMonth() + Number({{$depre->depreciationCom}}));
             document.getElementById('depreciationEnd').value = endDate.toISOString().split('T')[0];
         }
-    });
+      })
     </script>
   </body>
 </html>

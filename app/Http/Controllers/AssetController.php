@@ -4,7 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\MasterAssetCategory;
+use App\Models\MasterAssetStatus;
+use App\Models\MasterCostCentre;
+use App\Models\MasterLine;
+use App\Models\MasterSite;
+use App\Models\MasterUom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class AssetController extends Controller
@@ -22,8 +30,26 @@ class AssetController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('listasset/addasset');
+    {   
+        $category = MasterAssetCategory::select('assetCategory')->distinct()->get();
+        $class = MasterAssetCategory::select('assetClass')->distinct()->get();
+        $group = MasterAssetCategory::all();
+        $status = MasterAssetStatus::select('status')->distinct()->get();
+        $dept = MasterCostCentre::select('dept')->distinct()->get();
+        $costCentre = MasterCostCentre::all();
+        $line = MasterLine::all();
+        $site = MasterSite::select('name')->distinct()->get();
+        $uom = MasterUom::select('name')->distinct()->get();
+        return view('listasset/addasset')
+        ->with('category',$category)
+        ->with('class',$class)
+        ->with('group',$group)
+        ->with('status',$status)
+        ->with('dept',$dept)
+        ->with('costCentre',$costCentre)
+        ->with('line',$line)
+        ->with('site',$site)
+        ->with('uom',$uom);
     }
 
     /**
@@ -62,6 +88,15 @@ class AssetController extends Controller
         //     'poNumber' =>'required',
         //     // 'assetPicture'=>'required',
         // ]);
+
+        $foto_file = $request->file('assetPicture');
+        $foto_eks = $foto_file->getClientOriginalExtension();
+        $foto_nama = date('ymdhis').".".$foto_eks;
+        $foto_file ->move(public_path('foto'),$foto_nama);
+
+        $dept = MasterCostCentre::where('name', $request->input( 'costCentreInput'))->first();
+
+
         $data = [
             'assetCodeAccounting'=>$request->input( 'assetCodeAccounting'),
             'assetCodeEnginery' =>$request->input( 'assetCodeEnginery'),
@@ -78,7 +113,7 @@ class AssetController extends Controller
             'currentBookValue' =>$request->input( 'currentBookValue'),
             'assetCondition' =>$request->input( 'assetConditionInput'),
             'assetStatus' =>$request->input( 'assetStatusInput'),
-            'costCenter' =>$request->input( 'costCenter'),
+            'costCenter' =>$request->input( 'costCentreInput'),
             'product' =>$request->input( 'product'),
             'inventoryNumber'=>$request->input( 'inventoryNumber'),
             'department' =>$request->input( 'departmentInput'),
@@ -92,8 +127,12 @@ class AssetController extends Controller
             'cipNumber'=>$request->input( 'cipCode'),
             'budgetNumber' =>$request->input( 'budgetNumber'),
             'poNumber' =>$request->input( 'poNumber'),
-            // 'assetPicture'=>$request->input( 'assetPicture'),
+            'assetPicture'=>$foto_nama,
+            'departmentDetail'=> $dept->deptDetail,
+            'user'=> Auth::user()->name
         ];
+
+
 
         Asset::create($data);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\CIP;
+use App\Models\MasterCostCentre;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,10 @@ class SessionController extends Controller
 
     function dashboard(){
         $asset = Asset::count();
-        $cip = CIP::where('outstandingStatus', true)->count();
+        $cip = CIP::where('statusConfirmation', true)
+        ->where('statusRequest', 'Confirm')
+        ->where('outstandingStatus', false)
+        ->count();
 
         // $value = Asset::sum('currentBookValue');
 
@@ -83,7 +87,8 @@ class SessionController extends Controller
     }
 
     function setting(){
-        return view('setting');
+        $dept = MasterCostCentre::all()->unique('dept');
+        return view('setting')->with('dept',$dept);
 
     }
 

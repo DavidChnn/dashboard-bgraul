@@ -26,23 +26,26 @@ return new class extends Migration
             $table->date('acquisitionCIP');
             $table->date('depreciationStart');
             $table->date('depreciationEnd');
-            $table->integer('currentBookValue');
+            $table->bigInteger('currentBookValue');
             $table->string('assetCondition');
             $table->string('assetStatus');
             $table->string('costCenter');
             $table->string('product');
             $table->string('inventoryNumber')->nullable();
             $table->string('department');
+            $table->string('departmentDetail');
             $table->string('vendor');
             $table->string('site');
             $table->string('line');
             $table->string('proccess');
             $table->integer('quantity');
             $table->string('uom');
-            $table->integer('acquisitionValue');
+            $table->string('uom');
+            $table->bigInteger('acquisitionValue');
             $table->string('cipNumber')->nullable();
             $table->string('budgetNumber');
             $table->string('poNumber');
+            $table->string('user');
             $table->string('assetPicture')->nullable();
         });
     }

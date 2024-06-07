@@ -40,6 +40,8 @@ class Asset extends Model
         'budgetNumber' ,
         'poNumber' ,
         'assetPicture',
+        'departmentDetail',
+        'user'
 
     ];
 }

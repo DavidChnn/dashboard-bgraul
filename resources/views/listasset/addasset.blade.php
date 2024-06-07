@@ -36,20 +36,21 @@
             <p class="font-semibold">Add Asset Details >></p>
           </div>
 
-          <form method="post" action="/listasset">
+          <form method="post" action="/listasset" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-2 overflow-y-auto gap-x-10 gap-y-5 px-6">
               <div class="flex justify-between">
                   <p>Asset Code Accounting</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                      <input type="text" class="bg-[#ECE9E9]" placeholder="" id="assetCodeAccounting">
+                      <input type="text" class="bg-[#ECE9E9]" placeholder="" name="assetCodeAccounting" id="assetCodeAccounting">
                   </div>
               </div>
               <div class="flex justify-between">
-                  <p>Acqusition CIP</p>
-                  <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                      <input type="date" class="bg-[#ECE9E9]" placeholder="" name="acquisitionCIP" id="acquisitionCIP">
-                  </div>
+                <p>Acqusition CIP</p>
+                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                    <input type="hidden" name="acquisitionCIP" id="acquisitionCIP" value="{{ \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}">
+                    <label for="currentDateTime">{{ \Carbon\Carbon::now('Asia/Jakarta')->locale('id')->isoFormat('dddd, Do MMMM YYYY') }}</label>
+                </div>
               </div>
               <div class="flex justify-between">
                   <p>Asset Code Engineering</p>
@@ -71,15 +72,11 @@
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                        <a href="#" onclick="selectItem('Machine', 'assetCategory', 'myDropdown1', 'assetCategoryInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Machine</p>
+                      @foreach ($category as $category)
+                        <a href="#" onclick="selectItem('{{$category->assetCategory}}', 'assetCategory', 'myDropdown1', 'assetCategoryInput')" class="flex justify-between items-center w-64 px-4">
+                            <p>{{$category->assetCategory}}</p>
                         </a>
-                        <a href="#" onclick="selectItem('Machine1', 'assetCategory', 'myDropdown1', 'assetCategoryInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Machine1</p>
-                        </a>
-                        <a href="#" onclick="selectItem('Machine2', 'assetCategory', 'myDropdown1', 'assetCategoryInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Machine2</p>
-                        </a>
+                      @endforeach
                     </div>
                     <input type="hidden" id="assetCategoryInput" name="assetCategoryInput">
                 </div>
@@ -98,15 +95,11 @@
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown2" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                        <a href="#" onclick="selectItem('300', 'assetClass', 'myDropdown2', 'assetClassInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>300</p>
-                        </a>
-                        <a href="#" onclick="selectItem('301', 'assetClass', 'myDropdown2', 'assetClassInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>301</p>
-                        </a>
-                        <a href="#" onclick="selectItem('302', 'assetClass', 'myDropdown2', 'assetClassInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>302</p>
-                        </a>
+                        @foreach ($class as $class)
+                          <a href="#" onclick="selectItem('{{$class->assetClass}}', 'assetClass', 'myDropdown2', 'assetClassInput')" class="flex justify-between items-center w-64 px-4">
+                              <p>{{$class->assetClass}}</p>
+                          </a>
+                        @endforeach
                     </div>
                 </div>
                 <input type="hidden" id="assetClassInput" name="assetClassInput">
@@ -125,17 +118,14 @@
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown3" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                        <a href="#" onclick="selectItem('Machine', 'assetGroup', 'myDropdown3', 'assetGroupInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Machine</p>
+                      @foreach ($group as $group)
+                        <a href="#" onclick="selectItem1('{{$group->assetGroup}}', 'assetGroup', 'myDropdown3', 'assetGroupInput', '{{$group->depreciationCom}}', 'depreciationInput')" class="flex justify-between items-center w-64 px-4">
+                            <p>{{$group->assetGroup}}</p>
                         </a>
-                        <a href="#" onclick="selectItem('Machine1', 'assetGroup', 'myDropdown3', 'assetGroupInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Machine1</p>
-                        </a>
-                        <a href="#" onclick="selectItem('Machine2', 'assetGroup', 'myDropdown3', 'assetGroupInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Machine2</p>
-                        </a>
+                      @endforeach
                     </div>
                 </div>
+                <input type="hidden" id="depreciationInput" name="depreciationInput">
                 <input type="hidden" id="assetGroupInput" name="assetGroupInput">
               </div>
               <div class="flex justify-between">
@@ -173,12 +163,11 @@
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown5" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                        <a href="#" onclick="selectItem('Active', 'assetStatus', 'myDropdown5', 'assetStatusInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Active</p>
-                        </a>
-                        <a href="#" onclick="selectItem('In-Active', 'assetStatus', 'myDropdown5', 'assetStatusInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>In-Active</p>
-                        </a>
+                      @foreach ($status as $item)
+                          <a href="#" onclick="selectItem('{{$item->status}}', 'assetStatus', 'myDropdown5', 'assetStatusInput')" class="flex justify-between items-center w-64 px-4">
+                              <p>{{$item->status}}</p>
+                          </a>
+                        @endforeach
                     </div>
                 </div>
                 <input type="hidden" id="assetStatusInput" name="assetStatusInput">
@@ -191,9 +180,16 @@
               </div>
               <div class="flex justify-between">
                 <p>Cost Center</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="costCenter" id="costCenter">
-                </div>
+                <div class="relative">
+                  <input type="text" id="costCentreInput" name="costCentreInput" oninput="filterDropdown('costCentreInput', 'myDropdown9')" onclick="showDropdown('myDropdown9')" placeholder="Select or type..." class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                  <div id="myDropdown9" class="w-64 absolute hidden rounded shadow-md bg-white z-10 max-h-40 overflow-y-auto">
+                      @foreach ($costCentre as $item)
+                          <a href="#" onclick="selectItem('{{$item->name}}', 'costCentreInput', 'myDropdown9')" class="flex justify-between items-center w-64 px-4 py-2 hover:bg-gray-100">
+                              <p>{{$item->name}}</p>
+                          </a>
+                      @endforeach
+                  </div>
+              </div>
               </div>
               <div class="flex justify-between">
                 <p>PIC Asset</p>
@@ -227,12 +223,11 @@
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown6" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                        <a href="#" onclick="selectItem('Engineering Body', 'department', 'myDropdown6', 'departmentInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Engineering Body</p>
-                        </a>
-                        <a href="#" onclick="selectItem('Engineering', 'department', 'myDropdown6', 'departmentInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Engineering</p>
-                        </a>
+                      @foreach ($dept as $item)
+                      <a href="#" onclick="selectItem('{{$item->dept}}', 'department', 'myDropdown6', 'departmentInput')" class="flex justify-between items-center w-64 px-4">
+                          <p>{{$item->dept}}</p>
+                      </a>
+                      @endforeach
                     </div>
                 </div>
                 <input type="hidden" id="departmentInput" name="departmentInput">
@@ -263,12 +258,11 @@
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown7" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                        <a href="#" onclick="selectItem('Plant1', 'site', 'myDropdown7', 'siteInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Plant1</p>
+                      @foreach ($site as $item)
+                        <a href="#" onclick="selectItem('{{$item->name}}', 'site', 'myDropdown7', 'siteInput')" class="flex justify-between items-center w-64 px-4">
+                            <p>{{$item->name}}</p>
                         </a>
-                        <a href="#" onclick="selectItem('Plant2', 'site', 'myDropdown7', 'siteInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Plant2</p>
-                        </a>
+                      @endforeach
                     </div>
                 </div>
                 <input type="hidden" id="siteInput" name="siteInput">
@@ -286,7 +280,7 @@
                 <button class="flex items-center text-center">
                 <img src="/image/addpicture.png" alt="add" class="w-48">
                   <a href="" class="bg-[#CACACA] h-fit px-2 py-1 ml-5 rounded">
-                    Add picture
+                    <input type="file" class="form-control" id="assetPicture" name="assetPicture" >
                   </a>
                 </button>
               </div>
@@ -309,14 +303,13 @@
                         <span id="uom" class="h-6"></span>
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
-                    <div id="myDropdown8" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                        <a href="#" onclick="selectItem('Pcs', 'uom', 'myDropdown8', 'uomInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Pcs</p>
-                        </a>
-                        <a href="#" onclick="selectItem('Num', 'uom', 'myDropdown8', 'uomInput')" class="flex justify-between items-center w-64 px-4">
-                            <p>Num</p>
-                        </a>
-                    </div>
+                  <div id="myDropdown8" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                      @foreach ($uom as $item)
+                      <a href="#" onclick="selectItem('{{$item->name}}', 'uom', 'myDropdown8', 'uomInput')" class="flex justify-between items-center w-64 px-4">
+                          <p>{{$item->name}}</p>
+                      </a>
+                      @endforeach
+                  </div>
                 </div>
                 <input type="hidden" id="uomInput" name="uomInput">
               </div>
@@ -349,6 +342,68 @@
         document.getElementById(inputId).value = item; 
         toggleDropdown(null, dropdownId);
       }
+      function selectItem1(item, selectedItemTextId, dropdownId, inputId, item2, inputId2) {
+        event.preventDefault();
+        document.getElementById(selectedItemTextId).innerText = item;
+        document.getElementById(inputId).value = item; 
+        document.getElementById(inputId2).value = item2; 
+        toggleDropdown(null, dropdownId);
+      }
+      document.getElementById('depreciationStart').addEventListener('change', function() {
+        const startDate = new Date(this.value);
+        if (!isNaN(startDate.getTime())) {
+            const endDate = new Date(startDate);
+            endDate.setMonth(
+              startDate.getMonth() + Number(document.getElementById("depreciationInput").value)
+            );
+            document.getElementById('depreciationEnd').value = endDate.toISOString().split('T')[0];
+        }
+      })
+      // function showDropdown(dropdownId) {
+      //   document.getElementById(dropdownId).classList.remove('hidden');
+      // }
+
+      // function hideDropdown(dropdownId) {
+      //     document.getElementById(dropdownId).classList.add('hidden');
+      // }
+
+      // function toggleDropdown(buttonId, dropdownId) {
+      //     const dropdown = document.getElementById(dropdownId);
+      //     if (dropdown.classList.contains('hidden')) {
+      //         dropdown.classList.remove('hidden');
+      //     } else {
+      //         dropdown.classList.add('hidden');
+      //     }
+      // }
+
+      // function selectItem(value, inputId, dropdownId) {
+      //     document.getElementById(inputId).value = value;
+      //     hideDropdown(dropdownId);
+      // }
+
+      // function filterDropdown(inputId, dropdownId) {
+      //     const input = document.getElementById(inputId);
+      //     const filter = input.value.toLowerCase();
+      //     const dropdown = document.getElementById(dropdownId);
+      //     const items = dropdown.getElementsByTagName('a');
+
+      //     for (let i = 0; i < items.length; i++) {
+      //         const txtValue = items[i].textContent || items[i].innerText;
+      //         if (txtValue.toLowerCase().indexOf(filter) > -1) {
+      //             items[i].style.display = "";
+      //         } else {
+      //             items[i].style.display = "none";
+      //         }
+      //     }
+      // }
+
+      // // document.addEventListener('click', function(event) {
+      // //     event.preventDefault();
+      // //     const dropdown = document.getElementById('myDropdown9');
+      // //     if (!dropdown.contains(event.target) && event.target.id !== 'costCentreInput') {
+      // //         hideDropdown('myDropdown9');
+      // //     }
+      // // });
     </script>
   </body>
 </html>

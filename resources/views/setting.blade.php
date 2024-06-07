@@ -50,17 +50,16 @@
                     <div class=" justify-between col-start-1">
                         <p>Department</p>
                         <div>
-                            <button type="button" id="dropdownButton" onclick="toggleDropdown('dropdownButton', 'myDropdown')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                            <button type="button" id="dropdownButton" onclick="toggleDropdown('dropdownButton', 'myDropdown')" class="flex justify-between items-center px-5 bg-[#ECE9E9]    w-64 rounded">
                                 <span id="dept" class="h-6"></span>
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
                             <div id="myDropdown" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                                <a href="#" onclick="selectItem('Eng', 'dept', 'myDropdown', 'deptInput')" class="flex justify-between items-center w-64 px-4">
-                                    <p>Eng</p>
+                                @foreach ($dept as $item)
+                                <a href="#" onclick="selectItem('{{$item->dept}}', 'dept', 'myDropdown', 'deptInput')" class="flex justify-between items-center w-64 px-4">
+                                    <p>{{$item->dept}}</p>
                                 </a>
-                                <a href="#" onclick="selectItem('Engineering', 'dept', 'myDropdown', 'deptInput')" class="flex justify-between items-center w-64 px-4">
-                                    <p>Engineering</p>
-                                </a>
+                                @endforeach
                             </div>
                         </div>
                         <input type="hidden" id="deptInput" name="deptInput">
