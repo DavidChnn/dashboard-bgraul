@@ -49,115 +49,77 @@
               <div class="mx-10 my-4">
                 <p class="font-bold">Asset depreciation >></p>
               </div>
+            <form id="depreciationForm" action="/report/depreciation/commercial" method="post">
+                @csrf
               <div class="flex justify-between mx-10 mt-10">
                 <div class="flex justify-between items-center gap-x-10">
                     <div>
                         <p>Assembly Line Production</p>
                         <div>
-                            <button id="dropdownButton1" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
+                            <button type="button" id="dropdownButton1" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
                                 <span id="selectedItemText1" class="h-6">-- Pilih Line Production --</span>
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
                             <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                                <div href="#" onclick="selectItem('Plant1', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
-                                    <p>Confirm</p>
+                                <div href="#" onclick="selectItem('Fiscal', 'selectedItemText1', 'myDropdown1', 'typeInput')" class="flex justify-between items-center w-64 px-4">
+                                    <p>Fiscal</p>
                                 </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
-                                    <p>Reject Confirmation</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText1', 'myDropdown1')" class="flex justify-between items-center w-64 px-4">
-                                    <p>Not Confirm</p>
+                                <div href="#" onclick="selectItem('Commercial', 'selectedItemText1', 'myDropdown1', 'typeInput')" class="flex justify-between items-center w-64 px-4">
+                                    <p>Commercial</p>
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" id="typeInput" name="typeInput">
                     </div>
+                    @php
+                        $months = [
+                            'All', 'January', 'February', 'March', 'April', 'May', 'June', 
+                            'July', 'August', 'September', 'October', 'November', 'December'
+                        ];
+                    @endphp
                     <div>
                         <p>Month</p>
                         <div>
-                            <button id="dropdownButton2" onclick="toggleDropdown('dropdownButton2', 'myDropdown2')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
+                            <button type="button" id="dropdownButton2" onclick="toggleDropdown('dropdownButton2', 'myDropdown2')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
                                 <span id="selectedItemText2" class="h-6">-- Pilih bulan --</span>
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
                             <div id="myDropdown2" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                                <div href="#" onclick="selectItem('Plant1', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>January</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>February</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>Mart</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>April</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>May</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>June</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>July</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>Agust</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>September</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>October</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>November</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>December</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText2', 'myDropdown2')" class="flex justify-between items-center w-64 px-4">
-                                    <p>All</p>
-                                </div>
+                                @foreach ($months as $month)
+                                    <div href="#" onclick="selectItem('{{ $month }}', 'selectedItemText2', 'myDropdown2', 'monthInput')" class="flex justify-between items-center w-64 px-4">
+                                        <p>{{ $month }}</p>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
+                        <input type="hidden" id="monthInput" name="monthInput">
                     </div>
                     <div>
                         <p>Year</p>
                         <div>
-                            <button id="dropdownButton3" onclick="toggleDropdown('dropdownButton3', 'myDropdown3')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
+                            <button type="button" id="dropdownButton3" onclick="toggleDropdown('dropdownButton3', 'myDropdown3', 'yearInput')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
                                 <span id="selectedItemText3" class="h-6">-- Pilih bulan --</span>
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
                             <div id="myDropdown3" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                                <div href="#" onclick="selectItem('Plant1', 'selectedItemText3', 'myDropdown3')" class="flex justify-between items-center w-64 px-4">
-                                    <p>2021</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText3', 'myDropdown3')" class="flex justify-between items-center w-64 px-4">
-                                    <p>2022</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText3', 'myDropdown3')" class="flex justify-between items-center w-64 px-4">
-                                    <p>2023</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText3', 'myDropdown3')" class="flex justify-between items-center w-64 px-4">
-                                    <p>2024</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText3', 'myDropdown3')" class="flex justify-between items-center w-64 px-4">
-                                    <p>2025</p>
-                                </div>
-                                <div href="#" onclick="selectItem('Plant2', 'selectedItemText3', 'myDropdown3')" class="flex justify-between items-center w-64 px-4">
-                                    <p>2026</p>
-                                </div>
+                                @for ($year = $earliestYear; $year <= $latestYear; $year++)
+                                    <div href="#" onclick="selectItem('{{ $year }}', 'selectedItemText3', 'myDropdown3', 'yearInput')" class="flex justify-between items-center w-64 px-4">
+                                        <p>{{ $year }}</p>
+                                    </div>
+                                @endfor
                             </div>
                         </div>
+                        <input type="hidden" id="yearInput" name="yearInput">
                     </div>
                 </div>
               </div>
-              <div class="flex justify-end py-10 px-6">
-                <button type="button" class="flex text-white justify-center items-center w-fit bg-[#1899F6] px-2 py-1 rounded">
-                  <a href="report/depretiaon/fiscal">
-                    <p class="font-bold">+ Show</p>
-                  </a>
-                </button>
+            <div class="flex justify-end py-10 px-6">
+              <button type="submit" class="flex text-white justify-center items-center w-fit bg-[#1899F6] px-2 py-1 rounded">
+                <a href="/report/depreciation/commercial">
+                  <p class="font-bold">+ Show</p>
+                </a>
+              </button>
+            </form>
               </div>
             </div>
         </div>
@@ -165,14 +127,27 @@
     {{-- MAIN --}}
     <script>
         function toggleDropdown(buttonId, dropdownId) {
-          var dropdown = document.getElementById(dropdownId);
-          dropdown.classList.toggle("hidden");
+            var dropdown = document.getElementById(dropdownId);
+            dropdown.classList.toggle("hidden");
         }
 
-        function selectItem(item, selectedItemTextId, dropdownId) {
+        function selectItem(item, selectedItemTextId, dropdownId, inputId) {
+            event.preventDefault();
             document.getElementById(selectedItemTextId).innerText = item;
+            document.getElementById(inputId).value = item; 
             toggleDropdown(null, dropdownId);
         }
+
+        document.getElementById('depreciationForm').addEventListener('submit', function(event) {
+            var selectedType = document.getElementById('typeInput').value;
+
+            if (selectedType === 'Fiscal') {
+                this.action = '/report/depreciation/fiscal';
+            } else if (selectedType === 'Commercial') {
+                this.action = '/report/depreciation/commercial';
+            }
+        });
+
       </script>
   </body>
 </html>

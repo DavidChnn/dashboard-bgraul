@@ -189,4 +189,65 @@ class AssetController extends Controller
         $data = Asset::orderBy('assetCodeEnginery', 'asc')->paginate(6);
         return view('assetopname')->with('data',$data);
     }
+    public function indexReport()
+    {
+        $assets = Asset::all();
+        $earliestYear = $assets->min(function ($asset) {
+            return \Carbon\Carbon::parse($asset->depreciationStart)->year;
+        });
+        
+        $latestYear = $assets->max(function ($asset) {
+            return \Carbon\Carbon::parse($asset->depreciationEnd)->year;
+        });
+
+        return view('report/depreciation', compact('assets', 'earliestYear', 'latestYear'));
+    }
+    public function detailReportCommercial(Request $request)
+    {
+
+        $monthName = $request->input( 'monthInput');
+        $year = $request->input( 'yearInput');
+
+        $monthMapping = [
+            'All' => 0,
+            'January' => 1,
+            'February' => 2,
+            'March' => 3,
+            'April' => 4,
+            'May' => 5,
+            'June' => 6,
+            'July' => 7,
+            'August' => 8,
+            'September' => 9,
+            'October' => 10,
+            'November' => 11,
+            'December' => 12,
+        ];
+    
+        // Convert the month name to a month number
+        if (array_key_exists($monthName, $monthMapping)) {
+            $month = $monthMapping[$monthName];
+        } else {
+            // Handle invalid month input
+            return redirect()->back()->with('error', 'Invalid month input.');
+        }
+
+
+        $date = \Carbon\Carbon::createFromDate($year, $month, 1);
+
+        $assets = Asset::where('depreciationStart', '<=', $date)
+                   ->where('depreciationEnd', '>=', $date)
+                   ->get();
+
+
+        // $assets = Asset::semua data yang $month $year masih berada diantara 'depreciationStart' dan "depreciationEnd" asset tersebut
+        
+        
+
+        return view('report/depreciation/commercial')->with('data',$assets);
+    }
+    public function detailReportFiscal(Request $request)
+    {
+        return view('report/depreciation/fiscal');
+    }
 }

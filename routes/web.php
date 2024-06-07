@@ -49,6 +49,12 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/cip/outstanding',[cipController::class, 'indexOut']);
         Route::put('/cip/outstanding',[cipController::class, 'outstandingConfirm']);
         Route::put('/cip/addasset',[cipController::class, 'cipToAsset']);
+        
+        
+        
+        Route::get('/report/depreciation',[AssetController::class, 'indexReport']);
+        Route::post('/report/depreciation/commercial',[AssetController::class, 'detailReportCommercial']);
+        Route::post('/report/depreciation/fiscal',[AssetController::class, 'detailReportFiscal']);
 
         // Route::get('/cip/addasset', function () {
         //     return view('cip/addasset');
@@ -60,12 +66,12 @@ Route::middleware(['isLogin'])->group(function(){
             return view('welcome');
         });
         
-        Route::get('/report/depreciation', function () {
-            return view('report/depreciation');
-        });
-        Route::get('/report/depreciation/fiscal', function () {
-            return view('report/depreciation/fiscal');
-        });
+        // Route::get('/report/depreciation', function () {
+        //     return view('report/depreciation');
+        // });
+        // Route::get('/report/depreciation/fiscal', function () {
+        //     return view('report/depreciation/fiscal');
+        // });
     });
 
     Route::middleware(['UserAkses:user'])->group(function(){
