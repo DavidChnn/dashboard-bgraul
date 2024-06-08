@@ -48,7 +48,7 @@
                         <th class="border-2">Sub Asset</th>
                         <th class="border-2">Asset Group</th>
                         <th class="border-2">Asset Description</th>
-                        <th class="border-2">Department  </th>
+                        <th class="border-2">Department</th>
                         <th class="border-2">Cost Center</th>
                         <th class="border-2">Qty</th>
                         <th class="border-2">UoM</th>

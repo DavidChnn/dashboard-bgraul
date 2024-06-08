@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('assetCategory');
-            $table->int('assetClass');
+            $table->integer('assetClass');
             $table->string('assetGroup');
-            $table->int('depreciationCom');
-            $table->int('depreciationFis');
+            $table->integer('depreciationCom');
+            $table->integer('depreciationFis');
         });
     }
 

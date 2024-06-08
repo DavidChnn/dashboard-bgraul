@@ -55,13 +55,13 @@
             <div class="flex justify-between">
               <p>Inventory Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert Inventory Number" name="inventoryNumber" id="inventoryNumber">
+                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert Inventory Number" name="inventoryNumber" id="inventoryNumber" required>
               </div>
             </div>
             <div class="flex justify-between">
               <p>CIP Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert CIP Number" name="cipNumber" id="cipNumber">
+                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert CIP Number" name="cipNumber" id="cipNumber" required>
               </div>
             </div>
             <div class="flex justify-between">
@@ -73,7 +73,7 @@
             <div class="flex justify-between">
               <p>Confirmation</p>
               <div>
-                  <button id="dropdownButton1" type="button" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                  <button id="dropdownButton1" type="button" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded" required>
                       <span id="selectedItemText1" class="h-6">-- select --</span>
                       <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                   </button>

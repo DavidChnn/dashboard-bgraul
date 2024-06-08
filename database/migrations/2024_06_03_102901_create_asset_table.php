@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('asset', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('assetCodeAccounting')->nullable();;
+            $table->string('assetCodeAccounting')->nullable();
             $table->string('assetCodeEnginery');
             $table->string('assetCategory');
             $table->integer('assetClass');
@@ -39,7 +39,6 @@ return new class extends Migration
             $table->string('line');
             $table->string('proccess');
             $table->integer('quantity');
-            $table->string('uom');
             $table->string('uom');
             $table->bigInteger('acquisitionValue');
             $table->string('cipNumber')->nullable();

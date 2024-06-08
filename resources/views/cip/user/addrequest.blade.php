@@ -55,13 +55,13 @@
               <div class="flex justify-between">
                   <p>Asset Code Engineering</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="text" class="bg-[#ECE9E9]" placeholder="" name="assetCodeEnginery" id="assetCodeEnginery">
+                    <input required type="text" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="assetCodeEnginery" id="assetCodeEnginery">
                   </div>
               </div>
               <div class="flex justify-between">
                   <p>Depreciation Start</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="date" class="bg-[#ECE9E9]" placeholder="" name="depreciationStart" id="depreciationStart">
+                    <input required type="date" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="depreciationStart" id="depreciationStart">
                   </div>
               </div>
               <div class="flex justify-between">
@@ -78,13 +78,13 @@
                           </a>
                         @endforeach
                       </div>
-                      <input type="hidden" id="assetCategoryInput" name="assetCategoryInput">
+                      <input required type="hidden" id="assetCategoryInput" name="assetCategoryInput">
                   </div>
               </div>
               <div class="flex justify-between">
                   <p>Depreciation End</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="date" class="bg-[#ECE9E9]" placeholder="" name="depreciationEnd" id="depreciationEnd">
+                    <input required type="date" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="depreciationEnd" id="depreciationEnd">
                   </div>
               </div>
               <div class="flex justify-between">
@@ -102,12 +102,12 @@
                         @endforeach
                       </div>
                   </div>
-                  <input type="hidden" id="assetClassInput" name="assetClassInput">
+                  <input required type="hidden" id="assetClassInput" name="assetClassInput">
               </div>
               <div class="flex justify-between">
                 <p>Current Book Value</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="number" class="bg-[#ECE9E9]" placeholder="" name="currentBookValue" id="currentBookValue">
+                    <input required type="number" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="currentBookValue" id="currentBookValue">
                   </div>
               </div>
               <div class="flex justify-between">
@@ -125,8 +125,8 @@
                       @endforeach
                     </div>
                 </div>
-                <input type="hidden" id="depreciationInput" name="depreciationInput">
-                <input type="hidden" id="assetGroupInput" name="assetGroupInput">
+                <input required type="hidden" id="depreciationInput" name="depreciationInput">
+                <input required type="hidden" id="assetGroupInput" name="assetGroupInput">
               </div>
               <div class="flex justify-between">
                 <p>Asset Condition</p>
@@ -147,12 +147,12 @@
                           </a>
                       </div>
                   </div>
-                  <input type="hidden" id="assetConditionInput" name="assetConditionInput">
+                  <input required required type="hidden" id="assetConditionInput" name="assetConditionInput">
               </div>
               <div class="flex justify-between">
                 <p>Asset Description</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="type" class="bg-[#ECE9E9]" placeholder="" name="assetDescription" id="assetDescription">
+                    <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="assetDescription" id="assetDescription">
                   </div>
               </div>
               <div class="flex justify-between">
@@ -170,12 +170,12 @@
                         @endforeach
                       </div>
                   </div>
-                  <input type="hidden" id="assetStatusInput" name="assetStatusInput">
+                  <input required type="hidden" id="assetStatusInput" name="assetStatusInput">
               </div>
               <div class="flex justify-between">
                 <p>Sub Asset</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="subAsset" id="subAsset">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="subAsset" id="subAsset">
                 </div>
               </div>
               <div class="flex justify-between">
@@ -193,18 +193,18 @@
                     @endforeach
                   </div>
                 </div>
-                <input type="hidden" id="costCentreInput" name="costCentreInput">
+                <input required type="hidden" id="costCentreInput" name="costCentreInput">
               </div>
               <div class="flex justify-between">
                 <p>PIC Asset</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="picAsset" id="picAsset">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="picAsset" id="picAsset">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Product</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="product" id="product">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="product" id="product">
                 </div>
               </div>
               <div class="flex justify-between">
@@ -234,24 +234,24 @@
                         @endforeach
                       </div>
                   </div>
-                  <input type="hidden" id="departmentInput" name="departmentInput">
+                  <input required type="hidden" id="departmentInput" name="departmentInput">
               </div>
               <div class="flex justify-between">
                 <p>Budget Number</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="budgetNumber" id="budgetNumber">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="budgetNumber" id="budgetNumber">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Vendor</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="vendor" id="vendor">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="vendor" id="vendor">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>PO Number</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="poNumber" id="poNumber">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="poNumber" id="poNumber">
                 </div>
               </div>
               <div class="flex justify-between">
@@ -269,7 +269,7 @@
                         @endforeach
                       </div>
                   </div>
-                  <input type="hidden" id="siteInput" name="siteInput">
+                  <input required type="hidden" id="siteInput" name="siteInput">
               </div>
               <div class="flex justify-between">
                 <p>Asset Picture</p>
@@ -277,7 +277,7 @@
               <div class="flex justify-between">
                 <p>Line</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="line" id="line">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="line" id="line">
                 </div>
               </div>
               <div class="row-span-5">
@@ -291,13 +291,13 @@
               <div class="flex justify-between col-start-1">
                 <p>Process</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9]" placeholder="" name="proccess" id="proccess">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="proccess" id="proccess">
                 </div>
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Quantity</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="number" class="bg-[#ECE9E9]" placeholder="" name="quantity" id="quantity">
+                  <input required type="number" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="quantity" id="quantity">
                 </div>
               </div>
               <div class="flex justify-between col-start-1">
@@ -315,17 +315,17 @@
                         @endforeach
                       </div>
                   </div>
-                  <input type="hidden" id="uomInput" name="uomInput">
+                  <input required type="hidden" id="uomInput" name="uomInput">
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Acquisition Value</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="number" class="bg-[#ECE9E9]" placeholder="" name="acquisitionValue" id="acquisitionValue">
+                  <input type="number" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="acquisitionValue" id="acquisitionValue">
                 </div>
               </div>
             </div>
             <div class="flex justify-center items-center my-10">
-              <button type="submit" class="bg-red-500 rounded px-2 py-1">
+              <button  type="submit" class="bg-red-500 rounded px-2 py-1">
                 Submit
               </button>
             </div>
