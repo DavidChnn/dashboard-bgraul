@@ -65,8 +65,8 @@
                     @foreach ($data as $item)
                         <tr>
                             <td class="border-2">{{$counter}}</td>
-                            <td class="border-2">{{$item->assetCodeAccounting}}</td>
                             <td class="border-2">{{$item->assetCodeEnginery}}</td>
+                            <td class="border-2">{{$item->assetCodeAccounting}}</td>
                             <td class="border-2">{{$item->subAsset}}</td>
                             <td class="border-2">{{$item->assetGroup}}</td>
                             <td class="border-2">{{$item->assetDescription}}</td>

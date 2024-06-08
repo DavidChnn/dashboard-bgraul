@@ -27,7 +27,6 @@ class cipController extends Controller
         ->paginate(6);
         return view('cip/request')->with('data',$data);
     }
-    
     public function indexUser()
     {
         $data = CIP::where('statusRequest', 'Not Confirm')
@@ -117,21 +116,24 @@ class cipController extends Controller
         $idsArray = explode(',', $ids);
         $providedCount = count($idsArray);
 
-        for ($i = 1; $i < $providedCount; $i++) {
-            $cip1 = CIP::where('id', $idsArray[$i])->first();
-            $cip2 = CIP::where('id', $idsArray[$i-1])->first();
-            // Log::info("Status confirmation called for ID: $cip1");
-            if( $cip1->inventoryNumber != $cip2->inventoryNumber ){
-            return redirect('/cip/outstanding')->with('message', 'Pastikan inventory number sama');
+        if($providedCount > 1){
+            for ($i = 1; $i < $providedCount; $i++) {
+                $cip1 = CIP::where('id', $idsArray[$i])->first();
+                $cip2 = CIP::where('id', $idsArray[$i-1])->first();
+                // Log::info("Status confirmation called for ID: $cip1");
+                if( $cip1->inventoryNumber != $cip2->inventoryNumber ){
+                return redirect('/cip/outstanding')->with('message', 'Pastikan inventory number sama');
+                }
             }
         }
 
-        foreach ($idsArray as $id) {
-            $upData = [
-                'outstandingStatus' => true,
-            ];
-            return redirect('/cip/outstanding')->with('message', 'Pastikan inventory number sama');
-        }
+
+        // foreach ($idsArray as $id) {
+        //     $upData = [
+        //         'outstandingStatus' => true,
+        //     ];
+        //     return redirect('/cip/outstanding')->with('message', 'Pastikan inventory number sama');
+        // }
 
         $data = [
             'assetCodeAccounting'=>$request->input( 'assetCodeAccounting'),
@@ -142,7 +144,7 @@ class cipController extends Controller
             'assetDescription' =>$request->input( 'assetDescription'),
             'subAsset' =>$request->input( 'subAsset'),
             'picAsset' =>$request->input( 'picAsset'),
-            'cipCode' =>$request->input( 'cipCode'),
+            'cipCode' =>$request->input( 'cipNumber'),
             'acquisitionCIP' =>$request->input( 'acquisitionCIP'),
             'depreciationStart' =>$request->input( 'depreciationStart'),
             'depreciationEnd' =>$request->input( 'depreciationEnd'),
@@ -161,7 +163,7 @@ class cipController extends Controller
             'quantity' =>$request->input( 'quantity'),
             'uom' =>$request->input( 'uomInput'),
             'acquisitionValue' =>$request->input( 'acquisitionValue'),
-            'cipNumber'=>$request->input( 'cipCode'),
+            'cipNumber'=>$request->input( 'cipNumber'),
             'budgetNumber' =>$request->input( 'budgetNumber'),
             'poNumber' =>$request->input( 'poNumber'),
             'assetPicture'=>$foto_nama,

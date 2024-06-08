@@ -15,7 +15,7 @@
         <x-navbar />
         {{-- NAVBAR --}}
         <h1 class="text-xl text-xl mx-10 my-10">
-          CIP/ConfirmationCIP
+          CIP/OutStandingCIP
         </h1>
         <div class="bg-white mx-10 pb-10">
           <div class="flex justify-between items-center border-b-2 p-4">
