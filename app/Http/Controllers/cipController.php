@@ -26,7 +26,8 @@ class cipController extends Controller
         ->orderBy('id', 'asc')
         ->paginate(6);
         return view('cip/request')->with('data',$data);
-    } 
+    }
+    
     public function indexUser()
     {
         $data = CIP::where('statusRequest', 'Not Confirm')
@@ -34,7 +35,7 @@ class cipController extends Controller
         ->orderBy('id', 'asc')
         ->paginate(6);
         return view('cip/user/request')->with('data',$data);
-    } 
+    }
 
     public function detail(string $id){
         $data = CIP::where('id', $id)->first();
