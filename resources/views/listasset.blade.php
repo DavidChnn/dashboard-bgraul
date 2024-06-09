@@ -33,6 +33,11 @@
             </div>
           </div>
           <div class="flex justify-end px-2">
+          <div class="flex justify-between items-center px-2">
+              <a href="{{ route('exportlistasset') }}" class="bg-[#79C4FB] text-white rounded text-xl px-2 py-1 mr-5">
+                  Export to Excel
+              </a>
+          </div>
             <div class="flex bg-[#D6CECE] w-fit items-center justify-between rounded px-2 my-4 py-1">
                 <input class="bg-[#D6CECE] text-[#4B4A4A] focus:outline-none" type="text" placeholder="Search...">
                 <img src="/image/search1.png" alt="search" class="w-6 mr-2">

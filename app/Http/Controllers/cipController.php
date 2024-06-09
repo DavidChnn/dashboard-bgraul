@@ -11,9 +11,15 @@ use App\Models\MasterCostCentre;
 use App\Models\MasterLine;
 use App\Models\MasterSite;
 use App\Models\MasterUom;
+use Illuminate\Console\View\Components\Confirm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Exports\RequestCIP;
+use App\Exports\ConfirmationCIP;
+use App\Exports\OutstandingCIP;
+use App\Exports\OutstandingUserCIP;
+use Maatwebsite\Excel\Facades\Excel;
 
 class cipController extends Controller
 {
@@ -24,7 +30,7 @@ class cipController extends Controller
     {
         $data = CIP::where('statusRequest', 'Not Confirm')
         ->orderBy('id', 'asc')
-        ->paginate(6);
+        ->paginate(10);
         return view('cip/request')->with('data',$data);
     }
     public function indexUser()
@@ -32,7 +38,7 @@ class cipController extends Controller
         $data = CIP::where('statusRequest', 'Not Confirm')
         ->where('user',  Auth::user()->name)
         ->orderBy('id', 'asc')
-        ->paginate(6);
+        ->paginate(10);
         return view('cip/user/request')->with('data',$data);
     }
 
@@ -63,6 +69,7 @@ class cipController extends Controller
 
         return redirect('cip/user/confirmation');
     }
+
     public function outstandingConfirm( request $request){
 
         // Log::info("Status confirmation called for ID: $id");
@@ -238,7 +245,7 @@ class cipController extends Controller
         ->with('costCentre',$costCentre)
         ->with('line',$line)
         ->with('site',$site)
-        ->with('uom',$uom);;
+        ->with('uom',$uom);
     }
 
     /**
@@ -297,7 +304,42 @@ class cipController extends Controller
         return redirect('cip/user/request');
     }
 
-    
+    public function exportExcel (){
+        $data = CIP::where('statusRequest', 'Not Confirm')
+        -> orderBy('id', 'asc')
+        -> get(); // Ambil semua data tanpa paginasi
+
+        return Excel::download(new RequestCIP($data), 'CIP.xlsx');
+    }
+
+    public function exportConfirmationExcel() {
+        $data = CIP::where('statusRequest', 'Confirm')
+            ->where('statusConfirmation', false)
+            ->orderBy('id', 'asc')
+            ->get(); // Get all confirmed data without pagination
+
+        return Excel::download(new ConfirmationCIP($data), 'ConfirmationCIP.xlsx');
+    }
+
+    public function exportOutstandingExcel() {
+        $data = CIP::where('statusRequest', 'Confirm')
+            ->where('statusConfirmation', true)
+            ->where('outstandingStatus', false)
+            ->orderBy('id', 'asc')
+            ->get(); // Get all confirmed data without pagination
+
+        return Excel::download(new OutstandingCIP($data), 'Outstanding.xlsx');
+    }
+
+    public function exportOutstandingUserExcel() {
+        $data = CIP::where('statusRequest', 'Confirm')
+            ->where('statusConfirmation', true)
+            ->where('outstandingStatus', false)
+            ->orderBy('id', 'asc')
+            ->get(); // Get all confirmed data without pagination
+
+        return Excel::download(new OutstandingUserCIP($data), 'OutstandingUser.xlsx');
+    }
 
     /**
      * Display the specified resource.
