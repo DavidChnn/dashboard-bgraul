@@ -33,12 +33,12 @@
             </div>
           </div>
           <div class="flex justify-between items-center px-2">
-            <div class="flex px-6 py-4">
-                <p class="font-semibold">Request CIP Number >></p>
+              <div class="flex px-6 py-4">
+                  <p class="font-semibold">Request CIP Number >></p>
               </div>
-            <button type="button" class="bg-[#79C4FB] text-white rounded text-xl px-2 py-1 mr-5">
-                Print
-            </button>
+              <a href="{{ route('cip.export.exportrequestcip') }}" class="bg-[#79C4FB] text-white rounded text-xl px-2 py-1 mr-5">
+                  Export to Excel
+              </a>
           </div>
           <div class="px-2 w-full">
             <table class="table border-collapse text-sm w-full">
@@ -60,7 +60,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-center">
-                  @php 
+                  @php
                       $counter = ($data->currentPage() - 1) * $data->perPage() + 1;
                   @endphp
                     @foreach ($data as $item)
@@ -88,6 +88,7 @@
                         </tr>
                         @php $counter++; @endphp
                     @endforeach
+                    {{$data->links()}}
                 </tbody>
             </table>
           </div>
