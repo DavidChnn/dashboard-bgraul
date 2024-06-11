@@ -49,6 +49,8 @@ return new class extends Migration
             $table->string('statusRequest');
             $table->boolean('statusConfirmation');
             $table->boolean('outstandingStatus');
+            $table->boolean('ongoingStatus');
+            $table->string('notes');
 
         });
     }

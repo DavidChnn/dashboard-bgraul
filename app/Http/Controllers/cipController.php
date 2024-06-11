@@ -13,6 +13,7 @@ use App\Models\MasterSite;
 use App\Models\MasterUom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class cipController extends Controller
@@ -103,7 +104,7 @@ class cipController extends Controller
         ->with('count',$count);
     }
     public function cipToAsset(request $request){
-        // Log::info("Status confirmation called for ID: $id");
+
 
         $dept = MasterCostCentre::where('name', $request->input( 'costCenter'))->first();
 
@@ -126,14 +127,6 @@ class cipController extends Controller
                 }
             }
         }
-
-
-        // foreach ($idsArray as $id) {
-        //     $upData = [
-        //         'outstandingStatus' => true,
-        //     ];
-        //     return redirect('/cip/outstanding')->with('message', 'Pastikan inventory number sama');
-        // }
 
         $data = [
             'assetCodeAccounting'=>$request->input( 'assetCodeAccounting'),
@@ -205,7 +198,16 @@ class cipController extends Controller
         ->where('outstandingStatus', false)
         ->orderBy('id', 'asc')
         ->paginate(6);
-        return view('cip/outstanding')->with('data',$data);
+
+        $notes = CIP::select('inventoryNumber', 'notes')
+        ->where('statusConfirmation', true)
+        ->where('outstandingStatus', false)
+        ->where('ongoingStatus', true)
+        ->groupBy('inventoryNumber', 'notes')
+        ->orderBy('inventoryNumber', 'asc')
+        ->get();
+
+        return view('cip/outstanding')->with('data',$data)->with('notes',$notes);
     }
     public function indexOutUser()
     {
@@ -215,6 +217,32 @@ class cipController extends Controller
         ->orderBy('id', 'asc')
         ->paginate(6);
         return view('cip/user/outstanding')->with('data',$data);
+    }
+    public function indexOnUser()
+    {
+        $data = CIP::select('inventoryNumber', 'ongoingStatus', 'notes', DB::raw('count(*) as total'))
+        ->where('statusConfirmation', true)
+        ->where('outstandingStatus', false)
+        ->where('user', Auth::user()->name)
+        ->groupBy('inventoryNumber', 'ongoingStatus', 'notes')
+        ->orderBy('inventoryNumber', 'asc')
+        ->paginate(6);
+
+        return view('cip/user/ongoing')->with('data',$data);
+    }
+
+    public function ongoingDetail(string $id){
+        $data = CIP::where('inventoryNumber', $id)->first();
+        return view('/cip/user/ongoingconfirm')->with('data',$data);
+    }
+    public function ongoingStore(request $request, string $inventoryNumber){
+        $data = [
+            'ongoingStatus' =>$request->ongoingStatusInput,
+            'notes'=>$request->notes ? $request->notes : 'tidak ada notes',
+        ];
+        CIP::where('inventoryNumber', $inventoryNumber)->update($data);
+
+        return redirect('cip/user/ongoing');
     }
     
 
@@ -246,7 +274,6 @@ class cipController extends Controller
      */
     public function store(Request $request)
     {
-
 
         $foto_file = $request->file('assetPicture');
         $foto_eks = $foto_file->getClientOriginalExtension();

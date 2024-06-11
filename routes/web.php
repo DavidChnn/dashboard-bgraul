@@ -89,6 +89,9 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/cip/user/confirmation',[cipController::class, 'indexConUser']);
         Route::put('/cip/user/confirmation/{id}',[cipController::class, 'statusConfirm']);
         Route::get('/cip/user/outstanding',[cipController::class, 'indexOutUser']);
+        Route::get('/cip/user/ongoing',[cipController::class, 'indexOnUser']);
+        Route::get('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingDetail']);
+        Route::put('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingStore']);
 
     });
 
