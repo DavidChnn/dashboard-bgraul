@@ -57,11 +57,17 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/cip/export/exportrequestcip', [cipController::class, 'exportExcel'])->name('cip.export.exportrequestcip');
         Route::get('/cip/export/exportconfirmationcip', [cipController::class, 'exportConfirmationExcel'])->name('cip.export.exportconfirmationcip');
         Route::get('/cip/export/outstandingcip', [cipController::class, 'exportOutstandingExcel'])->name('cip.export.outstandingcip');
+        Route::get('/report/export/assetreport', [AssetController::class, 'exportAssetReprotExcel'])->name('report.export.assetreport');
 
         
         Route::get('/report/depreciation',[AssetController::class, 'indexReport']);
         Route::post('/report/depreciation/commercial',[AssetController::class, 'detailReportCommercial']);
         Route::post('/report/depreciation/fiscal',[AssetController::class, 'detailReportFiscal']);
+        Route::get('/report/assetreport', [AssetController::class, 'assetReport']);
+
+        // Route::get('/report/assetreport', function () {
+        //     return view('report/assetreport');
+        // });
 
         // Route::get('/cip/addasset', function () {
         //     return view('cip/addasset');

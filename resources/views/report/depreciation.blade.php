@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
+    <title>Asset Report</title>
   </head>
   <body class="bg-[#F5FAFF]">
     {{-- SIDEBAR --}}

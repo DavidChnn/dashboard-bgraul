@@ -99,7 +99,7 @@
               </a>
             </li>
             <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="">
+              <a href="/report/assetreport">
                 <p>Asset Report</p>
               </a>
             </li>

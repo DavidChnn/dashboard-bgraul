@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\AssetReport;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\MasterAssetCategory;
@@ -330,5 +331,17 @@ class AssetController extends Controller
             ->get(); // Get all confirmed data without pagination
 
         return Excel::download(new ListAsset($data), 'ListAsset.xlsx');
+    }
+
+    public function exportAssetReprotExcel() {
+        $data = Asset::orderBy('id', 'asc')
+            ->get(); // Get all confirmed data without pagination
+
+        return Excel::download(new AssetReport($data), 'AssetReport.xlsx');
+    }
+    public function assetReport()
+    {
+        $data = Asset::orderBy('id', 'asc')->paginate(6);
+        return view('report/assetreport')->with('data',$data);
     }
 }
