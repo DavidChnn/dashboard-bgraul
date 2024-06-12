@@ -48,7 +48,7 @@
                         <th class="border-2">UoM</th>
                         <th class="border-2">Status</th>
                         <th class="border-2">CIP Number</th>
-                        <th class="border-2">Konfirmasi</th>
+                        <th class="border-2">Revisi</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -62,14 +62,21 @@
                             <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : ''}}</td>
                             <td class="border-2">{{$item->assetDescription}}</td>
                             <td class="border-2">{{$item->acquisitionCIP}}</td>
-                            <td class="border-2"> {{$item->budgetNumber}}</td>
+                            <td class="border-2">{{$item->budgetNumber}}</td>
                             <td class="border-2">{{$item->department}}</td>
                             <td class="border-2">{{$item->acquisitionValue}}</td>
                             <td class="border-2">{{$item->quantity}}</td>
                             <td class="border-2">{{$item->uom}}</td>
-                            <td class="border-2">{{ $item->statusRequest}}</td>
+                            <td class="border-2">{{$item->statusRequest}}</td>
                             <td class="border-2">{{$item->cipNumber ? $item->cipNumber : ''}}</td>
                             <td class="border-2">
+                              @if($item->statusRequest == 'Reject')
+                                <button>
+                                  <a href='{{url('/cip/user/requestrevisi/'.$item->id)}}'>
+                                      memek
+                                  </a>
+                                </button>
+                              @endif
                           </td>
                         </tr>
                         @php $counter++; @endphp

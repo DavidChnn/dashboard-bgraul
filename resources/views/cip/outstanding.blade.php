@@ -59,6 +59,7 @@
                         <th class="border-2">UoM</th>
                         <th class="border-2">Status</th>
                         <th class="border-2">CIP Number</th>
+                        <th class="border-2">Merge</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -77,11 +78,13 @@
                           <td class="border-2">{{$item->acquisitionValue}}</td>
                           <td class="border-2">{{$item->quantity}}</td>
                           <td class="border-2">{{$item->uom}}</td>
-                          <td class="border-2">{{$item->statusConfirmation ? 'confirm' : 'no confirm'}}</td>
+                          <td class="border-2">{{$item->ongoingStatus ? 'confirm' : 'no confirm'}}</td>
                           <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
                           <td class="border-2">
-                            <input type="checkbox" name="ids[]" value="{{$item->id}}">
-                            </td>
+                            @if($item->ongoingStatus)
+                                <input type="checkbox" name="ids[]" value="{{$item->id}}">
+                            @endif
+                          </td>
                       </tr>
                       @php $counter++; @endphp
                     @endforeach
@@ -93,6 +96,15 @@
                   </button>
                 </div>
               </form>
+
+            <div>
+              <p> Notes</p>
+              @foreach ($notes as $item)
+              <div>Untuk Inventory Number {{$item->inventoryNumber}}</div>
+                  
+                  {{$item->notes}}
+              @endforeach
+            </div>
           </div>
         </div>
     </main>

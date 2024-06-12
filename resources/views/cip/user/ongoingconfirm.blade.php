@@ -17,7 +17,7 @@
         <h1 class="text-xl mx-10 my-10">
           CIP/Request/Confirm CIP
         </h1>
-        <form class="bg-white mx-10 mb-10 pb-10" action="{{ url('/cip/confirmrequest/'.$data->id) }}" method="POST">
+        <form class="bg-white mx-10 mb-10 pb-10" action="{{ url('/cip/user/ongoing/'.$data->inventoryNumber) }}" method="POST">
           @csrf
           @method('PUT')
           <div class="flex justify-between items-center border-b-2 p-4">
@@ -41,90 +41,39 @@
           
           <div class="grid grid-cols-2 overflow-y-auto gap-x-10 gap-y-5 px-6">
             <div class="flex justify-between">
-              <p>Class</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->assetClass}}</p>
-              </div>
-            </div>
-            <div class="flex justify-between">
-              <p>UoM</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->uom}}</p>
-              </div>
-            </div>
-            <div class="flex justify-between">
               <p>Inventory Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" value="{{$data->inventoryNumber}}" placeholder="{{$data->inventoryNumber}}" name="inventoryNumber" id="inventoryNumber" >
-              </div>
-            </div>
-            <div class="flex justify-between">
-              <p>CIP Number</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" value="{{$data->cipNumber}}" placeholder="{{$data->cipNumber}}" name="cipNumber" id="cipNumber">
-              </div>
-            </div>
-            <div class="flex justify-between">
-              <p>Description</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->assetDescription}}</p>
+                <p> {{$data->inventoryNumber}}</p>
               </div>
             </div>
             <div class="flex justify-between">
               <p>Confirmation</p>
               <div>
                   <button id="dropdownButton1" type="button" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded" required>
-                      <span id="selectedItemText1" class="h-6">{{{$data->statusRequest}}}</span>
+                      <span id="selectedItemText1" class="h-6">{{$data->ongoingStatus ? 'Confirm' : 'Not Confirm'}}</span>
                       <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                   </button>
                   <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
-                      <div href="#" onclick="selectItem('Confirm', 'selectedItemText1', 'myDropdown1', 'statusRequestInput')" class="flex justify-between items-center w-64 px-4">
+                      <div href="#" onclick="selectItem('Confirm', 'selectedItemText1', 'myDropdown1', 'ongoingStatusInput', '1')" class="flex justify-between items-center w-64 px-4">
                           <p>Confirm</p>
                       </div>
-                      <div href="#" onclick="selectItem('Reject', 'selectedItemText1', 'myDropdown1', 'statusRequestInput')" class="flex justify-between items-center w-64 px-4">
-                          <p>Reject Request</p>
-                      </div>
-                      <div href="#" onclick="selectItem('Not Confirm', 'selectedItemText1', 'myDropdown1', 'statusRequestInput')" class="flex justify-between items-center w-64 px-4">
+                      <div href="#" onclick="selectItem('Not Confirm', 'selectedItemText1', 'myDropdown1', 'ongoingStatusInput','0')" class="flex justify-between items-center w-64 px-4">
                           <p>Not Confirm</p>
                       </div>
                   </div>
-                  <input type="hidden" id="statusRequestInput" name="statusRequestInput" value="{{{$data->statusRequest}}}">
-              </div>
-            </div>
-            <div class="flex justify-between">
-              <p>Cap Date</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->acquisitionCIP}}</p>
+                  <input type="hidden" id="ongoingStatusInput" name="ongoingStatusInput" value="{{$data->ongoingStatus}}">
               </div>
             </div>
             <div class="flex justify-between col-start-1">
-              <p>Capex Number</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->budgetNumber}}</p>
-              </div>
-            </div>
-            <div class="flex justify-between col-start-1">
-              <p>Dept</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->department}}</p>
-              </div>
-            </div>
-            <div class="flex justify-between col-start-1">
-              <p>Amount</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->acquisitionValue}}</p>
-              </div>
-            </div>
-            <div class="flex justify-between col-start-1">
-              <p>Qty</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->quantity}}</p>
-              </div>
+                <p>Notes</p>
+                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                    <input type="type" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="notes" id="notes">
+                </div>
             </div>
           </div>
           <div class="flex justify-center mt-10">
             <button type="submit" class="bg-[#4B06A4] px-2 py-1 rounded text-white">
-                + Confirm CIP
+                + Confirm Ongoing
             </button>
           </div>
         
@@ -143,10 +92,10 @@
         dropdown.classList.toggle("hidden");
       }
 
-      function selectItem(item, selectedItemTextId, dropdownId, inputId) {
+      function selectItem(item, selectedItemTextId, dropdownId, inputId, value) {
         event.preventDefault();
         document.getElementById(selectedItemTextId).innerText = item;
-        document.getElementById(inputId).value = item; 
+        document.getElementById(inputId).value = value; 
         toggleDropdown(null, dropdownId);
       }
     </script>

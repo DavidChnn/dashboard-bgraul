@@ -154,8 +154,31 @@ class AssetController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        //
+    {   
+        $category = MasterAssetCategory::select('assetCategory')->distinct()->get();
+        $class = MasterAssetCategory::select('assetClass')->distinct()->get();
+        $group = MasterAssetCategory::all();
+        $status = MasterAssetStatus::select('status')->distinct()->get();
+        $dept = MasterCostCentre::select('dept')->distinct()->get();
+        $costCentre = MasterCostCentre::all();
+        $line = MasterLine::all();
+        $site = MasterSite::select('name')->distinct()->get();
+        $uom = MasterUom::select('name')->distinct()->get();
+        $data = Asset::where('id', $id)->first();
+        $depreciation = MasterAssetCategory::where('assetGroup', $data->assetGroup)->first();
+
+        return view('listasset/assetedit')->with('data',$data)
+        ->with('data',$data)
+        ->with('category',$category)
+        ->with('class',$class)
+        ->with('group',$group)
+        ->with('status',$status)
+        ->with('dept',$dept)
+        ->with('costCentre',$costCentre)
+        ->with('line',$line)
+        ->with('site',$site)
+        ->with('uom',$uom)
+        ->with('depreciation',$depreciation);
     }
 
     /**
@@ -163,7 +186,56 @@ class AssetController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = Asset::where('id',$id)->first();
+        if ($request->file('assetPicture')){
+            $foto_file = $request->file('assetPicture');
+            $foto_eks = $foto_file->getClientOriginalExtension();
+            $foto_nama = date('ymdhis').".".$foto_eks;
+            $foto_file ->move(public_path('foto'),$foto_nama);
+        } else {
+            if($data->assetPicture){
+                $foto_nama = $data->assetPicture;
+            }
+        }
+        
+        $dept = MasterCostCentre::where('name', $request->input( 'costCentreInput'))->first();
+        $deptDetail = $dept->deptDetail;
+        
+        $updata = [
+            'assetCodeEnginery' =>$request->input( 'assetCodeEnginery'),
+            'assetCategory' =>$request->input( 'assetCategoryInput'),
+            'assetClass' =>$request->input( 'assetClassInput'),
+            'assetGroup' =>$request->input( 'assetGroupInput'),
+            'assetDescription' =>$request->input( 'assetDescription'),
+            'subAsset' =>$request->input( 'subAsset'),
+            'picAsset' =>$request->input( 'picAsset'),
+            'acquisitionCIP' =>$request->input( 'acquisitionCIP'),
+            'depreciationStart' =>$request->input( 'depreciationStart'),
+            'depreciationEnd' =>$request->input( 'depreciationEnd'),
+            'currentBookValue' =>$request->input( 'currentBookValue'),
+            'assetCondition' =>$request->input( 'assetConditionInput'),
+            'assetStatus' =>$request->input( 'assetStatusInput'),
+            'costCenter' =>$request->input( 'costCentreInput'),
+            'product' =>$request->input( 'product'),
+            'department' =>$request->input( 'departmentInput'),
+            'vendor' =>$request->input( 'vendor'),
+            'site' =>$request->input( 'siteInput'),
+            'line' =>$request->input( 'line'),
+            'proccess' =>$request->input( 'proccess'),
+            'quantity' =>$request->input( 'quantity'),
+            'uom' =>$request->input( 'uomInput'),
+            'acquisitionValue' =>$request->input( 'acquisitionValue'),
+            'budgetNumber' =>$request->input( 'budgetNumber'),
+            'poNumber' =>$request->input( 'poNumber'),
+            'assetPicture'=>$foto_nama,
+            'departmentDetail'=>$deptDetail,
+
+            
+        ];
+
+        Asset::where('id', $id)->update($updata);
+
+        return redirect('listasset/assetdetail/'.$id);
     }
 
     /**

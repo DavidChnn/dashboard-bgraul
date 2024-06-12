@@ -216,6 +216,13 @@
               </div>
             </div>
           </div>
+          <div class="flex justify-center items-center my-10">
+            <button type="button" class="bg-red-500 rounded px-2 py-1">
+              <a href="{{url('/listasset/assetedit/'.$data->id)}}">
+                Edit
+              </a>
+            </button>
+          </div>
         </div>
       </div>
     </main>

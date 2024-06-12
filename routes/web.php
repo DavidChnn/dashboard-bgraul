@@ -36,6 +36,8 @@ Route::middleware(['isLogin'])->group(function(){
         
         Route::get('listasset',[AssetController::class, 'index']);
         Route::get('/listasset/assetdetail/{id}',[AssetController::class, 'show']);
+        Route::get('/listasset/assetedit/{id}',[AssetController::class, 'edit']);
+        Route::put('/listasset/assetedit/{id}',[AssetController::class, 'update']);
         Route::get('/listasset/addasset',[AssetController::class, 'create']);
         Route::post('/listasset',[AssetController::class, 'store']);
         Route::get('/assetlayout',[AssetController::class, 'indexLayout']);
@@ -91,9 +93,14 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/cip/user/request',[cipController::class, 'indexUser']);
         Route::post('/cip/user/request',[cipController::class, 'store']);
         Route::get('/cip/user/addrequest',[cipController::class, 'create']);
+        Route::get('/cip/user/requestrevisi/{id}',[cipController::class, 'requestRevisi']);
+        Route::put('/cip/user/requestrevisi/{id}',[cipController::class, 'storeRevisi']);
         Route::get('/cip/user/confirmation',[cipController::class, 'indexConUser']);
         Route::put('/cip/user/confirmation/{id}',[cipController::class, 'statusConfirm']);
         Route::get('/cip/user/outstanding',[cipController::class, 'indexOutUser']);
+        Route::get('/cip/user/ongoing',[cipController::class, 'indexOnUser']);
+        Route::get('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingDetail']);
+        Route::put('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingStore']);
 
 
         Route::get('/cip/user/export/outstanding', [cipController::class, 'exportOutstandingUserExcel'])->name('cip.user.export.outstanding');
