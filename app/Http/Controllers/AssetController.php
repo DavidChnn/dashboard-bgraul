@@ -23,10 +23,22 @@ class AssetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Asset::orderBy('id', 'asc')->paginate(6);
-        return view('listasset')->with('data',$data);
+         // Get the filter value from the request
+        $filter = $request->input('assetClass');
+
+        // Query the data, applying the filter if provided
+        $query = Asset::orderBy('id', 'asc');
+
+        if ($filter) {
+            $query->where('assetClass', $filter);
+        }
+
+        $data = $query->paginate(6);
+
+        // Pass the current filter value to the view
+        return view('listasset')->with('data', $data)->with('filter', $filter);
     }
 
     /**

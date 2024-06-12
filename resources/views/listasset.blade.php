@@ -34,6 +34,22 @@
           </div>
           <div class="flex justify-end px-2">
           <div class="flex justify-between items-center px-2">
+            <form method="GET" action="{{ url('/listasset') }}" class="mb-4">
+              <div class="flex items-center">
+                  <label for="assetClass" class="mr-2">Filter by Asset Class:</label>
+                  <select name="assetClass" id="assetClass" class="border rounded p-2">
+                      <option value="">All</option>
+                      @foreach(App\Models\Asset::select('assetClass')->distinct()->get() as $asset)
+                          <option value="{{ $asset->assetClass }}" {{ request('assetClass') == $asset->assetClass ? 'selected' : '' }}>
+                              {{ $asset->assetClass }}
+                          </option>
+                      @endforeach
+                  </select>
+                  <button type="submit" class="ml-2 bg-blue-500 text-white p-2 rounded">Filter</button>
+              </div>
+          </form>
+          </div>
+          <div class="flex justify-between items-center px-2">
               <a href="{{ route('exportlistasset') }}" class="bg-[#79C4FB] text-white rounded text-xl px-2 py-1 mr-5">
                   Export to Excel
               </a>
@@ -52,6 +68,7 @@
                         <th class="border-2">SAP Number</th>
                         <th class="border-2">Sub Asset</th>
                         <th class="border-2">Asset Group</th>
+                        <th class="border-2">Asset class</th>
                         <th class="border-2">Asset Description</th>
                         <th class="border-2">Department</th>
                         <th class="border-2">Cost Center</th>
@@ -74,6 +91,7 @@
                             <td class="border-2">{{$item->assetCodeAccounting}}</td>
                             <td class="border-2">{{$item->subAsset}}</td>
                             <td class="border-2">{{$item->assetGroup}}</td>
+                            <td class="border-2">{{$item->assetClass}}</td>
                             <td class="border-2">{{$item->assetDescription}}</td>
                             <td class="border-2">{{$item->department}}</td>
                             <td class="border-2">{{$item->costCenter}}</td>
