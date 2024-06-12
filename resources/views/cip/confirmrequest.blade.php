@@ -55,13 +55,13 @@
             <div class="flex justify-between">
               <p>Inventory Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert Inventory Number" name="inventoryNumber" id="inventoryNumber" >
+                <input type="type" class="bg-[#ECE9E9]" value="{{$data->inventoryNumber}}" placeholder="{{$data->inventoryNumber}}" name="inventoryNumber" id="inventoryNumber" >
               </div>
             </div>
             <div class="flex justify-between">
               <p>CIP Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert CIP Number" name="cipNumber" id="cipNumber">
+                <input type="type" class="bg-[#ECE9E9]" value="{{$data->cipNumber}}" placeholder="{{$data->cipNumber}}" name="cipNumber" id="cipNumber">
               </div>
             </div>
             <div class="flex justify-between">
@@ -88,7 +88,7 @@
                           <p>Not Confirm</p>
                       </div>
                   </div>
-                  <input type="hidden" id="statusRequestInput" name="statusRequestInput">
+                  <input type="hidden" id="statusRequestInput" name="statusRequestInput" value="{{{$data->statusRequest}}}">
               </div>
             </div>
             <div class="flex justify-between">
