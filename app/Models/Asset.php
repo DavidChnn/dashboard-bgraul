@@ -41,7 +41,8 @@ class Asset extends Model
         'poNumber' ,
         'assetPicture',
         'departmentDetail',
-        'user'
+        'user',
+        'quantityInput'
 
     ];
 }

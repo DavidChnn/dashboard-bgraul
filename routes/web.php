@@ -43,6 +43,8 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/assetlayout',[AssetController::class, 'indexLayout']);
         Route::get('/assetlayout/lineproductionmap/{line}',[AssetController::class, 'detailLayout']);
         Route::get('/assetopname',[AssetController::class, 'indexOpname']);
+        Route::get('/assetopnameedit/{id}',[AssetController::class, 'detailOpname']);
+        Route::put('/assetopnameedit/{id}',[AssetController::class, 'storeOpname']);
         
         Route::get('/cip/request',[cipController::class, 'index']);
         Route::get('/cip/confirmation',[cipController::class, 'indexCon']);

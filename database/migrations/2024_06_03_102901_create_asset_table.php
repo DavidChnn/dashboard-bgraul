@@ -46,6 +46,7 @@ return new class extends Migration
             $table->string('poNumber');
             $table->string('user');
             $table->string('assetPicture')->nullable();
+            $table->integer('quantityInput')->nullable();
         });
     }
 

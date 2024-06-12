@@ -125,6 +125,7 @@ class AssetController extends Controller
             'line' =>$request->input( 'line'),
             'proccess' =>$request->input( 'proccess'),
             'quantity' =>$request->input( 'quantity'),
+            'quantityInput' =>$request->input( 'quantity'),
             'uom' =>$request->input( 'uomInput'),
             'acquisitionValue' =>$request->input( 'acquisitionValue'),
             'cipNumber'=>$request->input( 'cipCode'),
@@ -224,6 +225,7 @@ class AssetController extends Controller
             'line' =>$request->input( 'line'),
             'proccess' =>$request->input( 'proccess'),
             'quantity' =>$request->input( 'quantity'),
+            'quantityInput' =>$request->input( 'quantity'),
             'uom' =>$request->input( 'uomInput'),
             'acquisitionValue' =>$request->input( 'acquisitionValue'),
             'budgetNumber' =>$request->input( 'budgetNumber'),
@@ -263,6 +265,33 @@ class AssetController extends Controller
     {
         $data = Asset::orderBy('assetCodeEnginery', 'asc')->paginate(6);
         return view('assetopname')->with('data',$data);
+    }
+    public function detailOpname(string $id)
+    {
+        $data = Asset::where('id', $id)->first();
+        return view('assetopnameedit')->with('data',$data);
+    }
+    public function storeOpname(Request $request, string $id)
+    {
+        $data = Asset::where('id',$id)->first();
+        if ($request->file('assetPicture')){
+            $foto_file = $request->file('assetPicture');
+            $foto_eks = $foto_file->getClientOriginalExtension();
+            $foto_nama = date('ymdhis').".".$foto_eks;
+            $foto_file ->move(public_path('foto'),$foto_nama);
+        } else {
+            if($data->assetPicture){
+                $foto_nama = $data->assetPicture;
+            }
+        }
+
+        $updata = [
+            'quantityInput' =>$request->input( 'quantityInput'),
+            'assetCondition' => $request->input('assetConditionInput'),
+            'assetPicture' => $foto_nama
+        ];
+        Asset::where('id', $id)->update($updata);
+        return redirect('assetopname');
     }
     public function indexReport()
     {

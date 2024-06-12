@@ -54,9 +54,11 @@
                         <th class="border-2">Qty</th>
                         <th class="border-2">UoM</th>
                         <th class="border-2">Product</th>
+                        <th class="border-2">condition</th>
                         <th class="border-2">Status</th>
                         <th class="border-2">Image</th>
                         <th class="border-2">Checklist</th>
+                        <th class="border-2">Edit</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -77,17 +79,27 @@
                             <td class="border-2">{{$item->uom}}</td>
                             <td class="border-2">{{$item->product}}</td>
                             <td class="border-2">{{$item->assetStatus}}</td>
+                            <td class="border-2">{{$item->assetCondition}}</td>
                             <td class="border-2">
                             <button>
                                 <a href="assetdetail">
-                                    <img src="/image/image1.png" alt="image1" class="w-6">
+                                    <img src="{{url('foto').'/'.$item->assetPicture}}" alt="image1" class="w-6">
                                 </a>
                             </button>
                         </td>
                         <td class="border-2">
                             <button>
-                                <a href="assetdetail">
-                                    <img src="/image/checklist1.png" alt="checklist1" class="w-6">
+                                <a href="#">
+                                    <img src="{{ $item->quantity == $item->quantityInput ? '/image/checklist1.png' : '/image/setting.png' }}" 
+                                    alt="{{ $item->quantity == $item->quantityInput ? 'checklist1' : 'setting' }}" 
+                                    class="w-6">
+                                </a>
+                            </button>
+                        </td>
+                        <td class="border-2">
+                            <button>
+                                <a href="{{url('assetopnameedit/'.$item->id)}}">
+                                    <img src="/image/setting.png" alt="setting" class="w-6">
                                 </a>
                             </button>
                         </td>

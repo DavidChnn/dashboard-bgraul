@@ -45,7 +45,9 @@ class CIP extends Model
         'statusRequest',
         'statusConfirmation',
         'outstandingStatus',
-        'user'
+        'user',
+        'ongoingStatus',
+        'notes'
         
 
     ];
