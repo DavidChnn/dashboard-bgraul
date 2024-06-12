@@ -32,15 +32,7 @@
               <img src="/image/arrow2.png" alt="arrow2" class="rotate-90 w-6">
             </div>
           </div>
-          <div class="flex justify-between items-center px-2">
-            <div class="flex px-6 py-4">
-                <p class="font-semibold">Request CIP Number >></p>
-              </div>
-            <button type="button" class="bg-[#79C4FB] text-white rounded text-xl px-2 py-1 mr-5">
-                Print
-            </button>
-          </div>
-          <form class="px-2 w-full">
+          <form class="px-2 py-5 w-full">
             <table class="table border-collapse text-sm w-full">
                 <thead class="text-center">
                     <tr class="border-2">

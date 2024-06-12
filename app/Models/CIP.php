@@ -33,7 +33,7 @@ class CIP extends Model
         'vendor' ,
         'site' ,
         'line' ,
-        'proccess' ,    
+        'proccess' ,
         'quantity',
         'uom' ,
         'acquisitionValue' ,

@@ -12,6 +12,8 @@ use App\Models\MasterSite;
 use App\Models\MasterUom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ListAsset;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
@@ -321,5 +323,12 @@ class AssetController extends Controller
     public function detailReportFiscal(Request $request)
     {
         return view('report/depreciation/fiscal');
+    }
+
+    public function exportListAssetExcel() {
+        $data = Asset::orderBy('id', 'asc')
+            ->get(); // Get all confirmed data without pagination
+
+        return Excel::download(new ListAsset($data), 'ListAsset.xlsx');
     }
 }

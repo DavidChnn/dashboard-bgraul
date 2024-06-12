@@ -52,7 +52,12 @@ Route::middleware(['isLogin'])->group(function(){
         Route::put('/cip/outstanding',[cipController::class, 'outstandingConfirm']);
         Route::put('/cip/addasset',[cipController::class, 'cipToAsset']);
         
-        
+
+        Route::get('/exportlistasset', [AssetController::class, 'exportListAssetExcel'])->name('exportlistasset');
+        Route::get('/cip/export/exportrequestcip', [cipController::class, 'exportExcel'])->name('cip.export.exportrequestcip');
+        Route::get('/cip/export/exportconfirmationcip', [cipController::class, 'exportConfirmationExcel'])->name('cip.export.exportconfirmationcip');
+        Route::get('/cip/export/outstandingcip', [cipController::class, 'exportOutstandingExcel'])->name('cip.export.outstandingcip');
+
         
         Route::get('/report/depreciation',[AssetController::class, 'indexReport']);
         Route::post('/report/depreciation/commercial',[AssetController::class, 'detailReportCommercial']);
@@ -97,6 +102,8 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingDetail']);
         Route::put('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingStore']);
 
+
+        Route::get('/cip/user/export/outstanding', [cipController::class, 'exportOutstandingUserExcel'])->name('cip.user.export.outstanding');
     });
 
 });
