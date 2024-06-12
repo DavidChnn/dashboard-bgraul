@@ -55,13 +55,13 @@
             <div class="flex justify-between">
               <p>Inventory Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert Inventory Number" name="inventoryNumber" id="inventoryNumber" required>
+                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert Inventory Number" name="inventoryNumber" id="inventoryNumber" >
               </div>
             </div>
             <div class="flex justify-between">
               <p>CIP Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert CIP Number" name="cipNumber" id="cipNumber" required>
+                <input type="type" class="bg-[#ECE9E9]" placeholder="Insert CIP Number" name="cipNumber" id="cipNumber">
               </div>
             </div>
             <div class="flex justify-between">
@@ -74,7 +74,7 @@
               <p>Confirmation</p>
               <div>
                   <button id="dropdownButton1" type="button" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded" required>
-                      <span id="selectedItemText1" class="h-6">-- select --</span>
+                      <span id="selectedItemText1" class="h-6">{{{$data->statusRequest}}}</span>
                       <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                   </button>
                   <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
@@ -82,7 +82,7 @@
                           <p>Confirm</p>
                       </div>
                       <div href="#" onclick="selectItem('Reject', 'selectedItemText1', 'myDropdown1', 'statusRequestInput')" class="flex justify-between items-center w-64 px-4">
-                          <p>Reject Confirmation</p>
+                          <p>Reject Request</p>
                       </div>
                       <div href="#" onclick="selectItem('Not Confirm', 'selectedItemText1', 'myDropdown1', 'statusRequestInput')" class="flex justify-between items-center w-64 px-4">
                           <p>Not Confirm</p>

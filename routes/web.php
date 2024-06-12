@@ -86,6 +86,8 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/cip/user/request',[cipController::class, 'indexUser']);
         Route::post('/cip/user/request',[cipController::class, 'store']);
         Route::get('/cip/user/addrequest',[cipController::class, 'create']);
+        Route::get('/cip/user/requestrevisi/{id}',[cipController::class, 'requestRevisi']);
+        Route::put('/cip/user/requestrevisi/{id}',[cipController::class, 'storeRevisi']);
         Route::get('/cip/user/confirmation',[cipController::class, 'indexConUser']);
         Route::put('/cip/user/confirmation/{id}',[cipController::class, 'statusConfirm']);
         Route::get('/cip/user/outstanding',[cipController::class, 'indexOutUser']);

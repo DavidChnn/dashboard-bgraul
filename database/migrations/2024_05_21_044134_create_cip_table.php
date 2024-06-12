@@ -50,7 +50,7 @@ return new class extends Migration
             $table->boolean('statusConfirmation');
             $table->boolean('outstandingStatus');
             $table->boolean('ongoingStatus');
-            $table->string('notes');
+            $table->string('notes')->nullable();
 
         });
     }

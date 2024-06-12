@@ -30,7 +30,7 @@ class cipController extends Controller
     }
     public function indexUser()
     {
-        $data = CIP::where('statusRequest', 'Not Confirm')
+        $data = CIP::whereIn('statusRequest', ['Not Confirm', 'Reject'])
         ->where('user',  Auth::user()->name)
         ->orderBy('id', 'asc')
         ->paginate(6);
@@ -43,6 +43,15 @@ class cipController extends Controller
     }
 
     public function storeConfirm( request $request, $id){
+
+        if ($request->statusRequestInput == 'Reject'){
+            $data = [
+                'statusRequest' =>$request->statusRequestInput,
+            ];
+            CIP::where('id', $id)->update($data);
+            return redirect('cip/request');
+        }
+        
         $data = [
             'inventoryNumber'=>$request->inventoryNumber,
             'cipNumber'=>$request->cipNumber,
@@ -52,6 +61,36 @@ class cipController extends Controller
 
         return redirect('cip/request');
     }
+
+    public function requestRevisi(string $id){
+        $category = MasterAssetCategory::select('assetCategory')->distinct()->get();
+        $class = MasterAssetCategory::select('assetClass')->distinct()->get();
+        $group = MasterAssetCategory::all();
+        
+        $status = MasterAssetStatus::select('status')->distinct()->get();
+        $dept = MasterCostCentre::select('dept')->distinct()->get();
+        $costCentre = MasterCostCentre::all();
+        $line = MasterLine::all();
+        $site = MasterSite::select('name')->distinct()->get();
+        $uom = MasterUom::select('name')->distinct()->get();
+        $data = CIP::where('id', $id)->first();
+        $depreciation = MasterAssetCategory::where('assetGroup', $data->assetGroup)->first();
+
+        return view('cip/user/requestrevisi')
+        ->with('data',$data)
+        ->with('category',$category)
+        ->with('class',$class)
+        ->with('group',$group)
+        ->with('status',$status)
+        ->with('dept',$dept)
+        ->with('costCentre',$costCentre)
+        ->with('line',$line)
+        ->with('site',$site)
+        ->with('uom',$uom)
+        ->with('depreciation',$depreciation);
+    }
+
+    
 
     public function statusConfirm($id){
 
@@ -312,6 +351,7 @@ class cipController extends Controller
             'statusRequest'=>'Not Confirm',
             'statusConfirmation'=> 0,
             'outstandingStatus'=> 0 ,
+            'ongoingStatus'=> 0 ,
             'assetPicture'=>$foto_nama,
             'departmentDetail'=>$deptDetail,
             'user'=> Auth::user()->name
@@ -320,6 +360,64 @@ class cipController extends Controller
         ];
 
         CIP::create($data);
+
+        return redirect('cip/user/request');
+    }
+
+    public function storeRevisi(Request $request, string $id)
+    {
+        $data = CIP::where('id',$id)->first();
+        if ($request->file('assetPicture')){
+            $foto_file = $request->file('assetPicture');
+            $foto_eks = $foto_file->getClientOriginalExtension();
+            $foto_nama = date('ymdhis').".".$foto_eks;
+            $foto_file ->move(public_path('foto'),$foto_nama);
+        } else {
+            if($data->assetPicture){
+                $foto_nama = $data->assetPicture;
+            }
+        }
+        
+        $dept = MasterCostCentre::where('name', $request->input( 'costCentreInput'))->first();
+        $deptDetail = $dept->deptDetail;
+        
+        $updata = [
+            'assetCodeEnginery' =>$request->input( 'assetCodeEnginery'),
+            'assetCategory' =>$request->input( 'assetCategoryInput'),
+            'assetClass' =>$request->input( 'assetClassInput'),
+            'assetGroup' =>$request->input( 'assetGroupInput'),
+            'assetDescription' =>$request->input( 'assetDescription'),
+            'subAsset' =>$request->input( 'subAsset'),
+            'picAsset' =>$request->input( 'picAsset'),
+            'acquisitionCIP' =>$request->input( 'acquisitionCIP'),
+            'depreciationStart' =>$request->input( 'depreciationStart'),
+            'depreciationEnd' =>$request->input( 'depreciationEnd'),
+            'currentBookValue' =>$request->input( 'currentBookValue'),
+            'assetCondition' =>$request->input( 'assetConditionInput'),
+            'assetStatus' =>$request->input( 'assetStatusInput'),
+            'costCenter' =>$request->input( 'costCentreInput'),
+            'product' =>$request->input( 'product'),
+            'department' =>$request->input( 'departmentInput'),
+            'vendor' =>$request->input( 'vendor'),
+            'site' =>$request->input( 'siteInput'),
+            'line' =>$request->input( 'line'),
+            'proccess' =>$request->input( 'proccess'),
+            'quantity' =>$request->input( 'quantity'),
+            'uom' =>$request->input( 'uomInput'),
+            'acquisitionValue' =>$request->input( 'acquisitionValue'),
+            'budgetNumber' =>$request->input( 'budgetNumber'),
+            'poNumber' =>$request->input( 'poNumber'),
+            'statusRequest'=>'Not Confirm',
+            'statusConfirmation'=> 0,
+            'outstandingStatus'=> 0 ,
+            'ongoingStatus'=> 0 ,
+            'assetPicture'=>$foto_nama,
+            'departmentDetail'=>$deptDetail,
+            'user'=> Auth::user()->name
+            
+        ];
+
+        CIP::where('id', $id)->update($updata);
 
         return redirect('cip/user/request');
     }
