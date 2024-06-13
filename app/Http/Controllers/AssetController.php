@@ -380,9 +380,56 @@ class AssetController extends Controller
 
         return Excel::download(new AssetReport($data), 'AssetReport.xlsx');
     }
-    public function assetReport()
+    public function assetReport(Request $request)
     {
-        $data = Asset::orderBy('id', 'asc')->paginate(6);
-        return view('report/assetreport')->with('data',$data);
+        $monthName = $request->input( 'monthInput');
+        $year = $request->input( 'yearInput');
+
+        $monthMapping = [
+            'All' => 0,
+            'January' => 1,
+            'February' => 2,
+            'March' => 3,
+            'April' => 4,
+            'May' => 5,
+            'June' => 6,
+            'July' => 7,
+            'August' => 8,
+            'September' => 9,
+            'October' => 10,
+            'November' => 11,
+            'December' => 12,
+        ];
+    
+        // Convert the month name to a month number
+        if (array_key_exists($monthName, $monthMapping)) {
+            $month = $monthMapping[$monthName];
+        } else {
+            // Handle invalid month input
+            return redirect()->back()->with('error', 'Invalid month input.');
+        }
+
+
+        $date = \Carbon\Carbon::createFromDate($year, $month, 1);
+
+        $assets = Asset::whereYear('acquisitionCip', $date->year)
+                        ->whereMonth('acquisitionCip', $date->month)
+                        ->paginate(6);
+        // $data = Asset::orderBy('id', 'asc')->paginate(6);
+        return view('report/assetreport')->with('data',$assets);
+    }
+    public function indexAssetReport()
+    {
+        $assets = Asset::all();
+        $earliestYear = $assets->min(function ($asset) {
+            return \Carbon\Carbon::parse($asset->acquistionCip)->year;
+        });
+        
+        $latestYear = $assets->max(function ($asset) {
+            return \Carbon\Carbon::parse($asset->acquistionCip)->year;
+        });
+
+
+        return view('report/index', compact('assets', 'earliestYear', 'latestYear'));
     }
 }

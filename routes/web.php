@@ -65,7 +65,8 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/report/depreciation',[AssetController::class, 'indexReport']);
         Route::post('/report/depreciation/commercial',[AssetController::class, 'detailReportCommercial']);
         Route::post('/report/depreciation/fiscal',[AssetController::class, 'detailReportFiscal']);
-        Route::get('/report/assetreport', [AssetController::class, 'assetReport']);
+        Route::post('/report/assetreport', [AssetController::class, 'assetReport']);
+        Route::get('/report/asset', [AssetController::class, 'indexAssetReport']);
 
         // Route::get('/report/assetreport', function () {
         //     return view('report/assetreport');
