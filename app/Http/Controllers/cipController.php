@@ -362,7 +362,8 @@ class cipController extends Controller
             'ongoingStatus'=> 0 ,
             'assetPicture'=>$foto_nama,
             'departmentDetail'=>$deptDetail,
-            'user'=> Auth::user()->name
+            'user'=> Auth::user()->name,
+            'deadline' => $request->input('deadline')
             
             // 'assetPicture'=>$request->input( 'assetPicture'),
         ];
@@ -421,7 +422,8 @@ class cipController extends Controller
             'ongoingStatus'=> 0 ,
             'assetPicture'=>$foto_nama,
             'departmentDetail'=>$deptDetail,
-            'user'=> Auth::user()->name
+            'user'=> Auth::user()->name,
+            'deadline'=> $request->input('deadline'),
             
         ];
 

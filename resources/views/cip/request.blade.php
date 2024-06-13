@@ -56,6 +56,7 @@
                         <th class="border-2">UoM</th>
                         <th class="border-2">Status</th>
                         <th class="border-2">CIP Number</th>
+                        <th class="border-2">Deadline</th>
                         <th class="border-2">Konfirmasi</th>
                     </tr>
                 </thead>
@@ -77,6 +78,12 @@
                             <td class="border-2">{{$item->uom}}</td>
                             <td class="border-2">{{$item->statusRequest}}</td>
                             <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
+                            @php
+                                $deadline = \Carbon\Carbon::parse($item->deadline);
+                                $datetimenow = \Carbon\Carbon::now();
+                                $remainingTime = $deadline->diffForHumans($datetimenow);
+                            @endphp
+                            <td class="border-2">{{$remainingTime}}</td>
                             <td class="border-2">
                               <button type="button">
                                   <a href="{{url('/cip/confirmrequest/'.$item->id)}}">

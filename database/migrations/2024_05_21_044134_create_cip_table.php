@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('picAsset');
             $table->integer('cipCode')->nullable();
             $table->date('acquisitionCIP');
+            $table->date('deadline');
             $table->date('depreciationStart');
             $table->date('depreciationEnd');
             $table->bigInteger('currentBookValue');

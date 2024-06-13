@@ -273,12 +273,24 @@
                   <input required type="hidden" id="siteInput" name="siteInput" value="{{$data->site}}" >
               </div>
               <div class="flex justify-between">
-                <p>Asset Picture</p>
+                <p>Deadline</p>
+                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                  <input required type="date" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="deadline" id="deadline">
+                </div>
               </div>
               <div class="flex justify-between">
                 <p>Line</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
                   <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->line}}" placeholder="{{$data->line}}" name="line" id="line">
+                </div>
+              </div>
+              <div class="flex justify-between">
+                <p>Asset Picture</p>
+              </div>
+              <div class="flex justify-between col-start-1">
+                <p>Process</p>
+                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->proccess}}" placeholder="{{$data->proccess}}" name="proccess" id="proccess">
                 </div>
               </div>
               <div class="row-span-5">
@@ -288,12 +300,6 @@
                     <input type="file" class="form-control" id="assetPicture" name="assetPicture" >
                   </a>
                 </button>
-              </div>
-              <div class="flex justify-between col-start-1">
-                <p>Process</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->proccess}}" placeholder="{{$data->proccess}}" name="proccess" id="proccess">
-                </div>
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Quantity</p>

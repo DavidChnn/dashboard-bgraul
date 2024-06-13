@@ -121,6 +121,12 @@
                 <p> {{$data->quantity}}</p>
               </div>
             </div>
+            <div class="flex justify-between col-start-1">
+              <p>Deadline</p>
+              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                <p> {{$data->deadline}}</p>
+              </div>
+            </div>
           </div>
           <div class="flex justify-center mt-10">
             <button type="submit" class="bg-[#4B06A4] px-2 py-1 rounded text-white">
