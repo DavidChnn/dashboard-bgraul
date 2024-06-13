@@ -23,10 +23,22 @@ class AssetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Asset::orderBy('id', 'asc')->paginate(6);
-        return view('listasset')->with('data',$data);
+         // Get the filter value from the request
+        $filter = $request->input('assetClass');
+
+        // Query the data, applying the filter if provided
+        $query = Asset::orderBy('id', 'asc');
+
+        if ($filter) {
+            $query->where('assetClass', $filter);
+        }
+
+        $data = $query->paginate(6);
+
+        // Pass the current filter value to the view
+        return view('listasset')->with('data', $data)->with('filter', $filter);
     }
 
     /**
@@ -125,6 +137,7 @@ class AssetController extends Controller
             'line' =>$request->input( 'line'),
             'proccess' =>$request->input( 'proccess'),
             'quantity' =>$request->input( 'quantity'),
+            'quantityInput' =>$request->input( 'quantity'),
             'uom' =>$request->input( 'uomInput'),
             'acquisitionValue' =>$request->input( 'acquisitionValue'),
             'cipNumber'=>$request->input( 'cipCode'),
@@ -224,6 +237,7 @@ class AssetController extends Controller
             'line' =>$request->input( 'line'),
             'proccess' =>$request->input( 'proccess'),
             'quantity' =>$request->input( 'quantity'),
+            'quantityInput' =>$request->input( 'quantity'),
             'uom' =>$request->input( 'uomInput'),
             'acquisitionValue' =>$request->input( 'acquisitionValue'),
             'budgetNumber' =>$request->input( 'budgetNumber'),
@@ -263,6 +277,33 @@ class AssetController extends Controller
     {
         $data = Asset::orderBy('assetCodeEnginery', 'asc')->paginate(6);
         return view('assetopname')->with('data',$data);
+    }
+    public function detailOpname(string $id)
+    {
+        $data = Asset::where('id', $id)->first();
+        return view('assetopnameedit')->with('data',$data);
+    }
+    public function storeOpname(Request $request, string $id)
+    {
+        $data = Asset::where('id',$id)->first();
+        if ($request->file('assetPicture')){
+            $foto_file = $request->file('assetPicture');
+            $foto_eks = $foto_file->getClientOriginalExtension();
+            $foto_nama = date('ymdhis').".".$foto_eks;
+            $foto_file ->move(public_path('foto'),$foto_nama);
+        } else {
+            if($data->assetPicture){
+                $foto_nama = $data->assetPicture;
+            }
+        }
+
+        $updata = [
+            'quantityInput' =>$request->input( 'quantityInput'),
+            'assetCondition' => $request->input('assetConditionInput'),
+            'assetPicture' => $foto_nama
+        ];
+        Asset::where('id', $id)->update($updata);
+        return redirect('assetopname');
     }
     public function indexReport()
     {
@@ -339,9 +380,56 @@ class AssetController extends Controller
 
         return Excel::download(new AssetReport($data), 'AssetReport.xlsx');
     }
-    public function assetReport()
+    public function assetReport(Request $request)
     {
-        $data = Asset::orderBy('id', 'asc')->paginate(6);
-        return view('report/assetreport')->with('data',$data);
+        $monthName = $request->input( 'monthInput');
+        $year = $request->input( 'yearInput');
+
+        $monthMapping = [
+            'All' => 0,
+            'January' => 1,
+            'February' => 2,
+            'March' => 3,
+            'April' => 4,
+            'May' => 5,
+            'June' => 6,
+            'July' => 7,
+            'August' => 8,
+            'September' => 9,
+            'October' => 10,
+            'November' => 11,
+            'December' => 12,
+        ];
+    
+        // Convert the month name to a month number
+        if (array_key_exists($monthName, $monthMapping)) {
+            $month = $monthMapping[$monthName];
+        } else {
+            // Handle invalid month input
+            return redirect()->back()->with('error', 'Invalid month input.');
+        }
+
+
+        $date = \Carbon\Carbon::createFromDate($year, $month, 1);
+
+        $assets = Asset::whereYear('acquisitionCip', $date->year)
+                        ->whereMonth('acquisitionCip', $date->month)
+                        ->paginate(6);
+        // $data = Asset::orderBy('id', 'asc')->paginate(6);
+        return view('report/assetreport')->with('data',$assets);
+    }
+    public function indexAssetReport()
+    {
+        $assets = Asset::all();
+        $earliestYear = $assets->min(function ($asset) {
+            return \Carbon\Carbon::parse($asset->acquistionCip)->year;
+        });
+        
+        $latestYear = $assets->max(function ($asset) {
+            return \Carbon\Carbon::parse($asset->acquistionCip)->year;
+        });
+
+
+        return view('report/index', compact('assets', 'earliestYear', 'latestYear'));
     }
 }

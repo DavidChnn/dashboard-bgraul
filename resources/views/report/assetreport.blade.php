@@ -71,7 +71,7 @@
                             <td class="border-2">{{$item->department}}</td>
                             <td class="border-2">{{$item->acquisitionCIP}}</td>
                             <td class="border-2">{{$item->assetCondition}}</td>
-                            <td class="border-2">{{$item->quantity}}</td>
+                            <td class="border-2">{{$item->currentBookValue}}</td>
                             <!-- aku gatau isi yang assetNumber, Capitalized Date, Amount -->
                         </tr>
                         @php $counter++; @endphp

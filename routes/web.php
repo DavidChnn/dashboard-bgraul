@@ -25,6 +25,12 @@ Route::middleware(['notLogin'])->group(function(){
 });
 
 Route::middleware(['isLogin'])->group(function(){
+
+    Route::get('/assetlayout',[AssetController::class, 'indexLayout']);
+    Route::get('/assetlayout/lineproductionmap/{line}',[AssetController::class, 'detailLayout']);
+    Route::get('/assetopname',[AssetController::class, 'indexOpname']);
+    Route::get('/assetopnameedit/{id}',[AssetController::class, 'detailOpname']);
+    Route::put('/assetopnameedit/{id}',[AssetController::class, 'storeOpname']);
     
     Route::get('/logout',[SessionController::class, 'logout']);
 
@@ -40,9 +46,7 @@ Route::middleware(['isLogin'])->group(function(){
         Route::put('/listasset/assetedit/{id}',[AssetController::class, 'update']);
         Route::get('/listasset/addasset',[AssetController::class, 'create']);
         Route::post('/listasset',[AssetController::class, 'store']);
-        Route::get('/assetlayout',[AssetController::class, 'indexLayout']);
-        Route::get('/assetlayout/lineproductionmap/{line}',[AssetController::class, 'detailLayout']);
-        Route::get('/assetopname',[AssetController::class, 'indexOpname']);
+
         
         Route::get('/cip/request',[cipController::class, 'index']);
         Route::get('/cip/confirmation',[cipController::class, 'indexCon']);
@@ -63,7 +67,8 @@ Route::middleware(['isLogin'])->group(function(){
         Route::get('/report/depreciation',[AssetController::class, 'indexReport']);
         Route::post('/report/depreciation/commercial',[AssetController::class, 'detailReportCommercial']);
         Route::post('/report/depreciation/fiscal',[AssetController::class, 'detailReportFiscal']);
-        Route::get('/report/assetreport', [AssetController::class, 'assetReport']);
+        Route::post('/report/assetreport', [AssetController::class, 'assetReport']);
+        Route::get('/report/asset', [AssetController::class, 'indexAssetReport']);
 
         // Route::get('/report/assetreport', function () {
         //     return view('report/assetreport');

@@ -200,6 +200,7 @@ class cipController extends Controller
             'line' =>$request->input( 'line'),
             'proccess' =>$request->input( 'proccess'),
             'quantity' =>$request->input( 'quantity'),
+            'quantityInput' =>$request->input( 'quantity'),
             'uom' =>$request->input( 'uomInput'),
             'acquisitionValue' =>$request->input( 'acquisitionValue'),
             'cipNumber'=>$request->input( 'cipNumber'),
