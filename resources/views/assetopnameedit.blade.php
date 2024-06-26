@@ -17,7 +17,7 @@
         <h1 class="text-xl mx-10 my-10">
           CIP/Request/Confirm CIP
         </h1>
-        <form class="bg-white mx-10 mb-10 pb-10" action="{{ url('/cip/confirmrequest/'.$data->id) }}" method="POST">
+        <form class="bg-white mx-10 mb-10 pb-10" action="{{ url('assetopnameedit/'.$data->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
           @method('PUT')
           <div class="flex justify-between items-center border-b-2 p-4">
@@ -140,9 +140,20 @@
             </div>
             <div class="flex justify-between col-start-1">
               <p>Asset Status</p>
-              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p> {{$data->assetStatus}}</p>
+              <div>
+                  <button type="button" id="dropdownButton5" onclick="toggleDropdown('dropdownButton5', 'myDropdown5')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                      <span id="assetStatus" class="h-6">{{$data->assetStatus}}</span>
+                      <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                  </button>
+                  <div id="myDropdown5" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                    @foreach ($status as $item)
+                        <a href="#" onclick="selectItem('{{$item->status}}', 'assetStatus', 'myDropdown5', 'assetStatusInput')" class="flex justify-between items-center w-64 px-4">
+                            <p>{{$item->status}}</p>
+                        </a>
+                      @endforeach
+                  </div>
               </div>
+              <input type="hidden" id="assetStatusInput" name="assetStatusInput">
             </div>
           </div>
           <div class="flex justify-center mt-10">

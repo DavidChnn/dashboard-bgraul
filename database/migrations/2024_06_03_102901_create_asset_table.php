@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('subAsset');
             $table->string('picAsset');
             $table->date('acquisitionCIP');
+            $table->date('disposalDate');
             $table->date('depreciationStart');
             $table->date('depreciationEnd');
             $table->bigInteger('currentBookValue');

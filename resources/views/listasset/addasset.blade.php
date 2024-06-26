@@ -204,16 +204,27 @@
                 </div>
               </div>
               <div class="flex justify-between">
-                <p>CIP Code</p>
+                <p>CIP Number</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="number" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="cipCode" id="cipCode">
+                  <input type="number" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="cipNumber" id="cipNumber">
                 </div>
               </div>
               <div class="flex justify-between">
-                <p>Inventory Number</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="inventoryNumber" id="inventoryNumber">
+                <p>Specific Department</p>
+                <div>
+                    <button type="button" id="dropdownButton10" onclick="toggleDropdown('dropdownButton10', 'myDropdown10')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                        <span id="deptDetail" class="h-6"></span>
+                        <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                    </button>
+                    <div id="myDropdown10" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                      @foreach ($costCentre as $item)
+                      <a href="#" onclick="selectItem('{{$item->deptDetail}}', 'deptDetail', 'myDropdown10', 'deptDetailInput')" class="flex justify-between items-center w-64 px-4">
+                          <p>{{$item->deptDetail}}</p>
+                      </a>
+                      @endforeach
+                    </div>
                 </div>
+                <input required type="hidden" id="deptDetailInput" name="deptDetailInput">
               </div>
               <div class="flex justify-between">
                 <p>Department</p>

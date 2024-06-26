@@ -60,10 +60,28 @@
                         ];
                     @endphp
                     <div>
+                        <p>Tipe</p>
+                        <div>
+                            <button type="button" id="dropdownButton3" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
+                                <span id="selectedItemText1" class="h-6">-- Pilih Tipe --</span>
+                                <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                            </button>
+                            <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">                               
+                                <div href="#" onclick="selectItem('Asset', 'selectedItemText1', 'myDropdown1', 'typeInput')" class="flex justify-between items-center w-64 px-4">
+                                    <p>Cip To Asset</p>
+                                </div>
+                                <div href="#" onclick="selectItem('Disposal', 'selectedItemText1', 'myDropdown1', 'typeInput')" class="flex justify-between items-center w-64 px-4">
+                                    <p>Disposal</p>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="typeInput" name="typeInput">
+                    </div>
+                    <div>
                         <p>Month</p>
                         <div>
                             <button type="button" id="dropdownButton2" onclick="toggleDropdown('dropdownButton2', 'myDropdown2')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
-                                <span id="selectedItemText2" class="h-6">-- Pilih bulan --</span>
+                                <span id="selectedItemText2" class="h-6">-- Pilih Tahun --</span>
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
                             <div id="myDropdown2" class="w-64 absolute hidden rounded shadow-md bg-white z-10">

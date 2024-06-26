@@ -47,7 +47,7 @@
                   </select>
                   <button type="submit" class="ml-2 bg-blue-500 text-white p-2 rounded">Filter</button>
               </div>
-          </form>
+            </form>
           </div>
           <div class="flex justify-between items-center px-2">
               <a href="{{ route('exportlistasset') }}" class="bg-[#79C4FB] text-white rounded text-xl px-2 py-1 mr-5">

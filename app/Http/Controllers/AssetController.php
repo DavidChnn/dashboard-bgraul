@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ListAsset;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
@@ -121,7 +122,6 @@ class AssetController extends Controller
             'assetDescription' =>$request->input( 'assetDescription'),
             'subAsset' =>$request->input( 'subAsset'),
             'picAsset' =>$request->input( 'picAsset'),
-            'cipCode' =>$request->input( 'cipCode'),
             'acquisitionCIP' =>$request->input( 'acquisitionCIP'),
             'depreciationStart' =>$request->input( 'depreciationStart'),
             'depreciationEnd' =>$request->input( 'depreciationEnd'),
@@ -130,8 +130,8 @@ class AssetController extends Controller
             'assetStatus' =>$request->input( 'assetStatusInput'),
             'costCenter' =>$request->input( 'costCentreInput'),
             'product' =>$request->input( 'product'),
-            'inventoryNumber'=>$request->input( 'inventoryNumber'),
             'department' =>$request->input( 'departmentInput'),
+            'departmentDetail' =>$request->input( 'deptDetailInput'),
             'vendor' =>$request->input( 'vendor'),
             'site' =>$request->input( 'siteInput'),
             'line' =>$request->input( 'line'),
@@ -140,12 +140,13 @@ class AssetController extends Controller
             'quantityInput' =>$request->input( 'quantity'),
             'uom' =>$request->input( 'uomInput'),
             'acquisitionValue' =>$request->input( 'acquisitionValue'),
-            'cipNumber'=>$request->input( 'cipCode'),
+            'cipNumber'=>$request->input( 'cipNumber'),
             'budgetNumber' =>$request->input( 'budgetNumber'),
             'poNumber' =>$request->input( 'poNumber'),
             'assetPicture'=>$foto_nama,
-            'departmentDetail'=> $dept->deptDetail,
-            'user'=> Auth::user()->name
+            'user'=> Auth::user()->name,
+            'cipStatus'=> false,
+            'cipId'=> '-'
         ];
 
 
@@ -243,7 +244,7 @@ class AssetController extends Controller
             'budgetNumber' =>$request->input( 'budgetNumber'),
             'poNumber' =>$request->input( 'poNumber'),
             'assetPicture'=>$foto_nama,
-            'departmentDetail'=>$deptDetail,
+            'departmentDetail'=>$request->input( 'deptDetailInput'),
 
             
         ];
@@ -273,15 +274,26 @@ class AssetController extends Controller
         return view('assetlayout/lineproductionmap')->with('data',$data);
     }
 
-    public function indexOpname()
+    public function indexOpname(Request $request)
     {
-        $data = Asset::orderBy('assetCodeEnginery', 'asc')->paginate(6);
-        return view('assetopname')->with('data',$data);
+        $query = Asset::orderBy('assetCodeEnginery', 'asc');
+        $filter = $request->input('department');
+
+        if ($filter) {
+            $query->where('assetClass', $filter);
+        }
+
+        $data = $query->paginate(6);
+
+        // Pass the current filter value to the view
+        return view('assetopname')->with('data', $data)->with('filter', $filter);
+
     }
     public function detailOpname(string $id)
     {
         $data = Asset::where('id', $id)->first();
-        return view('assetopnameedit')->with('data',$data);
+        $status = MasterAssetStatus::select('status')->distinct()->get();
+        return view('assetopnameedit')->with('data',$data)->with('status', $status);
     }
     public function storeOpname(Request $request, string $id)
     {
@@ -296,12 +308,21 @@ class AssetController extends Controller
                 $foto_nama = $data->assetPicture;
             }
         }
-
-        $updata = [
-            'quantityInput' =>$request->input( 'quantityInput'),
-            'assetCondition' => $request->input('assetConditionInput'),
-            'assetPicture' => $foto_nama
-        ];
+        if( $request->input('assetStatusInput') == $data->assetStatus){
+            $updata = [
+                'quantityInput' =>$request->input( 'quantityInput'),
+                'assetCondition' => $request->input('assetConditionInput'),
+                'assetPicture' => $foto_nama
+            ];
+        } else {
+            $updata = [
+                'quantityInput' =>$request->input( 'quantityInput'),
+                'assetCondition' => $request->input('assetConditionInput'),
+                'assetstatus' => $request->input('assetStatusInput'),
+                'disposalDate' => Carbon::now(),
+                'assetPicture' => $foto_nama
+            ];
+        }
         Asset::where('id', $id)->update($updata);
         return redirect('assetopname');
     }
@@ -309,11 +330,11 @@ class AssetController extends Controller
     {
         $assets = Asset::all();
         $earliestYear = $assets->min(function ($asset) {
-            return \Carbon\Carbon::parse($asset->depreciationStart)->year;
+            return Carbon::parse($asset->depreciationStart)->year;
         });
         
         $latestYear = $assets->max(function ($asset) {
-            return \Carbon\Carbon::parse($asset->depreciationEnd)->year;
+            return Carbon::parse($asset->depreciationEnd)->year;
         });
 
         return view('report/depreciation', compact('assets', 'earliestYear', 'latestYear'));
@@ -349,7 +370,7 @@ class AssetController extends Controller
         }
 
 
-        $date = \Carbon\Carbon::createFromDate($year, $month, 1);
+        $date = Carbon::createFromDate($year, $month, 1);
 
         $assets = Asset::where('depreciationStart', '<=', $date)
                    ->where('depreciationEnd', '>=', $date)
@@ -410,26 +431,31 @@ class AssetController extends Controller
         }
 
 
-        $date = \Carbon\Carbon::createFromDate($year, $month, 1);
+        $date = Carbon::createFromDate($year, $month, 1);
 
-        $assets = Asset::whereYear('acquisitionCip', $date->year)
+        if ($request->input('typeInput')=='Asset'){
+            $assets = Asset::whereYear('acquisitionCip', $date->year)
                         ->whereMonth('acquisitionCip', $date->month)
                         ->paginate(6);
-        // $data = Asset::orderBy('id', 'asc')->paginate(6);
-        return view('report/assetreport')->with('data',$assets);
+            return view('report/assetreport')->with('data',$assets);
+        } else {
+            $assets = Asset::whereYear('disposalDate', $date->year)
+                        ->whereMonth('disposalDate', $date->month)
+                        ->paginate(6);
+            return view('report/assetreport')->with('data',$assets);
+        }
+
     }
     public function indexAssetReport()
     {
         $assets = Asset::all();
         $earliestYear = $assets->min(function ($asset) {
-            return \Carbon\Carbon::parse($asset->acquistionCip)->year;
+            return Carbon::parse($asset->acquistionCip)->year;
         });
         
         $latestYear = $assets->max(function ($asset) {
-            return \Carbon\Carbon::parse($asset->acquistionCip)->year;
+            return Carbon::parse($asset->acquistionCip)->year;
         });
-
-
         return view('report/index', compact('assets', 'earliestYear', 'latestYear'));
     }
 }

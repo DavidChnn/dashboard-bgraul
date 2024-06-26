@@ -45,6 +45,7 @@ class Asset extends Model
         'quantityInput',
         'cipId',
         'cipStatus',
+        'disposalDate',
 
     ];
 }

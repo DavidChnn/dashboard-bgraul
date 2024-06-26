@@ -46,7 +46,7 @@
                     <tr class="border-2">
                         <th class="border-2">No</th>
                         <th class="border-2">Asset Class</th>
-                        <th class="border-2">Inventory Number</th>
+                        <th class="border-2">Asset Code User</th>
                         <th class="border-2">CIP Number</th>
                         <th class="border-2">Asset Number</th>
                         <th class="border-2">Asset Description</th>
@@ -64,7 +64,7 @@
                         <tr>
                             <td class="border-2">{{$counter}}</td>
                             <td class="border-2">{{$item->assetClass}}</td>
-                            <td class="border-2">{{$item->inventoryNumber}}</td>
+                            <td class="border-2">{{$item->assetCodeEnginery}}</td>
                             <td class="border-2">{{$item->cipNumber}}</td>
                             <td class="border-2">{{$item->assetCodeAccounting}}</td>
                             <td class="border-2">{{$item->assetDescription}}</td>
