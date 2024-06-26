@@ -21,13 +21,12 @@ class SessionController extends Controller
     }
 
     function dashboard(){
-        $asset = Asset::count();
+        $asset = Asset::where('cipStatus', false)->count();
         $cip = CIP::where('statusConfirmation', true)
         ->where('statusRequest', 'Confirm')
         ->where('outstandingStatus', false)
         ->count();
 
-        // $value = Asset::sum('currentBookValue');
 
         $assets = Asset::all();
 

@@ -38,7 +38,7 @@
                     <tr class="border-2">
                         <th class="border-2">No</th>
                         <th class="border-2">Class</th>
-                        <th class="border-2">Inventory Number</th>
+                        <th class="border-2">Asset Code User</th>
                         <th class="border-2">Description</th>
                         <th class="border-2">Cap Date  </th>
                         <th class="border-2">Capex Number </th>
@@ -59,7 +59,7 @@
                         <tr>
                             <td class="border-2">{{$counter}}</td>
                             <td class="border-2">{{$item->assetClass}}</td>
-                            <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : ''}}</td>
+                            <td class="border-2">{{$item->assetCodeEnginery}}</td>
                             <td class="border-2">{{$item->assetDescription}}</td>
                             <td class="border-2">{{$item->acquisitionCIP}}</td>
                             <td class="border-2">{{$item->budgetNumber}}</td>
@@ -73,7 +73,7 @@
                               @if($item->statusRequest == 'Reject')
                                 <button>
                                   <a href='{{url('/cip/user/requestrevisi/'.$item->id)}}'>
-                                      memek
+                                      Button
                                   </a>
                                 </button>
                               @endif

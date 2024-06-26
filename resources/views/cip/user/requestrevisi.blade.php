@@ -54,7 +54,7 @@
                 </div>
               </div>
               <div class="flex justify-between">
-                  <p>Asset Code Engineering</p>
+                  <p>Asset Code User</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
                     <input required type="text" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->assetCodeEnginery}}" placeholder="{{$data->assetCodeEnginery}}" name="assetCodeEnginery" id="assetCodeEnginery">
                   </div>
@@ -215,11 +215,22 @@
                 </div>
               </div>
               <div class="flex justify-between">
-                <p>Inventory Number</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <p></p>
+                <p>Specific Department</p>
+                  <div>
+                      <button type="button" id="dropdownButton10" onclick="toggleDropdown('dropdownButton10', 'myDropdown10')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="deptDetail" class="h-6">{{$data->departmentDetail}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown10" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($costCentre as $item)
+                        <a href="#" onclick="selectItem('{{$item->deptDetail}}', 'deptDetail', 'myDropdown10', 'deptDetailInput')" class="flex justify-between items-center w-64 px-4">
+                            <p>{{$item->deptDetail}}</p>
+                        </a>
+                        @endforeach
+                      </div>
+                  </div>
+                  <input required type="hidden" id="deptDetailInput" name="deptDetailInput" value="{{$data->departmentDetail}}">
                 </div>
-              </div>
               <div class="flex justify-between">
                 <p>Department</p>
                   <div>
@@ -275,7 +286,7 @@
               <div class="flex justify-between">
                 <p>Deadline</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input required type="date" class="bg-[#ECE9E9] w-full outline-none" placeholder="" name="deadline" id="deadline">
+                  <input required type="date" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->deadline}}" placeholder="{{$data->deadline}}" name="deadline" id="deadline">
                 </div>
               </div>
               <div class="flex justify-between">

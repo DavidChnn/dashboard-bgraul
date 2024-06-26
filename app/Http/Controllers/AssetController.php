@@ -29,7 +29,7 @@ class AssetController extends Controller
         $filter = $request->input('assetClass');
 
         // Query the data, applying the filter if provided
-        $query = Asset::orderBy('id', 'asc');
+        $query = Asset::orderBy('id', 'asc')->where('cipStatus', false);
 
         if ($filter) {
             $query->where('assetClass', $filter);

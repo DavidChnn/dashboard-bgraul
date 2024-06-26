@@ -22,7 +22,6 @@ return new class extends Migration
             $table->text('assetDescription');
             $table->integer('subAsset');
             $table->string('picAsset');
-            $table->integer('cipCode')->nullable();
             $table->date('acquisitionCIP');
             $table->date('depreciationStart');
             $table->date('depreciationEnd');
@@ -31,7 +30,6 @@ return new class extends Migration
             $table->string('assetStatus');
             $table->string('costCenter');
             $table->string('product');
-            $table->string('inventoryNumber')->nullable();
             $table->string('department');
             $table->string('departmentDetail');
             $table->string('vendor');
@@ -45,8 +43,10 @@ return new class extends Migration
             $table->string('budgetNumber');
             $table->string('poNumber');
             $table->string('user');
+            $table->string('cipId');
             $table->string('assetPicture')->nullable();
             $table->integer('quantityInput')->nullable();
+            $table->boolean('cipStatus')->default(false);
         });
     }
 
