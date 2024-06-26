@@ -213,8 +213,12 @@ class AssetController extends Controller
             }
         }
         
-        $dept = MasterCostCentre::where('name', $request->input( 'costCentreInput'))->first();
-        $deptDetail = $dept->deptDetail;
+        if( $request->input('assetStatusInput') != $data->assetStatus){
+            $disposal = [
+                'disposalDate' => Carbon::now(),
+            ];
+            Asset::where('id', $id)->update($disposal);
+        } 
         
         $updata = [
             'assetCodeEnginery' =>$request->input( 'assetCodeEnginery'),
@@ -244,9 +248,7 @@ class AssetController extends Controller
             'budgetNumber' =>$request->input( 'budgetNumber'),
             'poNumber' =>$request->input( 'poNumber'),
             'assetPicture'=>$foto_nama,
-            'departmentDetail'=>$request->input( 'deptDetailInput'),
-
-            
+            'departmentDetail'=>$request->input( 'deptDetailInput'),  
         ];
 
         Asset::where('id', $id)->update($updata);
