@@ -104,12 +104,27 @@
               </a>
             </li>
           </ul>
-          <li class="my-4 p-2 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-            <a href="" class="flex">
+          <li class="mt-4 p-2 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
+            <a href="#" class="flex items-center reportLink">
               <img class="w-7" src="/image/masterdata.png" alt="masterdata">
+              <div class="flex w-full justify-between">
                 <p class="pl-2">Master Data</p>
+                <img class="w-7 transform transition duration-300 ease-in-out reportArrow" src="/image/arrow.png" alt="arrow">
+              </div>
             </a>
           </li>
+          <ul class="reportOptions" style="display: none;">
+            <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
+              <a href="#">
+                <p>Asset Group</p>
+              </a>
+            </li>
+            <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
+              <a href="/masterdata/pic">
+                <p>PIC</p>
+              </a>
+            </li>
+          </ul>
         </ul>
     </div>
     {{-- SIDEBAR --}}

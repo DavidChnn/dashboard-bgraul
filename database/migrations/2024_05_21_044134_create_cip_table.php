@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('cip', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('assetCodeAccounting')->nullable();;
+            $table->string('assetCodeAccounting')->nullable();
             $table->string('assetCodeEnginery');
             $table->string('assetCategory');
             $table->integer('assetClass');
             $table->string('assetGroup');
+            $table->integer('cipCode')->nullable();
             $table->text('assetDescription');
             $table->integer('subAsset');
             $table->string('picAsset');
@@ -48,6 +49,7 @@ return new class extends Migration
             $table->string('statusRequest');
             $table->boolean('statusConfirmation');
             $table->boolean('outstandingStatus');
+            $table->string('inventoryNumber')->nullable();
 
         });
     }
