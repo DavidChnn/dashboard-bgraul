@@ -54,6 +54,7 @@ Route::middleware(['isLogin'])->group(function () {
         Route::get('/cip/outstanding/{id}', [cipController::class, 'outstandingConfirm']);
         Route::put('/cip/addasset/{id}', [cipController::class, 'cipToAsset']);
 
+        Route::post('/cip/notify/{id}', [cipController::class, 'notifyUser'])->name('cip.notify');
 
         Route::get('/exportlistasset', [AssetController::class, 'exportListAssetExcel'])->name('exportlistasset');
         Route::get('/cip/export/exportrequestcip', [cipController::class, 'exportExcel'])->name('cip.export.exportrequestcip');
