@@ -133,15 +133,15 @@
               </div>
             </div>
             <div class="flex justify-between">
-              <p>CIP Code</p>
+              <p>CIP Number</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p>{{$data->cipCode}}</p>
+                <p>{{$data->cipNumber}}</p>
               </div>
             </div>
             <div class="flex justify-between">
-              <p>Inventory Number</p>
+              <p>Specific Department</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <p>{{$data->inventoryNumber}}</p>
+                <p>{{$data->departmentDetail}}</p>
               </div>
             </div>
             <div class="flex justify-between">

@@ -36,14 +36,14 @@
             <p class="font-semibold">Add Asset Details >></p>
           </div>
 
-          <form method="post" action="{{url('cip/addasset/'.$data->id)}}" enctype="multipart/form-data">
+          <form method="post" action="/cip/user/merge" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="grid grid-cols-2 overflow-y-auto gap-x-10 gap-y-5 px-6">
               <div class="flex justify-between">
                   <p>Asset Code Accounting</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                      <input  type="text" name="assetCodeAccounting" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" id="assetCodeAccounting">
+                    <p></p>
                   </div>
               </div>
               <div class="flex justify-between">
@@ -89,8 +89,8 @@
               <div class="flex justify-between">
                 <p>Current Book Value</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->currentBookValue}}" name="currentBookValue" id="currentBookValue">
-                    <label for="">{{$data->currentBookValue}}</label>
+                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$sum}}" name="currentBookValue" id="currentBookValue">
+                    <label for="">{{$sum}}</label>
                   </div>
               </div>
               <div class="flex justify-between">
@@ -170,7 +170,7 @@
               <div class="flex justify-between">
                 <p>Specific Department</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->departmentDetail}}" name="departmentDetail" id="departmentDetail">
+                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->departmentDetail}}" name="deptDetail" id="deptDetail">
                     <label for="">{{$data->departmentDetail}}</label>
                   </div>
               </div>
@@ -234,15 +234,15 @@
               <div class="flex justify-between col-start-1">
                 <p>Quantity</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->quantity}}" name="quantity" id="quantity">
-                  <label for="">{{$data->quantity}}</label>
+                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$count}}" name="quantity" id="quantity">
+                  <label for="">{{$count}}</label>
                 </div>
               </div>
               <div class="flex justify-between col-start-1">
                 <p>UoM</p>
                 <div>
                     <button type="button" id="dropdownButton8" onclick="toggleDropdown('dropdownButton8', 'myDropdown8')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
-                        <span id="uom" class="h-6"></span>
+                        <span id="uom" class="h-6">{{$data->uom}}</span>
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown8" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
@@ -253,16 +253,17 @@
                       @endforeach
                     </div>
                 </div>
-                <input type="hidden" id="uomInput" name="uomInput">
+                <input type="hidden" id="uomInput" name="uomInput" value="{{$data->uom}}">
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Acquisition Value</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->acquisitionValue}}" name="acquisitionValue" id="acquisitionValue">
-                  <label for="">{{$data->acquisitionValue}}</label>
+                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$sum}}" name="acquisitionValue" id="acquisitionValue">
+                  <label for="">{{$sum}}</label>
                 </div>
               </div>
             </div>
+            <input type="hidden" name="ids" id="ids" value="{{ implode(',', $ids) }}">
             <div class="flex justify-center items-center my-10">
               <button type="submit" class="bg-red-500 rounded px-2 py-1">
                 Submit

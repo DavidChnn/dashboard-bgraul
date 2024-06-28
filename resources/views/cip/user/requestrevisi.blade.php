@@ -54,7 +54,7 @@
                 </div>
               </div>
               <div class="flex justify-between">
-                  <p>Asset Code Engineering</p>
+                  <p>Asset Code User</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
                     <input required type="text" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->assetCodeEnginery}}" placeholder="{{$data->assetCodeEnginery}}" name="assetCodeEnginery" id="assetCodeEnginery">
                   </div>
@@ -215,11 +215,22 @@
                 </div>
               </div>
               <div class="flex justify-between">
-                <p>Inventory Number</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <p></p>
+                <p>Specific Department</p>
+                  <div>
+                      <button type="button" id="dropdownButton10" onclick="toggleDropdown('dropdownButton10', 'myDropdown10')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="deptDetail" class="h-6">{{$data->departmentDetail}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown10" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($costCentre as $item)
+                        <a href="#" onclick="selectItem('{{$item->deptDetail}}', 'deptDetail', 'myDropdown10', 'deptDetailInput')" class="flex justify-between items-center w-64 px-4">
+                            <p>{{$item->deptDetail}}</p>
+                        </a>
+                        @endforeach
+                      </div>
+                  </div>
+                  <input required type="hidden" id="deptDetailInput" name="deptDetailInput" value="{{$data->departmentDetail}}">
                 </div>
-              </div>
               <div class="flex justify-between">
                 <p>Department</p>
                   <div>
@@ -273,12 +284,24 @@
                   <input required type="hidden" id="siteInput" name="siteInput" value="{{$data->site}}" >
               </div>
               <div class="flex justify-between">
-                <p>Asset Picture</p>
+                <p>Deadline</p>
+                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                  <input required type="date" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->deadline}}" placeholder="{{$data->deadline}}" name="deadline" id="deadline">
+                </div>
               </div>
               <div class="flex justify-between">
                 <p>Line</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
                   <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->line}}" placeholder="{{$data->line}}" name="line" id="line">
+                </div>
+              </div>
+              <div class="flex justify-between">
+                <p>Asset Picture</p>
+              </div>
+              <div class="flex justify-between col-start-1">
+                <p>Process</p>
+                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->proccess}}" placeholder="{{$data->proccess}}" name="proccess" id="proccess">
                 </div>
               </div>
               <div class="row-span-5">
@@ -288,12 +311,6 @@
                     <input type="file" class="form-control" id="assetPicture" name="assetPicture" >
                   </a>
                 </button>
-              </div>
-              <div class="flex justify-between col-start-1">
-                <p>Process</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->proccess}}" placeholder="{{$data->proccess}}" name="proccess" id="proccess">
-                </div>
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Quantity</p>

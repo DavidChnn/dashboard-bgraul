@@ -53,9 +53,9 @@
               </div>
             </div>
             <div class="flex justify-between">
-              <p>Inventory Number</p>
+              <p>Asset Code User</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                <input type="type" class="bg-[#ECE9E9]" value="{{$data->inventoryNumber}}" placeholder="{{$data->inventoryNumber}}" name="inventoryNumber" id="inventoryNumber" >
+                <p> {{$data->assetCodeEnginery}}</p>
               </div>
             </div>
             <div class="flex justify-between">
@@ -119,6 +119,12 @@
               <p>Qty</p>
               <div class="bg-[#ECE9E9] w-64 px-4 rounded">
                 <p> {{$data->quantity}}</p>
+              </div>
+            </div>
+            <div class="flex justify-between col-start-1">
+              <p>Deadline</p>
+              <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                <p> {{$data->deadline}}</p>
               </div>
             </div>
           </div>

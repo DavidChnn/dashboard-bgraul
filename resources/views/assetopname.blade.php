@@ -39,6 +39,22 @@
                 <img src="/image/search1.png" alt="search" class="w-6 mr-2">
               </div>
           </div>
+          <div class="flex justify-between items-center px-2">
+            <form method="GET" action="{{ url('/assetopname') }}" class="mb-4">
+              <div class="flex items-center">
+                  <label for="assetClass" class="mr-2">Filter by Department:</label>
+                  <select name="assetClass" id="assetClass" class="border rounded p-2">
+                      <option value="">All</option>
+                      @foreach(App\Models\Asset::select('department')->distinct()->get() as $asset)
+                          <option value="{{ $asset->department }}" {{ request('department') == $asset->department ? 'selected' : '' }}>
+                              {{ $asset->department }}
+                          </option>
+                      @endforeach
+                  </select>
+                  <button type="submit" class="ml-2 bg-blue-500 text-white p-2 rounded">Filter</button>
+              </div>
+            </form>
+          </div>
           <div class="px-2 w-full">
             <table class="table-auto text-sm w-full">
                 <thead class="text-center">
@@ -54,8 +70,8 @@
                         <th class="border-2">Qty</th>
                         <th class="border-2">UoM</th>
                         <th class="border-2">Product</th>
-                        <th class="border-2">condition</th>
                         <th class="border-2">Status</th>
+                        <th class="border-2">Condition</th>
                         <th class="border-2">Image</th>
                         <th class="border-2">Checklist</th>
                         <th class="border-2">Edit</th>

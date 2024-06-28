@@ -46,7 +46,7 @@
                     <tr class="border-2">
                         <th class="border-2">No</th>
                         <th class="border-2">Class</th>
-                        <th class="border-2">Inventory Number</th>
+                        <th class="border-2">Asset Code User</th>
                         <th class="border-2">Description</th>
                         <th class="border-2">Cap Date  </th>
                         <th class="border-2">Capex Number </th>
@@ -56,6 +56,7 @@
                         <th class="border-2">UoM</th>
                         <th class="border-2">Status</th>
                         <th class="border-2">CIP Number</th>
+                        <th class="border-2">Deadline</th>
                         <th class="border-2">Konfirmasi</th>
                     </tr>
                 </thead>
@@ -67,7 +68,7 @@
                         <tr>
                             <td class="border-2">{{$counter}}</td>
                             <td class="border-2">{{$item->assetClass}}</td>
-                            <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : 'Insert Inventory Number'}}</td>
+                            <td class="border-2">{{$item->assetCodeEnginery}}</td>
                             <td class="border-2">{{$item->assetDescription}}</td>
                             <td class="border-2">{{$item->acquisitionCIP}}</td>
                             <td class="border-2">{{$item->budgetNumber}}</td>
@@ -77,6 +78,12 @@
                             <td class="border-2">{{$item->uom}}</td>
                             <td class="border-2">{{$item->statusRequest}}</td>
                             <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
+                            @php
+                                $deadline = \Carbon\Carbon::parse($item->deadline);
+                                $datetimenow = \Carbon\Carbon::now();
+                                $remainingTime = $deadline->diffForHumans($datetimenow);
+                            @endphp
+                            <td class="border-2">{{$remainingTime}}</td>
                             <td class="border-2">
                               <button type="button">
                                   <a href="{{url('/cip/confirmrequest/'.$item->id)}}">

@@ -59,7 +59,6 @@ class cipController extends Controller
         }
         
         $data = [
-            'inventoryNumber'=>$request->inventoryNumber,
             'cipNumber'=>$request->cipNumber,
             'statusRequest' =>$request->statusRequestInput,
         ];
@@ -110,7 +109,68 @@ class cipController extends Controller
         return redirect('cip/user/confirmation');
     }
 
-    public function outstandingConfirm( request $request){
+    public function outstandingConfirm( request $request, string $id){
+
+        
+        $data = Asset::where('id', $id)->first();
+        $depre = MasterAssetCategory::where('assetGroup', $data->assetGroup)->first();
+        $uom = MasterUom::select('name')->distinct()->get();
+        
+        
+
+        return view('cip/addasset')
+        ->with('data',$data)
+        ->with('uom',$uom)
+        ->with('depre', $depre);
+    }
+    public function cipToAsset(request $request, string $id){
+
+        $foto_file = $request->file('assetPicture');
+        $foto_eks = $foto_file->getClientOriginalExtension();
+        $foto_nama = date('ymdhis').".".$foto_eks;
+        $foto_file ->move(public_path('foto'),$foto_nama);
+
+        $data = [
+            'assetCodeAccounting'=>$request->input( 'assetCodeAccounting'),
+            'assetCodeEnginery' =>$request->input( 'assetCodeEnginery'),
+            'assetCategory' =>$request->input( 'assetCategory'),
+            'assetClass' =>$request->input( 'assetClass'),
+            'assetGroup' =>$request->input( 'assetGroup'),
+            'assetDescription' =>$request->input( 'assetDescription'),
+            'subAsset' =>$request->input( 'subAsset'),
+            'picAsset' =>$request->input( 'picAsset'),
+            'acquisitionCIP' =>$request->input( 'acquisitionCIP'),
+            'depreciationStart' =>$request->input( 'depreciationStart'),
+            'depreciationEnd' =>$request->input( 'depreciationEnd'),
+            'currentBookValue' =>$request->input( 'currentBookValue'),
+            'assetCondition' =>$request->input( 'assetConditionInput'),
+            'assetStatus' =>$request->input( 'assetStatus'),
+            'costCenter' =>$request->input( 'costCenter'),
+            'product' =>$request->input( 'product'),
+            'department' =>$request->input( 'department'),
+            'departmentDetail' =>$request->input( 'departmentDetail'),
+            'vendor' =>$request->input( 'vendor'),
+            'site' =>$request->input( 'site'),
+            'line' =>$request->input( 'line'),
+            'proccess' =>$request->input( 'proccess'),
+            'quantity' =>$request->input( 'quantity'),
+            'quantityInput' =>$request->input( 'quantity'),
+            'uom' =>$request->input( 'uomInput'),
+            'acquisitionValue' =>$request->input( 'acquisitionValue'),
+            'cipNumber'=>$request->input( 'cipNumber'),
+            'budgetNumber' =>$request->input( 'budgetNumber'),
+            'poNumber' =>$request->input( 'poNumber'),
+            'assetPicture'=>$foto_nama,
+            'user'=> Auth::user()->name,
+            'cipStatus' => false
+
+        ];
+        Asset::where('id', $id)->update($data);
+
+        return redirect('/');
+    }
+
+    public function outstandingConfirmUser( request $request){
 
         // Log::info("Status confirmation called for ID: $id");
         $ids = $request->input('ids', []);
@@ -127,21 +187,18 @@ class cipController extends Controller
         $data = CIP::where('id', $id)->first();
         $depre = MasterAssetCategory::where('assetGroup', $data->assetGroup)->first();
         
-        // $ids = $request->input('ids');
-        // $idsArray = explode(',', $ids);
-        // $providedCount = count($idsArray);
 
         for ($i = 1; $i < $count; $i++) {
             $cip1 = CIP::where('id', $ids[$i])->first();
             $cip2 = CIP::where('id', $ids[$i-1])->first();
             // Log::info("Status confirmation called for ID: $cip1");
-            if( $cip1->inventoryNumber != $cip2->inventoryNumber ){
-            return redirect('/cip/outstanding')->with('message', 'Pastikan inventory number sama');
+            if( $cip1->assetCodeEnginery != $cip2->assetCodeEnginery ){
+            return redirect('/cip/user/outstanding')->with('message', 'Pastikan inventory number sama');
             }
         }
         
 
-        return view('cip/addasset')
+        return view('cip/user/merge')
         ->with('data',$data)
         ->with('sum',$sum)
         ->with('ids',$ids)
@@ -149,30 +206,28 @@ class cipController extends Controller
         ->with('depre',$depre)
         ->with('count',$count);
     }
-    public function cipToAsset(request $request){
+    public function mergeCip(request $request){
 
+        $ids = $request->input('ids');
+        $idsArray = explode(',', $ids);
+        $providedCount = count($idsArray);
 
-        $dept = MasterCostCentre::where('name', $request->input( 'costCenter'))->first();
+        // if($providedCount > 1){
+        //     for ($i = 1; $i < $providedCount; $i++) {
+        //         $cip1 = CIP::where('id', $idsArray[$i])->first();
+        //         $cip2 = CIP::where('id', $idsArray[$i-1])->first();
+        //         if( $cip1->assetCodeEnginery != $cip2->assetCodeEnginery ){
+        //         return redirect('/cip/user/outstanding')->with('message', 'Pastikan inventory number sama');
+        //         }
+        //     }
+        // }
 
         $foto_file = $request->file('assetPicture');
         $foto_eks = $foto_file->getClientOriginalExtension();
         $foto_nama = date('ymdhis').".".$foto_eks;
         $foto_file ->move(public_path('foto'),$foto_nama);
 
-        $ids = $request->input('ids');
-        $idsArray = explode(',', $ids);
-        $providedCount = count($idsArray);
-
-        if($providedCount > 1){
-            for ($i = 1; $i < $providedCount; $i++) {
-                $cip1 = CIP::where('id', $idsArray[$i])->first();
-                $cip2 = CIP::where('id', $idsArray[$i-1])->first();
-                // Log::info("Status confirmation called for ID: $cip1");
-                if( $cip1->inventoryNumber != $cip2->inventoryNumber ){
-                return redirect('/cip/outstanding')->with('message', 'Pastikan inventory number sama');
-                }
-            }
-        }
+        
 
         $data = [
             'assetCodeAccounting'=>$request->input( 'assetCodeAccounting'),
@@ -183,7 +238,6 @@ class cipController extends Controller
             'assetDescription' =>$request->input( 'assetDescription'),
             'subAsset' =>$request->input( 'subAsset'),
             'picAsset' =>$request->input( 'picAsset'),
-            'cipCode' =>$request->input( 'cipNumber'),
             'acquisitionCIP' =>$request->input( 'acquisitionCIP'),
             'depreciationStart' =>$request->input( 'depreciationStart'),
             'depreciationEnd' =>$request->input( 'depreciationEnd'),
@@ -192,9 +246,8 @@ class cipController extends Controller
             'assetStatus' =>$request->input( 'assetStatus'),
             'costCenter' =>$request->input( 'costCenter'),
             'product' =>$request->input( 'product'),
-            'inventoryNumber'=>$request->input( 'inventoryNumber'),
             'department' =>$request->input( 'department'),
-            'departmentDetail' =>$dept->deptDetail,
+            'departmentDetail' =>$request->input( 'deptDetail'),
             'vendor' =>$request->input( 'vendor'),
             'site' =>$request->input( 'site'),
             'line' =>$request->input( 'line'),
@@ -207,7 +260,9 @@ class cipController extends Controller
             'budgetNumber' =>$request->input( 'budgetNumber'),
             'poNumber' =>$request->input( 'poNumber'),
             'assetPicture'=>$foto_nama,
-            'user'=> Auth::user()->name
+            'user'=> Auth::user()->name,
+            'cipStatus' => 1,
+            'cipId' => $request->input( 'ids')
         ];
         Asset::create($data);
         
@@ -218,9 +273,8 @@ class cipController extends Controller
             CIP::where('id', $id)->update($upData);
         }
 
-        return redirect('/');
+        return redirect('cip/user/outstanding');
     }
-    
     public function indexCon()
     {
         $data = CIP::where('statusRequest', 'Confirm')
@@ -241,20 +295,13 @@ class cipController extends Controller
     
     public function indexOut()
     {
-        $data = CIP::where('statusConfirmation', true)
-        ->where('outstandingStatus', false)
+        $data = Asset::orderBy('id', 'asc')
+        ->where('cipStatus', true)
         ->orderBy('id', 'asc')
         ->paginate(6);
 
-        $notes = CIP::select('inventoryNumber', 'notes')
-        ->where('statusConfirmation', true)
-        ->where('outstandingStatus', false)
-        ->where('ongoingStatus', true)
-        ->groupBy('inventoryNumber', 'notes')
-        ->orderBy('inventoryNumber', 'asc')
-        ->get();
 
-        return view('cip/outstanding')->with('data',$data)->with('notes',$notes);
+        return view('cip/outstanding')->with('data',$data);
     }
     public function indexOutUser()
     {
@@ -327,8 +374,6 @@ class cipController extends Controller
         $foto_nama = date('ymdhis').".".$foto_eks;
         $foto_file ->move(public_path('foto'),$foto_nama);
 
-        $dept = MasterCostCentre::where('name', $request->input( 'costCentreInput'))->first();
-        $deptDetail = $dept->deptDetail;
         
         $data = [
             'assetCodeEnginery' =>$request->input( 'assetCodeEnginery'),
@@ -359,10 +404,10 @@ class cipController extends Controller
             'statusRequest'=>'Not Confirm',
             'statusConfirmation'=> 0,
             'outstandingStatus'=> 0 ,
-            'ongoingStatus'=> 0 ,
             'assetPicture'=>$foto_nama,
-            'departmentDetail'=>$deptDetail,
-            'user'=> Auth::user()->name
+            'departmentDetail'=>$request->input('deptDetailInput'),
+            'user'=> Auth::user()->name,
+            'deadline' => $request->input('deadline')
             
             // 'assetPicture'=>$request->input( 'assetPicture'),
         ];
@@ -418,10 +463,10 @@ class cipController extends Controller
             'statusRequest'=>'Not Confirm',
             'statusConfirmation'=> 0,
             'outstandingStatus'=> 0 ,
-            'ongoingStatus'=> 0 ,
             'assetPicture'=>$foto_nama,
-            'departmentDetail'=>$deptDetail,
-            'user'=> Auth::user()->name
+            'departmentDetail'=>$request->input( 'deptDetailInput'),
+            'user'=> Auth::user()->name,
+            'deadline'=> $request->input('deadline'),
             
         ];
 

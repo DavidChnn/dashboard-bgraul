@@ -47,7 +47,8 @@ class CIP extends Model
         'outstandingStatus',
         'user',
         'ongoingStatus',
-        'notes'
+        'notes',
+        'deadline'
         
 
     ];

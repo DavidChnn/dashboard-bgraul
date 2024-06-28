@@ -15,7 +15,7 @@
         <x-navbar />
         {{-- NAVBAR --}}
         <h1 class="text-xl text-xl mx-10 my-10">
-          CIP/ConfirmationCIP
+          CIP/OutStandingCIP
         </h1>
         <div class="bg-white mx-10 pb-10">
           <div class="flex justify-between items-center border-b-2 p-4">
@@ -36,18 +36,20 @@
               <div class="flex px-6 py-4">
                   <p class="font-semibold">Request CIP Number >></p>
               </div>
-              <a href="{{ route('cip.user.export.outstanding') }}" class="bg-[#79C4FB] text-white rounded text-xl px-2 py-1 mr-5">
+              <a href="{{ route('cip.export.outstandingcip') }}" class="bg-[#79C4FB] text-white rounded text-xl px-2 py-1 mr-5">
                   Export to Excel
               </a>
           </div>
           <div class="px-2 w-full">
-            
+            <form action="/cip/user/outstanding" method="post">
+              @csrf
+              @method('PUT')
               <table class="table border-collapse text-sm w-full">
                 <thead class="text-center">
                     <tr class="border-2">
                         <th class="border-2">No</th>
                         <th class="border-2">Class</th>
-                        <th class="border-2">Inventory Number</th>
+                        <th class="border-2">Asset Code User</th>
                         <th class="border-2">Description</th>
                         <th class="border-2">Cap Date  </th>
                         <th class="border-2">Capex Number </th>
@@ -55,8 +57,8 @@
                         <th class="border-2">Amount</th>
                         <th class="border-2">Qty</th>
                         <th class="border-2">UoM</th>
-                        <th class="border-2">Status</th>
                         <th class="border-2">CIP Number</th>
+                        <th class="border-2">Merge</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -67,7 +69,7 @@
                       <tr>
                           <td class="border-2">{{$counter}}</td>
                           <td class="border-2">{{$item->assetClass}}</td>
-                          <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : 'Insert Inventory Number'}}</td>
+                          <td class="border-2">{{$item->assetCodeEnginery}}</td>
                           <td class="border-2">{{$item->assetDescription}}</td>
                           <td class="border-2">{{$item->acquisitionCIP}}</td>
                           <td class="border-2">{{$item->budgetNumber}}</td>
@@ -75,15 +77,21 @@
                           <td class="border-2">{{$item->acquisitionValue}}</td>
                           <td class="border-2">{{$item->quantity}}</td>
                           <td class="border-2">{{$item->uom}}</td>
-                          <td class="border-2">{{$item->ongoingStatus ? 'confirm' : 'no confirm'}}</td>
                           <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
+                          <td class="border-2">
+                                <input type="checkbox" name="ids[]" value="{{$item->id}}">
+                          </td>
                       </tr>
                       @php $counter++; @endphp
                     @endforeach
                   </tbody>
                 </table>
-                
-              
+                <div class="flex justify-center mt-10">
+                  <button type="submit" class="bg-[#4B06A4] px-2 py-1 rounded text-white">
+                    Confirm
+                  </button>
+                </div>
+              </form>
           </div>
         </div>
     </main>

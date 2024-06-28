@@ -42,7 +42,10 @@ class Asset extends Model
         'assetPicture',
         'departmentDetail',
         'user',
-        'quantityInput'
+        'quantityInput',
+        'cipId',
+        'cipStatus',
+        'disposalDate',
 
     ];
 }

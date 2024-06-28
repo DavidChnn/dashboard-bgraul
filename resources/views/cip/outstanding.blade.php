@@ -49,7 +49,7 @@
                     <tr class="border-2">
                         <th class="border-2">No</th>
                         <th class="border-2">Class</th>
-                        <th class="border-2">Inventory Number</th>
+                        <th class="border-2">Asset Code User</th>
                         <th class="border-2">Description</th>
                         <th class="border-2">Cap Date  </th>
                         <th class="border-2">Capex Number </th>
@@ -59,7 +59,7 @@
                         <th class="border-2">UoM</th>
                         <th class="border-2">Status</th>
                         <th class="border-2">CIP Number</th>
-                        <th class="border-2">Merge</th>
+                        <th class="border-2">Asset</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
@@ -70,7 +70,7 @@
                       <tr>
                           <td class="border-2">{{$counter}}</td>
                           <td class="border-2">{{$item->assetClass}}</td>
-                          <td class="border-2">{{$item->inventoryNumber ? $item->inventoryNumber : 'Insert Inventory Number'}}</td>
+                          <td class="border-2">{{$item->assetCodeEnginery}}</td>
                           <td class="border-2">{{$item->assetDescription}}</td>
                           <td class="border-2">{{$item->acquisitionCIP}}</td>
                           <td class="border-2">{{$item->budgetNumber}}</td>
@@ -81,10 +81,12 @@
                           <td class="border-2">{{$item->ongoingStatus ? 'confirm' : 'no confirm'}}</td>
                           <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
                           <td class="border-2">
-                            @if($item->ongoingStatus)
-                                <input type="checkbox" name="ids[]" value="{{$item->id}}">
-                            @endif
-                          </td>
+                            <button type="button">
+                                <a href="{{url('/cip/outstanding/'.$item->id)}}">
+                                  <img src="/image/checklist.png" alt="checklist" class="w-6 translate-y-1">
+                                </a>
+                            </button>
+                        </td>
                       </tr>
                       @php $counter++; @endphp
                     @endforeach
@@ -96,15 +98,6 @@
                   </button>
                 </div>
               </form>
-
-            <div>
-              <p> Notes</p>
-              @foreach ($notes as $item)
-              <div>Untuk Inventory Number {{$item->inventoryNumber}}</div>
-                  
-                  {{$item->notes}}
-              @endforeach
-            </div>
           </div>
         </div>
     </main>
