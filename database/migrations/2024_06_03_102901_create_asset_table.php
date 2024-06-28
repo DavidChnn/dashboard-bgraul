@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('subAsset');
             $table->string('picAsset');
             $table->date('acquisitionCIP');
-            $table->date('disposalDate');
+            $table->date('disposalDate')->nullable(); // aku ubah nullable dulu
             $table->date('depreciationStart');
             $table->date('depreciationEnd');
             $table->bigInteger('currentBookValue');

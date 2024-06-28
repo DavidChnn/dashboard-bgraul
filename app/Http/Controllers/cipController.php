@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
 use App\Models\CIP;
+use App\Models\User;
 use App\Models\MasterAssetCategory;
 use App\Models\MasterAssetStatus;
 use App\Models\MasterCostCentre;
@@ -21,6 +22,7 @@ use App\Exports\ConfirmationCIP;
 use App\Exports\OutstandingCIP;
 use App\Exports\OutstandingUserCIP;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
 
 class cipController extends Controller
 {
@@ -514,6 +516,33 @@ class cipController extends Controller
         return Excel::download(new OutstandingUserCIP($data), 'OutstandingUser.xlsx');
     }
 
+    public function notifyUser(Request $request, $id)
+    {
+        $cip = CIP::find($id);
+
+        if ($cip) {
+            // Assuming the 'user_id' column exists in the CIP model to reference the User model
+            $user = User::find($cip->user_id);
+            $admin = User::where('role', 'admin')->first();
+
+            if ($user && $admin) {
+                // Email details
+                $details = [
+                    'title' => 'CIP Notification',
+                    'body' => 'There is an update on your CIP request with ID: ' . $id,
+                ];
+
+                // Send email
+                Mail::to($user->email)->send(new \App\Mail\CipNotification($details));
+
+                return redirect()->back()->with('success', 'Notification sent successfully!');
+            }
+
+            return redirect()->back()->with('error', 'User or Admin not found.');
+        }
+
+        return redirect()->back()->with('error', 'CIP not found.');
+    }
 
     /**
      * Display the specified resource.
