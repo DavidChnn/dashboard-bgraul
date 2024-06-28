@@ -25,6 +25,7 @@ class CIPSeeder extends Seeder
             'subAsset' =>'1',
             'picAsset' =>'SPV Engineering',
             'cipCode' =>'1220184',
+            'deadline' => date('2024-10-10'),
             'acquisitionCIP' => date('2018-04-14'),
             'depreciationStart' => date('2018-05-04'),
             'depreciationEnd' => date('2025-05-03'),
@@ -55,7 +56,7 @@ class CIPSeeder extends Seeder
         DB::table('cip')->insert([
             
             'created_at' => date('Y-m-d H:i:s'),
-            'assetCodeEnginery' =>'3001470-6',
+            'assetCodeEnginery' =>'3001470-5',
             'assetCategory' =>'Machine',
             'assetClass' =>'302',
             'assetGroup' =>'Machine1',
@@ -63,6 +64,7 @@ class CIPSeeder extends Seeder
             'subAsset' =>'1',
             'picAsset' =>'SPV Engineering',
             'cipCode' =>'1220184',
+            'deadline' => date('2024-10-10'),
             'acquisitionCIP' => date('2018-04-14'),
             'depreciationStart' => date('2018-05-04'),
             'depreciationEnd' => date('2025-05-03'),
@@ -93,7 +95,7 @@ class CIPSeeder extends Seeder
         DB::table('cip')->insert([
             
             'created_at' => date('Y-m-d H:i:s'),
-            'assetCodeEnginery' =>'3001470-7',
+            'assetCodeEnginery' =>'3001470-5',
             'assetCategory' =>'Machine',
             'assetClass' =>'302',
             'assetGroup' =>'Machine1',
@@ -101,6 +103,7 @@ class CIPSeeder extends Seeder
             'subAsset' =>'1',
             'picAsset' =>'SPV Engineering',
             'cipCode' =>'1220184',
+            'deadline' => date('2024-10-10'),
             'acquisitionCIP' => date('2018-04-14'),
             'depreciationStart' => date('2018-05-04'),
             'depreciationEnd' => date('2025-05-03'),
@@ -131,7 +134,7 @@ class CIPSeeder extends Seeder
         DB::table('cip')->insert([
             
             'created_at' => date('Y-m-d H:i:s'),
-            'assetCodeEnginery' =>'3001470-8',
+            'assetCodeEnginery' =>'3001470-5',
             'assetCategory' =>'Machine',
             'assetClass' =>'302',
             'assetGroup' =>'Machine1',
@@ -139,6 +142,7 @@ class CIPSeeder extends Seeder
             'subAsset' =>'1',
             'picAsset' =>'SPV Engineering',
             'cipCode' =>'1220184',
+            'deadline' => date('2024-10-10'),
             'acquisitionCIP' => date('2018-04-14'),
             'depreciationStart' => date('2018-05-04'),
             'depreciationEnd' => date('2025-05-03'),
@@ -169,7 +173,7 @@ class CIPSeeder extends Seeder
         DB::table('cip')->insert([
             
             'created_at' => date('Y-m-d H:i:s'),
-            'assetCodeEnginery' =>'3001470-9',
+            'assetCodeEnginery' =>'3001470-5',
             'assetCategory' =>'Machine',
             'assetClass' =>'302',
             'assetGroup' =>'Machine1',
@@ -177,6 +181,7 @@ class CIPSeeder extends Seeder
             'subAsset' =>'1',
             'picAsset' =>'SPV Engineering',
             'cipCode' =>'1220184',
+            'deadline' => date('2024-10-10'),
             'acquisitionCIP' => date('2018-04-14'),
             'depreciationStart' => date('2018-05-04'),
             'depreciationEnd' => date('2025-05-03'),
