@@ -11,7 +11,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\CIP;
 
 
-class test extends Mailable
+class NotificationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +31,7 @@ class test extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Test',
+            subject: 'Confirmation CIP',
         );
     }
 
@@ -41,7 +41,7 @@ class test extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.test',
+            view: 'emails.NotificationEmail',
             with: [
                 'id' => $this->cip->id,
                 'assetCodeUser' => $this->cip->assetCodeEnginery,

@@ -23,8 +23,7 @@ use App\Exports\OutstandingCIP;
 use App\Exports\OutstandingUserCIP;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\test;
-use App\Mail\CipNotification;
+use App\Mail\NotificationEmail;
 
 class cipController extends Controller
 {
@@ -532,48 +531,13 @@ class cipController extends Controller
         return Excel::download(new OutstandingUserCIP($data), 'OutstandingUser.xlsx');
     }
 
-    public function notifyUser(Request $request, $id)
-    {
-        $cip = CIP::find($id);
-
-        if ($cip) {
-            // Assuming the 'user_id' column exists in the CIP model to reference the User model
-            $name = User::find($cip->user);
-            $user = User::where('name', $name)->first();
-            $admin = User::where('role', 'admin')->first();
-
-            if ($user && $admin) {
-                // Email details
-                $details = [
-                    'title' => 'CIP Notification',
-                    'body' => 'There is an update on your CIP request with ID: ' . $id,
-                ];
-
-                // Send email
-                try {
-                    Mail::to($user->email)->send(new CipNotification($details));
-                    if (count(Mail::failures()) > 0) {
-                        return redirect()->back()->with('error', 'Failed to send notification.');
-                    }
-                } catch (\Exception $e) {
-                    return redirect()->back()->with('error', 'Error sending notification: ' . $e->getMessage());
-                }
-
-                return redirect()->back()->with('success', 'Notification sent successfully!');
-            }
-
-            return redirect()->back()->with('error', 'User or Admin not found.');
-        }
-        
-        return redirect()->back()->with('error', 'CIP not found.');
-    }
     public function notifyCip(Request $request, $id)
     {
         $cip = CIP::find($id);
         $name = $request->input('name');
         $user = User::where('name', $name)->first();
         $email = $user->email;
-        Mail::to($email)->send(new test($cip));
+        Mail::to($email)->send(new NotificationEmail($cip));
         return redirect('cip/confirmation');
     }
 
