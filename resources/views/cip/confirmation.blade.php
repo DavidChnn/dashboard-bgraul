@@ -84,6 +84,13 @@
                                         <img src="/image/notify.png" alt="checklist" class="w-6 translate-y-1">
                                     </button>
                                 </form>
+                                <form action="{{ url('/cip/email/'.$item->id) }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" id="name" name="name" value="{{$item->user}}">
+                                    <button type="submit">
+                                        <img src="/image/notify.png" alt="checklist" class="w-6 translate-y-1">
+                                    </button>
+                                </form>
                             </td>
                           </tr>
                           @php $counter++; @endphp
