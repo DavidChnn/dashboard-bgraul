@@ -4,7 +4,9 @@ use App\Http\Controllers\AssetController;
 use App\Http\Controllers\cipController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
+use App\Mail\test;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +57,7 @@ Route::middleware(['isLogin'])->group(function () {
         Route::put('/cip/addasset/{id}', [cipController::class, 'cipToAsset']);
 
         Route::post('/cip/notify/{id}', [cipController::class, 'notifyUser'])->name('cip.notify');
+        Route::post('/cip/email/{id}', [cipController::class, 'notifyCip']);
 
         Route::get('/exportlistasset', [AssetController::class, 'exportListAssetExcel'])->name('exportlistasset');
         Route::get('/cip/export/exportrequestcip', [cipController::class, 'exportExcel'])->name('cip.export.exportrequestcip');

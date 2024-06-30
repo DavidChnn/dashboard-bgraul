@@ -23,6 +23,7 @@ use App\Exports\OutstandingCIP;
 use App\Exports\OutstandingUserCIP;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\test;
 use App\Mail\CipNotification;
 
 class cipController extends Controller
@@ -537,7 +538,8 @@ class cipController extends Controller
 
         if ($cip) {
             // Assuming the 'user_id' column exists in the CIP model to reference the User model
-            $user = User::find($cip->user_id);
+            $name = User::find($cip->user);
+            $user = User::where('name', $name)->first();
             $admin = User::where('role', 'admin')->first();
 
             if ($user && $admin) {
@@ -564,6 +566,15 @@ class cipController extends Controller
         }
         
         return redirect()->back()->with('error', 'CIP not found.');
+    }
+    public function notifyCip(Request $request, $id)
+    {
+        $cip = CIP::find($id);
+        $name = $request->input('name');
+        $user = User::where('name', $name)->first();
+        $email = $user->email;
+        Mail::to($email)->send(new test($cip));
+        return redirect('cip/confirmation');
     }
 
     /**
