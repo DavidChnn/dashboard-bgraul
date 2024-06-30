@@ -78,12 +78,6 @@
                               <td class="border-2">{{$item->statusConfirmation ? 'Confirmed by User' : 'Not Confirmed by User'}}</td>
                               <td class="border-2">{{$item->cipNumber ? $item->cipNumber : 'Insert CIP Number'}}</td>
                               <td class="border-2">
-                                <form action="{{ route('cip.notify', $item->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit">
-                                        <img src="/image/notify.png" alt="checklist" class="w-6 translate-y-1">
-                                    </button>
-                                </form>
                                 <form action="{{ url('/cip/email/'.$item->id) }}" method="POST">
                                     @csrf
                                     <input type="hidden" id="name" name="name" value="{{$item->user}}">
