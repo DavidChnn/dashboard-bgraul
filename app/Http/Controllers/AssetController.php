@@ -180,7 +180,7 @@ class AssetController extends Controller
         $site = MasterSite::select('name')->distinct()->get();
         $uom = MasterUom::select('name')->distinct()->get();
         $data = Asset::where('id', $id)->first();
-        $depreciation = MasterAssetCategory::where('assetGroup', $data->assetGroup)->first();
+        $depreciation = MasterAssetCategory::where('assetClass', $data->assetClass)->first();
 
         return view('listasset/assetedit')->with('data',$data)
         ->with('data',$data)
@@ -196,6 +196,7 @@ class AssetController extends Controller
         ->with('depreciation',$depreciation);
     }
 
+
     /**
      * Update the specified resource in storage.
      */
@@ -210,6 +211,8 @@ class AssetController extends Controller
         } else {
             if($data->assetPicture){
                 $foto_nama = $data->assetPicture;
+            } else {
+                $foto_nama = '';
             }
         }
         
@@ -308,6 +311,8 @@ class AssetController extends Controller
         } else {
             if($data->assetPicture){
                 $foto_nama = $data->assetPicture;
+            } else {
+                $foto_nama = '';
             }
         }
         if( $request->input('assetStatusInput') == $data->assetStatus){

@@ -22,16 +22,18 @@ class SessionController extends Controller
 
     function dashboard(){
         $asset = Asset::where('cipStatus', false)->count();
-        $cip = CIP::where('statusConfirmation', true)
+        $cip1 = Asset::where('cipStatus', true)->count();
+        $cip2 = CIP::where('statusConfirmation', true)
         ->where('statusRequest', 'Confirm')
         ->where('outstandingStatus', false)
         ->count();
+        $cip = $cip1 + $cip2;
 
 
         $assets = Asset::all();
 
         $value = $assets->sum(function ($asset) {
-            return (int) $asset->currentBookValue;
+            return (int) $asset->acquisitionValue;
         });
         $count = $this->formatRupiah($value);
 

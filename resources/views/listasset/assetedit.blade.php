@@ -229,7 +229,7 @@
                         @endforeach
                       </div>
                   </div>
-                  <input required type="hidden" id="deptDetailInput" name="deptDetailInput">
+                  <input required type="hidden" id="deptDetailInput" name="deptDetailInput" value="{{$item->deptDetail}}">
               </div>
               <div class="flex justify-between">
                 <p>Department</p>
