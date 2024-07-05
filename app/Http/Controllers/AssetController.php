@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\AssetReport;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\CIP;
 use App\Models\MasterAssetCategory;
 use App\Models\MasterAssetStatus;
 use App\Models\MasterCostCentre;
@@ -444,8 +445,16 @@ class AssetController extends Controller
         if ($request->input('typeInput')=='Asset'){
             $assets = Asset::whereYear('acquisitionCip', $date->year)
                         ->whereMonth('acquisitionCip', $date->month)
-                        ->paginate(6);
-            return view('report/assetreport')->with('data',$assets);
+                        ->select('cipId')
+                        ->get();
+            $idsArray = $assets->pluck('cipId')->toArray();
+            $flattenedIds = [];
+            foreach ($idsArray as $ids) {
+                $flattenedIds = array_merge($flattenedIds, explode(',', $ids));
+            }
+            $cip = CIP::whereIn('id', $flattenedIds)->paginate(6);
+
+            return view('report/assetreport')->with('data',$cip);
         } else {
             $assets = Asset::whereYear('disposalDate', $date->year)
                         ->whereMonth('disposalDate', $date->month)

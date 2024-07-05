@@ -48,7 +48,6 @@
                         <th class="border-2">Asset Class</th>
                         <th class="border-2">Asset Code User</th>
                         <th class="border-2">CIP Number</th>
-                        <th class="border-2">Asset Number</th>
                         <th class="border-2">Asset Description</th>
                         <th class="border-2">Departement</th>
                         <th class="border-2">Capitalized Date</th>
@@ -66,7 +65,6 @@
                             <td class="border-2">{{$item->assetClass}}</td>
                             <td class="border-2">{{$item->assetCodeEnginery}}</td>
                             <td class="border-2">{{$item->cipNumber}}</td>
-                            <td class="border-2">{{$item->assetCodeAccounting}}</td>
                             <td class="border-2">{{$item->assetDescription}}</td>
                             <td class="border-2">{{$item->department}}</td>
                             <td class="border-2">{{$item->acquisitionCIP}}</td>

@@ -98,7 +98,7 @@
                         <p>Year</p>
                         <div>
                             <button type="button" id="dropdownButton3" onclick="toggleDropdown('dropdownButton3', 'myDropdown3', 'yearInput')" class="flex justify-between items-center px-5 border-b-2 w-64 rounded">
-                                <span id="selectedItemText3" class="h-6">-- Pilih bulan --</span>
+                                <span id="selectedItemText3" class="h-6">-- Pilih Tahun --</span>
                                 <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                             </button>
                             <div id="myDropdown3" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
