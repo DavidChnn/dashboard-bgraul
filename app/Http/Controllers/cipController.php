@@ -324,35 +324,6 @@ class cipController extends Controller
             ->paginate(6);
         return view('cip/user/outstanding')->with('data', $data);
     }
-    public function indexOnUser()
-    {
-        $data = CIP::select('inventoryNumber', 'ongoingStatus', 'notes', DB::raw('count(*) as total'))
-            ->where('statusConfirmation', true)
-            ->where('outstandingStatus', false)
-            ->where('user', Auth::user()->name)
-            ->groupBy('inventoryNumber', 'ongoingStatus', 'notes')
-            ->orderBy('inventoryNumber', 'asc')
-            ->paginate(6);
-
-        return view('cip/user/ongoing')->with('data', $data);
-    }
-
-    public function ongoingDetail(string $id)
-    {
-        $data = CIP::where('inventoryNumber', $id)->first();
-        return view('/cip/user/ongoingconfirm')->with('data', $data);
-    }
-    public function ongoingStore(request $request, string $inventoryNumber)
-    {
-        $data = [
-            'ongoingStatus' => $request->ongoingStatusInput,
-            'notes' => $request->notes ? $request->notes : 'tidak ada notes',
-        ];
-        CIP::where('inventoryNumber', $inventoryNumber)->update($data);
-
-        return redirect('cip/user/ongoing');
-    }
-
 
     public function create()
     {

@@ -108,9 +108,7 @@ Route::middleware(['isLogin'])->group(function () {
         Route::get('/cip/user/outstanding', [cipController::class, 'indexOutUser']);
         Route::put('/cip/user/outstanding', [cipController::class, 'outstandingConfirmUser']);
         Route::put('/cip/user/merge', [cipController::class, 'mergeCip']);
-        // Route::get('/cip/user/ongoing',[cipController::class, 'indexOnUser']);
-        // Route::get('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingDetail']);
-        // Route::put('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingStore']);
+
 
 
         Route::get('/cip/user/export/outstanding', [cipController::class, 'exportOutstandingUserExcel'])->name('cip.user.export.outstanding');
