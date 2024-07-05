@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\AssetReport;
 use App\Http\Controllers\Controller;
 use App\Models\Asset;
+use App\Models\CIP;
 use App\Models\MasterAssetCategory;
 use App\Models\MasterAssetStatus;
 use App\Models\MasterCostCentre;
@@ -180,7 +181,7 @@ class AssetController extends Controller
         $site = MasterSite::select('name')->distinct()->get();
         $uom = MasterUom::select('name')->distinct()->get();
         $data = Asset::where('id', $id)->first();
-        $depreciation = MasterAssetCategory::where('assetGroup', $data->assetGroup)->first();
+        $depreciation = MasterAssetCategory::where('assetClass', $data->assetClass)->first();
 
         return view('listasset/assetedit')->with('data',$data)
         ->with('data',$data)
@@ -196,6 +197,7 @@ class AssetController extends Controller
         ->with('depreciation',$depreciation);
     }
 
+
     /**
      * Update the specified resource in storage.
      */
@@ -210,6 +212,8 @@ class AssetController extends Controller
         } else {
             if($data->assetPicture){
                 $foto_nama = $data->assetPicture;
+            } else {
+                $foto_nama = '';
             }
         }
         
@@ -273,7 +277,8 @@ class AssetController extends Controller
     public function detailLayout(string $line)
     {
         $data = Asset::where('line', $line)->orderBy('id', 'asc')->paginate(6);
-        return view('assetlayout/lineproductionmap')->with('data',$data);
+        $line = Masterline::where('line', $line)->first();
+        return view('assetlayout/lineproductionmap')->with('data',$data)->with('line',$line);
     }
 
     public function indexOpname(Request $request)
@@ -308,6 +313,8 @@ class AssetController extends Controller
         } else {
             if($data->assetPicture){
                 $foto_nama = $data->assetPicture;
+            } else {
+                $foto_nama = '';
             }
         }
         if( $request->input('assetStatusInput') == $data->assetStatus){
@@ -438,8 +445,16 @@ class AssetController extends Controller
         if ($request->input('typeInput')=='Asset'){
             $assets = Asset::whereYear('acquisitionCip', $date->year)
                         ->whereMonth('acquisitionCip', $date->month)
-                        ->paginate(6);
-            return view('report/assetreport')->with('data',$assets);
+                        ->select('cipId')
+                        ->get();
+            $idsArray = $assets->pluck('cipId')->toArray();
+            $flattenedIds = [];
+            foreach ($idsArray as $ids) {
+                $flattenedIds = array_merge($flattenedIds, explode(',', $ids));
+            }
+            $cip = CIP::whereIn('id', $flattenedIds)->paginate(6);
+
+            return view('report/assetreport')->with('data',$cip);
         } else {
             $assets = Asset::whereYear('disposalDate', $date->year)
                         ->whereMonth('disposalDate', $date->month)
@@ -459,5 +474,16 @@ class AssetController extends Controller
             return Carbon::parse($asset->acquistionCip)->year;
         });
         return view('report/index', compact('assets', 'earliestYear', 'latestYear'));
+    }
+    public function uploadImagesLayout(Request $request, string $line){
+        $foto_file = $request->file('images');
+        $foto_eks = $foto_file->getClientOriginalExtension();
+        $foto_nama = date('ymdhis').".".$foto_eks;
+        $foto_file ->move(public_path('foto'),$foto_nama);
+        $data = [
+            'images' => $foto_nama
+        ];
+        Masterline::where('line', $line)->update($data);
+        return redirect('/assetlayout/lineproductionmap/'.$line);
     }
 }

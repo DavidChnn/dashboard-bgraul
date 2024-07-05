@@ -65,11 +65,6 @@
                 <p>Outstanding CIP</p>
               </a>
             </li>
-            <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="{{Auth::user()->role == 'admin' ? '/cip/ongoing': '/cip/user/ongoing'}}">
-                <p>Ongoing CIP</p>
-              </a>
-            </li>
           </ul>
           <li class="my-4 p-2 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
             <a href="/assetlayout" class="flex">
@@ -114,10 +109,6 @@
             </a>
           </li>
           <ul class="reportOptions" style="display: none;">
-            <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
-              <a href="#">
-                <p>Asset Group</p>
-              </a>
             </li>
             <li class="p-1 pl-11 rounded hover:bg-[#6B6565] focus:bg-[#6B6565] w-full">
               <a href="/masterdata/pic">

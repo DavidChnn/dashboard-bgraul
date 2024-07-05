@@ -153,7 +153,7 @@
                       @endforeach
                   </div>
               </div>
-              <input type="hidden" id="assetStatusInput" name="assetStatusInput">
+              <input type="hidden" id="assetStatusInput" name="assetStatusInput" value="{{$item->status}}">
             </div>
           </div>
           <div class="flex justify-center mt-10">

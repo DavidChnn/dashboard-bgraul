@@ -28,6 +28,7 @@ Route::middleware(['isLogin'])->group(function () {
 
     Route::get('/assetlayout', [AssetController::class, 'indexLayout']);
     Route::get('/assetlayout/lineproductionmap/{line}', [AssetController::class, 'detailLayout']);
+    Route::put('/assetlayout/lineproductionmap/{line}', [AssetController::class, 'uploadImagesLayout']);
     Route::get('/assetopname', [AssetController::class, 'indexOpname']);
     Route::get('/assetopnameedit/{id}', [AssetController::class, 'detailOpname']);
     Route::put('/assetopnameedit/{id}', [AssetController::class, 'storeOpname']);
@@ -107,9 +108,7 @@ Route::middleware(['isLogin'])->group(function () {
         Route::get('/cip/user/outstanding', [cipController::class, 'indexOutUser']);
         Route::put('/cip/user/outstanding', [cipController::class, 'outstandingConfirmUser']);
         Route::put('/cip/user/merge', [cipController::class, 'mergeCip']);
-        // Route::get('/cip/user/ongoing',[cipController::class, 'indexOnUser']);
-        // Route::get('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingDetail']);
-        // Route::put('/cip/user/ongoing/{inventoryNumber}',[cipController::class, 'ongoingStore']);
+
 
 
         Route::get('/cip/user/export/outstanding', [cipController::class, 'exportOutstandingUserExcel'])->name('cip.user.export.outstanding');
