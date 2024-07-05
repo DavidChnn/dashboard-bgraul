@@ -276,7 +276,8 @@ class AssetController extends Controller
     public function detailLayout(string $line)
     {
         $data = Asset::where('line', $line)->orderBy('id', 'asc')->paginate(6);
-        return view('assetlayout/lineproductionmap')->with('data',$data);
+        $line = Masterline::where('line', $line)->first();
+        return view('assetlayout/lineproductionmap')->with('data',$data)->with('line',$line);
     }
 
     public function indexOpname(Request $request)
@@ -464,5 +465,16 @@ class AssetController extends Controller
             return Carbon::parse($asset->acquistionCip)->year;
         });
         return view('report/index', compact('assets', 'earliestYear', 'latestYear'));
+    }
+    public function uploadImagesLayout(Request $request, string $line){
+        $foto_file = $request->file('images');
+        $foto_eks = $foto_file->getClientOriginalExtension();
+        $foto_nama = date('ymdhis').".".$foto_eks;
+        $foto_file ->move(public_path('foto'),$foto_nama);
+        $data = [
+            'images' => $foto_nama
+        ];
+        Masterline::where('line', $line)->update($data);
+        return redirect('/assetlayout/lineproductionmap/'.$line);
     }
 }

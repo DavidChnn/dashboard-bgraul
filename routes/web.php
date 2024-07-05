@@ -28,6 +28,7 @@ Route::middleware(['isLogin'])->group(function () {
 
     Route::get('/assetlayout', [AssetController::class, 'indexLayout']);
     Route::get('/assetlayout/lineproductionmap/{line}', [AssetController::class, 'detailLayout']);
+    Route::put('/assetlayout/lineproductionmap/{line}', [AssetController::class, 'uploadImagesLayout']);
     Route::get('/assetopname', [AssetController::class, 'indexOpname']);
     Route::get('/assetopnameedit/{id}', [AssetController::class, 'detailOpname']);
     Route::put('/assetopnameedit/{id}', [AssetController::class, 'storeOpname']);

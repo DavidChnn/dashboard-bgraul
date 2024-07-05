@@ -93,12 +93,20 @@
             </table>
           </div>
           <div class="flex justify-between items-end py-10 px-6">
-            <div>
+            <form action="{{ url('/assetlayout/lineproductionmap/'.$line->line)}}" method="post" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
+              <div>
                 <div class="flex justify-center items-center w-fit bg-[#F7F7F7] px-6 py-1 rounded border-2 border-black">
-                    <a href="addasset" class="font-bold">Choose File</a>
+                  <input type="file" class="form-control" id="images" name="images" >
                 </div>
                 <p class="text-[#E3E3E3] w-36">No file Chosen for Asset Layout</p>
-            </div>
+              </div>
+              <button type="submit" class="bg-red-500 rounded px-2 py-1">
+                Submit Images
+              </button>
+            </form>
+              <img src="{{url('foto').'/'.$line->images}}" alt="add" class="w-48">
             <div >
               {{$data->links()}}
             </div>

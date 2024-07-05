@@ -12,5 +12,6 @@ class MasterLine extends Model
     protected $table = 'masterline';
     protected $fillable = [
         'line',
+        'images',
     ];
 }
