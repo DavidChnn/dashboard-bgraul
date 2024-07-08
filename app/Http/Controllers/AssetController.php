@@ -37,7 +37,7 @@ class AssetController extends Controller
             $query->where('assetClass', $filter);
         }
 
-        $data = $query->paginate(6);
+        $data = $query->paginate(25);
 
         // Pass the current filter value to the view
         return view('listasset')->with('data', $data)->with('filter', $filter);
@@ -276,7 +276,7 @@ class AssetController extends Controller
     }
     public function detailLayout(string $line)
     {
-        $data = Asset::where('line', $line)->orderBy('id', 'asc')->paginate(6);
+        $data = Asset::where('line', $line)->orderBy('id', 'asc')->paginate(25);
         $line = Masterline::where('line', $line)->first();
         return view('assetlayout/lineproductionmap')->with('data',$data)->with('line',$line);
     }
@@ -290,7 +290,7 @@ class AssetController extends Controller
             $query->where('assetClass', $filter);
         }
 
-        $data = $query->paginate(6);
+        $data = $query->paginate(25);
 
         // Pass the current filter value to the view
         return view('assetopname')->with('data', $data)->with('filter', $filter);
@@ -452,13 +452,13 @@ class AssetController extends Controller
             foreach ($idsArray as $ids) {
                 $flattenedIds = array_merge($flattenedIds, explode(',', $ids));
             }
-            $cip = CIP::whereIn('id', $flattenedIds)->paginate(6);
+            $cip = CIP::whereIn('id', $flattenedIds)->paginate(25);
 
             return view('report/assetreport')->with('data',$cip);
         } else {
             $assets = Asset::whereYear('disposalDate', $date->year)
                         ->whereMonth('disposalDate', $date->month)
-                        ->paginate(6);
+                        ->paginate(25);
             return view('report/assetreport')->with('data',$assets);
         }
 
