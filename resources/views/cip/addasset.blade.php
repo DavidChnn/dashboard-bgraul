@@ -42,69 +42,97 @@
             <div class="grid grid-cols-2 overflow-y-auto gap-x-10 gap-y-5 px-6">
               <div class="flex justify-between">
                   <p>Asset Code Accounting</p>
-                  <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                  <div class="bg-[#ECE9E9] w-64 px-4 rounded"> 
                       <input  type="text" name="assetCodeAccounting" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" id="assetCodeAccounting">
                   </div>
               </div>
               <div class="flex justify-between">
                   <p>Acqusition CIP</p>
-                  <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                      <input type="hidden" name="acquisitionCIP" id="acquisitionCIP" value="{{ \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}">
-                      <label for="currentDateTime">{{ \Carbon\Carbon::now('Asia/Jakarta')->locale('id')->isoFormat('dddd, Do MMMM YYYY') }}</label>
-                    </div>
+                  <div class="bg-[#ECE9E9] w-64 px-4 rounded">  
+                    <input type="text" class="bg-[#ECE9E9] w-full outline-none" onfocus="(this.type='date')" required value="{{ \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}" name="acquisitionCip" id="acquisitionCip">
+                  </div>
               </div>
               <div class="flex justify-between">
-                  <p>Asset Code Engineering</p>
+                  <p>Asset Code User</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->assetCodeEnginery}}" name="assetCodeEnginery" id="assetCodeEnginery">
-                    <label for="">{{$data->assetCodeEnginery}}</label>
+                    <input required type="text" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->assetCodeEnginery}}" placeholder="{{$data->assetCodeEnginery}}" name="assetCodeEnginery" id="assetCodeEnginery">
                   </div>
               </div>
               <div class="flex justify-between">
                   <p>Depreciation Start</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="date" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="depreciationStart" id="depreciationStart">
+                    <input required type="date" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->depreciationStart}}" placeholder="{{$data->depreciationStart}}" name="depreciationStart" id="depreciationStart">
                   </div>
               </div>
               <div class="flex justify-between">
                 <p>Asset Category</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->assetCategory}}" name="assetCategory" id="assetCategory">
-                    <label for="">{{$data->assetCategory}}</label>
+                  <div>
+                      <button type="button" id="dropdownButton1" onclick="toggleDropdown('dropdownButton1', 'myDropdown1')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="assetCategory" class="h-6">{{$data->assetCategory}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown1" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($category as $category)
+                          <a href="#" onclick="selectItem('{{$category->assetCategory}}', 'assetCategory', 'myDropdown1', 'assetCategoryInput')" class="flex justify-between items-center w-64 px-4">
+                              <p>{{$category->assetCategory}}</p>
+                          </a>
+                        @endforeach
+                      </div>
+                      <input required type="hidden" id="assetCategoryInput" name="assetCategoryInput" value="{{$data->assetCategory}}" >
                   </div>
               </div>
               <div class="flex justify-between">
                 <p>Depreciation End</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="date" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="depreciationEnd" id="depreciationEnd">
-                </div>
-              </div>
-              <div class="flex justify-between">
-                <p>Asset Class</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->assetClass}}" name="assetClass" id="assetClass">
-                    <label for="">{{$data->assetClass}}</label>
+                  <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                    <input required type="date" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->depreciationEnd}}" placeholder="{{$data->depreciationEnd}}" name="depreciationEnd" id="depreciationEnd">
                   </div>
               </div>
               <div class="flex justify-between">
+                <p>Asset Class</p>
+                  <div>
+                      <button type="button" id="dropdownButton2" onclick="toggleDropdown('dropdownButton2', 'myDropdown2')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="assetClass" class="h-6">{{$data->assetClass}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown2" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($class as $class)
+                          <a href="#" onclick="selectItem('{{$class->assetClass}}', 'assetClass', 'myDropdown2', 'assetClassInput')" class="flex justify-between items-center w-64 px-4">
+                              <p>{{$class->assetClass}}</p>
+                          </a>
+                        @endforeach
+                      </div>
+                  </div>
+                  <input required type="hidden" id="assetClassInput" name="assetClassInput" value="{{$data->assetClass}}" >
+              </div>
+              <div class="flex justify-between">
                 <p>Current Book Value</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->currentBookValue}}" name="currentBookValue" id="currentBookValue">
-                    <label for="">{{$data->currentBookValue}}</label>
+                  <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                    <input required type="number" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->currentBookValue}}" placeholder="{{$data->currentBookValue}}" name="currentBookValue" id="currentBookValue">
                   </div>
               </div>
               <div class="flex justify-between">
                 <p>Asset Group</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->assetGroup}}" name="assetGroup" id="assetGroup">
-                    <label for="">{{$data->assetGroup}}</label>
+                  <div>
+                      <button type="button" id="dropdownButton3" onclick="toggleDropdown('dropdownButton3', 'myDropdown3')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="assetGroup" class="h-6">{{$data->assetGroup}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown3" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($group as $group)
+                          <a href="#" onclick="selectItem1('{{$group->assetGroup}}', 'assetGroup', 'myDropdown3', 'assetGroupInput', '{{$group->depreciationCom}}', 'depreciationInput')" class="flex justify-between items-center w-64 px-4">
+                              <p>{{$group->assetGroup}}</p>
+                          </a>
+                        @endforeach
+                      </div>
                   </div>
+                  <input required type="hidden" id="depreciationInput" name="depreciationInput" value="{{$depre->depre}}" >
+                  <input required type="hidden" id="assetGroupInput" name="assetGroupInput" value="{{$data->assetGroup}}">
               </div>
               <div class="flex justify-between">
                 <p>Asset Condition</p>
                 <div>
                     <button type="button" id="dropdownButton4" onclick="toggleDropdown('dropdownButton4', 'myDropdown4')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
-                        <span id="assetCondition" class="h-6"></span>
+                        <span id="assetCondition" class="h-6">{{$data->assetCondition}}</span>
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown4" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
@@ -119,93 +147,140 @@
                         </a>
                     </div>
                 </div>
-                <input type="hidden" id="assetConditionInput" name="assetConditionInput">
+                <input type="hidden" id="assetConditionInput" name="assetConditionInput" value="{{$data->assetCondition}}">
               </div>
               <div class="flex justify-between">
                 <p>Asset Description</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="assetDescription" id="assetDescription">
-                </div>
+                  <div class="bg-[#ECE9E9] w-64 px-4 rounded">
+                    <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->assetDescription}}" placeholder="{{$data->assetDescription}}" name="assetDescription" id="assetDescription">
+                  </div>
               </div>
               <div class="flex justify-between">
                 <p>Asset Status</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->assetStatus}}" name="assetStatus" id="assetStatus">
-                    <label for="">{{$data->assetStatus}}</label>
+                  <div>
+                      <button type="button" id="dropdownButton5" onclick="toggleDropdown('dropdownButton5', 'myDropdown5')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="assetStatus" class="h-6">{{$data->assetStatus}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown5" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($status as $item)
+                          <a href="#" onclick="selectItem('{{$item->status}}', 'assetStatus', 'myDropdown5', 'assetStatusInput')" class="flex justify-between items-center w-64 px-4">
+                              <p>{{$item->status}}</p>
+                          </a>
+                        @endforeach
+                      </div>
                   </div>
+                  <input required type="hidden" id="assetStatusInput" name="assetStatusInput" value="{{$data->assetStatus}}" >
               </div>
               <div class="flex justify-between">
                 <p>Sub Asset</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="subAsset" id="subAsset">
+                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required value="{{$data->subAsset}}" placeholder="{{$data->subAsset}}" name="subAsset" id="subAsset">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Cost Center</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->costCenter}}" name="costCenter" id="costCenter">
-                    <label for="">{{$data->costCenter}}</label>
+                <div>
+                  <button type="button" id="dropdownButton9" onclick="toggleDropdown('dropdownButton9', 'myDropdown9')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                      <span id="costCentre" class="h-6">{{$data->costCenter}}</span>
+                      <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                  </button>
+                  <div id="myDropdown9" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                    @foreach ($costCentre as $item)
+                      <a href="#" onclick="selectItem('{{$item->name}}', 'costCentre', 'myDropdown9', 'costCentreInput')" class="flex justify-between items-center w-64 px-4">
+                          <p>{{$item->name}}</p>
+                      </a>
+                    @endforeach
                   </div>
+                </div>
+                <input required type="hidden" id="costCentreInput" name="costCentreInput" value="{{$data->costCenter}}" >
               </div>
               <div class="flex justify-between">
                 <p>PIC Asset</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="picAsset" id="picAsset">
+                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required value="{{$data->picAsset}}" placeholder="{{$data->picAsset}}" name="picAsset" id="picAsset">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Product</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->product}}" name="product" id="product">
-                    <label for="">{{$data->product}}</label>
-                  </div>
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->product}}" placeholder="{{$data->product}}" name="product" id="product">
+                </div>
               </div>
               <div class="flex justify-between">
                 <p>CIP Code</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->cipNumber}}" name="cipNumber" id="cipNumber">
-                    <label for="">{{$data->cipNumber}}</label>
-                  </div>
+                    <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->cipNumber}}" placeholder="{{$data->cipNumber}}" name="cipNumber" id="cipNumber">
+                </div>
               </div>
               <div class="flex justify-between">
                 <p>Specific Department</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->departmentDetail}}" name="departmentDetail" id="departmentDetail">
-                    <label for="">{{$data->departmentDetail}}</label>
+                  <div>
+                      <button type="button" id="dropdownButton10" onclick="toggleDropdown('dropdownButton10', 'myDropdown10')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="deptDetail" class="h-6">{{$data->departmentDetail}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown10" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($costCentre as $item)
+                        <a href="#" onclick="selectItem('{{$item->deptDetail}}', 'deptDetail', 'myDropdown10', 'deptDetailInput')" class="flex justify-between items-center w-64 px-4">
+                            <p>{{$item->deptDetail}}</p>
+                        </a>
+                        @endforeach
+                      </div>
                   </div>
+                  <input required type="hidden" id="deptDetailInput" name="deptDetailInput" value="{{$data->departmentDetail}}">
               </div>
               <div class="flex justify-between">
                 <p>Department</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->department}}" name="department" id="department">
-                    <label for="">{{$data->department}}</label>
+                  <div>
+                      <button type="button" id="dropdownButton6" onclick="toggleDropdown('dropdownButton6', 'myDropdown6')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="department" class="h-6">{{$data->department}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown6" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($dept as $item)
+                        <a href="#" onclick="selectItem('{{$item->dept}}', 'department', 'myDropdown6', 'departmentInput')" class="flex justify-between items-center w-64 px-4">
+                            <p>{{$item->dept}}</p>
+                        </a>
+                        @endforeach
+                      </div>
                   </div>
+                  <input required type="hidden" id="departmentInput" name="departmentInput" value="{{$data->department}}">
               </div>
               <div class="flex justify-between">
                 <p>Budget Number</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="budgetNumber" id="budgetNumber">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->budgetNumber}}" placeholder="{{$data->budgetNumber}}" name="budgetNumber" id="budgetNumber">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Vendor</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->vendor}}" name="vendor" id="vendor">
-                    <label for="">{{$data->vendor}}</label>
-                  </div>
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->vendor}}" placeholder="{{$data->vendor}}" name="vendor" id="vendor">
+                </div>
               </div>
               <div class="flex justify-between">
                 <p>PO Number</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="poNumber" id="poNumber">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->poNumber}}" placeholder="{{$data->poNumber}}" name="poNumber" id="poNumber">
                 </div>
               </div>
               <div class="flex justify-between">
                 <p>Site</p>
-                <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->site}}" name="site" id="site">
-                  <label for="">{{$data->site}}</label>
-                </div>
+                  <div>
+                      <button type="button" id="dropdownButton7" onclick="toggleDropdown('dropdownButton7', 'myDropdown7')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
+                          <span id="site" class="h-6">{{$data->site}}</span>
+                          <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
+                      </button>
+                      <div id="myDropdown7" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
+                        @foreach ($site as $item)
+                          <a href="#" onclick="selectItem('{{$item->name}}', 'site', 'myDropdown7', 'siteInput')" class="flex justify-between items-center w-64 px-4">
+                              <p>{{$item->name}}</p>
+                          </a>
+                        @endforeach
+                      </div>
+                  </div>
+                  <input required type="hidden" id="siteInput" name="siteInput" value="{{$data->site}}" >
               </div>
               <div class="flex justify-between">
                 <p>Asset Picture</p>
@@ -213,13 +288,12 @@
               <div class="flex justify-between">
                 <p>Line</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->line}}" name="line" id="line">
-                  <label for="">{{$data->line}}</label>
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->line}}" placeholder="{{$data->line}}" name="line" id="line">
                 </div>
               </div>
               <div class="row-span-5">
                 <button class="flex items-center text-center">
-                  <img src="/image/addpicture.png" alt="add" class="w-48">
+                  <img src="{{url('foto').'/'.$data->assetPicture}}" alt="add" class="w-48">
                     <a href="" class="bg-[#CACACA] h-fit px-2 py-1 ml-5 rounded">
                       <input type="file" class="form-control" id="assetPicture" name="assetPicture" >
                     </a>
@@ -228,21 +302,20 @@
               <div class="flex justify-between col-start-1">
                 <p>Process</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="type" class="bg-[#ECE9E9] w-full outline-none" required placeholder="" name="proccess" id="proccess">
+                  <input required type="type" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->proccess}}" placeholder="{{$data->proccess}}" name="proccess" id="proccess">
                 </div>
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Quantity</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->quantity}}" name="quantity" id="quantity">
-                  <label for="">{{$data->quantity}}</label>
+                  <input required type="number" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->quantity}}" placeholder="{{$data->quantity}}" name="quantity" id="quantity">
                 </div>
               </div>
               <div class="flex justify-between col-start-1">
                 <p>UoM</p>
                 <div>
                     <button type="button" id="dropdownButton8" onclick="toggleDropdown('dropdownButton8', 'myDropdown8')" class="flex justify-between items-center px-5 bg-[#ECE9E9] w-64 rounded">
-                        <span id="uom" class="h-6"></span>
+                        <span id="uom" class="h-6">{{$data->uom}}</span>
                         <img src="/image/arrow3.png" alt="" class="w-3 h-fit">
                     </button>
                     <div id="myDropdown8" class="w-64 absolute hidden rounded shadow-md bg-white z-10">
@@ -253,13 +326,12 @@
                       @endforeach
                     </div>
                 </div>
-                <input type="hidden" id="uomInput" name="uomInput">
+                <input type="hidden" id="uomInput" name="uomInput" value="{{$data->uom}}">
               </div>
               <div class="flex justify-between col-start-1">
                 <p>Acquisition Value</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                  <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->acquisitionValue}}" name="acquisitionValue" id="acquisitionValue">
-                  <label for="">{{$data->acquisitionValue}}</label>
+                  <input type="number" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->acquisitionValue}}" placeholder="{{$data->acquisitionValue}}" name="acquisitionValue" id="acquisitionValue">
                 </div>
               </div>
             </div>

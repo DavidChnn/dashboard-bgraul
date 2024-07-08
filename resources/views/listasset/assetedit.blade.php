@@ -54,7 +54,7 @@
                 </div>
               </div>
               <div class="flex justify-between">
-                  <p>Asset Code Engineering</p>
+                  <p>Asset Code User</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">
                     <input required type="text" class="bg-[#ECE9E9] w-full outline-none" value="{{$data->assetCodeEnginery}}" placeholder="{{$data->assetCodeEnginery}}" name="assetCodeEnginery" id="assetCodeEnginery">
                   </div>
