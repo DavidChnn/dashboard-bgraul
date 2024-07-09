@@ -233,7 +233,7 @@
               <div class="flex justify-between">
                 <p>Department</p>
                 <div class="bg-[#ECE9E9] w-64 px-4 rounded">
-                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->department}}" name="department" id="department">
+                    <input type="hidden" class="bg-[#ECE9E9]" value="{{$data->department}}" name="departmentInput" id="departmentInput">
                     <label for="">{{$data->department}}</label>
                   </div>
               </div>
