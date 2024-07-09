@@ -49,7 +49,7 @@
               <div class="flex justify-between">
                   <p>Acqusition CIP</p>
                   <div class="bg-[#ECE9E9] w-64 px-4 rounded">  
-                    <input type="text" class="bg-[#ECE9E9] w-full outline-none" onfocus="(this.type='date')" required value="{{ \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}" name="acquisitionCip" id="acquisitionCip">
+                    <input type="text" class="bg-[#ECE9E9] w-full outline-none" onfocus="(this.type='date')" required value="{{ \Carbon\Carbon::now('Asia/Jakarta')->format('Y-m-d') }}" name="acquisitionCIP" id="acquisitionCIP">
                   </div>
               </div>
               <div class="flex justify-between">
