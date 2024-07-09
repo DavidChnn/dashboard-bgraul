@@ -348,6 +348,14 @@
         document.getElementById(inputId).value = item; 
         toggleDropdown(null, dropdownId);
       }
+
+      function selectItem1(item, selectedItemTextId, dropdownId, inputId, item2, inputId2) {
+        event.preventDefault();
+        document.getElementById(selectedItemTextId).innerText = item;
+        document.getElementById(inputId).value = item; 
+        document.getElementById(inputId2).value = item2; 
+        toggleDropdown(null, dropdownId);
+      }
       
       document.getElementById('depreciationStart').addEventListener('change', function() {
         const startDate = new Date(this.value);
